@@ -283,17 +283,19 @@ function Hero({ L }: { L: typeof t.en }) {
       <div className="mx-auto max-w-7xl px-5 lg:px-10 pt-12 pb-20 lg:pt-20 lg:pb-32 grid lg:grid-cols-12 gap-10 items-center">
         <div className="lg:col-span-6">
           <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.6}}
-            className="inline-flex items-center gap-2 rounded-full border border-soil/20 bg-cream px-3 py-1 text-[11px] font-semibold tracking-wider text-soil">
-            <span className="h-1.5 w-1.5 rounded-full bg-rust animate-pulse" />
+            className="inline-flex items-center gap-3 text-[11px] font-bold tracking-[0.32em] uppercase text-soil/70">
+            <span className="h-px w-10 bg-soil/40" />
             {L.badge}
           </motion.div>
           <motion.h1
             initial={{opacity:0,y:30}} animate={{opacity:1,y:0}} transition={{duration:0.7, delay:0.1}}
-            className="mt-6 font-display font-black text-soil leading-[0.95] text-balance text-5xl sm:text-6xl lg:text-[5.25rem]"
-            style={{ fontVariationSettings: '"opsz" 144' }}>
-            {L.h1a} <em className="not-italic text-rust italic font-display">{L.h1b}</em> {L.h1c}
+            className="mt-7 font-display font-bold text-soil leading-[0.95] text-balance text-5xl sm:text-6xl lg:text-[5.5rem]">
+            {L.h1a} <em className="italic font-normal text-leaf">{L.h1b}</em> {L.h1c}
           </motion.h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">{L.sub}</p>
+          <p className="mt-4 font-display italic text-xl text-rust/80" style={{ fontFamily: 'var(--font-tamil)' }}>
+            ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
+          </p>
+          <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed font-light">{L.sub}</p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={`tel:+91${PHONE_1}`}
