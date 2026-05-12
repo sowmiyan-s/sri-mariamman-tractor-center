@@ -37,8 +37,10 @@
   --color-cream: var(--cream);
   --color-leaf: var(--leaf);
   --color-rust: var(--rust);
-  --font-display: "Fraunces", serif;
-  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-display: "Playfair Display", "Hind Madurai", serif;
+  --font-sans: "Inter", "Hind Madurai", system-ui, sans-serif;
+  --font-tamil: "Hind Madurai", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 :root {
