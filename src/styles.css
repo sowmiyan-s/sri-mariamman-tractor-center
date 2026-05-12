@@ -44,15 +44,15 @@
 }
 
 :root {
-  --radius: 0.875rem;
-  /* Earthy premium agricultural palette */
-  --background: oklch(0.97 0.022 85);          /* warm cream */
-  --foreground: oklch(0.22 0.04 145);          /* deep forest */
-  --cream: oklch(0.97 0.022 85);
-  --soil: oklch(0.22 0.04 145);                /* deep forest green */
-  --leaf: oklch(0.42 0.12 145);                /* leaf green */
-  --harvest: oklch(0.78 0.16 75);              /* harvest gold */
-  --rust: oklch(0.55 0.18 32);                 /* tractor red */
+  --radius: 0.5rem;
+  /* Editorial premium agricultural palette */
+  --background: oklch(0.98 0.012 85);          /* ivory FDFBF7 */
+  --foreground: oklch(0.32 0.06 155);          /* deep forest 1B4332 */
+  --cream: oklch(0.98 0.012 85);
+  --soil: oklch(0.32 0.06 155);                /* editorial forest */
+  --leaf: oklch(0.45 0.10 150);                /* secondary forest */
+  --harvest: oklch(0.82 0.10 80);              /* muted ochre */
+  --rust: oklch(0.55 0.15 38);                 /* terracotta */
 
   --card: oklch(0.99 0.012 85);
   --card-foreground: var(--foreground);
