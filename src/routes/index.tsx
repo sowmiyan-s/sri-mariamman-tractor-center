@@ -435,6 +435,13 @@ function Services({ L }: { L: typeof t.en }) {
 
 function Equipment({ L }: { L: typeof t.en }) {
   const imgs = [eqTractor575, eqTractor475, eqRotavator, eqTrailer, eqTanker];
+  const alts = [
+    "Mahindra 575 DI tractor for farming",
+    "Mahindra 475 DI tractor for medium farms",
+    "Agricultural rotavator for soil preparation",
+    "Robust tractor trailer for farm hauling",
+    "High-capacity water tanker for farm irrigation",
+  ];
   return (
     <section id="equipment" className="mx-auto max-w-7xl px-5 lg:px-10 py-24">
       <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
