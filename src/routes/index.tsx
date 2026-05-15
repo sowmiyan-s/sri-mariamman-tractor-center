@@ -56,7 +56,7 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Sri Mariamman Tractor Center — Trusted Tractor Sales & Service in Namakkal" },
+      { title: "Sri Mariamman Tractor Center — Sales & Service, Namakkal" },
       { name: "description", content: "25+ years of trusted Mahindra tractor sales, servicing, spare parts & agricultural equipment in Paramathi Velur, Namakkal. Mon–Fri 8am–7pm. Call 94433 61295." },
       { name: "keywords", content: "tractor service Namakkal, Mahindra 575, Mahindra 475, tractor mechanic Paramathi Velur, rotavator, trailer, water tanker" },
       { name: "geo.region", content: "IN-TN" },
