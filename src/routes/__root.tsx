@@ -77,9 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "Sri Mariamman Tractor Center" },
       { property: "og:site_name", content: "Sri Mariamman Tractor Center" },
       { property: "og:title", content: "Sri Mariamman Tractor Center" },
-      { property: "og:description", content: "Trusted tractor sales, service and spare parts in Namakkal." },
+      { property: "og:description", content: "Trusted tractor sales, service and spare parts in Paramathi Velur, Namakkal — 25+ years of experience." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Sri Mariamman Tractor Center" },
+      { name: "twitter:description", content: "Trusted tractor sales, service and spare parts in Paramathi Velur, Namakkal — 25+ years of experience." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5480d355-6576-4bb7-bf3c-1b0568957340/id-preview-b6d37210--584d6547-7a61-4538-8c9b-d1b2aae799ea.lovable.app-1778596440055.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5480d355-6576-4bb7-bf3c-1b0568957340/id-preview-b6d37210--584d6547-7a61-4538-8c9b-d1b2aae799ea.lovable.app-1778596440055.png" },
     ],
     links: [
       {
