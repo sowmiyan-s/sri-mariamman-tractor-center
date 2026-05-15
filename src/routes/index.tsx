@@ -56,14 +56,14 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Sri Mariamman Tractor Center — Trusted Tractor Sales & Service in Namakkal" },
+      { title: "Sri Mariamman Tractor Center — Sales & Service, Namakkal" },
       { name: "description", content: "25+ years of trusted Mahindra tractor sales, servicing, spare parts & agricultural equipment in Paramathi Velur, Namakkal. Mon–Fri 8am–7pm. Call 94433 61295." },
       { name: "keywords", content: "tractor service Namakkal, Mahindra 575, Mahindra 475, tractor mechanic Paramathi Velur, rotavator, trailer, water tanker" },
       { name: "geo.region", content: "IN-TN" },
       { name: "geo.placename", content: "Paramathi Velur, Namakkal" },
       { property: "og:title", content: "Sri Mariamman Tractor Center — Namakkal" },
-      { property: "og:description", content: "25+ years of trusted tractor sales & service. Mahindra 575, 475 and more." },
-      { property: "og:type", content: "business.business" },
+      { property: "og:description", content: "25+ years of trusted Mahindra tractor sales, service & spares in Paramathi Velur, Namakkal." },
+      { property: "og:type", content: "website" },
       { property: "og:image", content: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Mahindra_575_Di_-Tamil_girl_watching_sunset_at_a_village_sugar_cane_field_and_palm_trees_sitting_barefoot_in_pink_Sari_on_a_red_tractor_-_Tamil_Nadu_village_gas_station_with_her_mobile_phone_-_myindiaexperience_-feature_story_photo.jpg/1280px-thumbnail.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -435,6 +435,13 @@ function Services({ L }: { L: typeof t.en }) {
 
 function Equipment({ L }: { L: typeof t.en }) {
   const imgs = [eqTractor575, eqTractor475, eqRotavator, eqTrailer, eqTanker];
+  const alts = [
+    "Mahindra 575 DI tractor for farming",
+    "Mahindra 475 DI tractor for medium farms",
+    "Agricultural rotavator for soil preparation",
+    "Robust tractor trailer for farm hauling",
+    "High-capacity water tanker for farm irrigation",
+  ];
   return (
     <section id="equipment" className="mx-auto max-w-7xl px-5 lg:px-10 py-24">
       <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
@@ -452,7 +459,7 @@ function Equipment({ L }: { L: typeof t.en }) {
             initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.07}}
             className="group rounded-2xl overflow-hidden bg-card border border-border hover:border-rust transition">
             <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-              <img src={imgs[i]} alt={title} loading="lazy" width={800} height={600}
+              <img src={imgs[i]} alt={alts[i]} loading="lazy" width={800} height={600}
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
               <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider bg-cream text-soil px-2 py-1 rounded-full">{tag}</span>
             </div>
