@@ -1,13 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
 import {
-  Phone, MessageCircle, MapPin, Wrench, Cog, Sprout, Truck,
+  Phone, MapPin, Wrench, Cog, Sprout, Truck, Handshake,
   ShieldCheck, Star, ArrowUpRight, Tractor, Quote, CheckCircle2, Clock, Languages,
 } from "lucide-react";
 import heroTractor from "@/assets/hero-tractor.jpg";
 import eqRotavator from "@/assets/eq-rotavator.jpg";
-import eqTrailer from "@/assets/eq-trailer.jpg";
 import eqTanker from "@/assets/eq-tanker.jpg";
 import eqTractor575 from "@/assets/eq-tractor-575.jpg";
 import eqTractor475 from "@/assets/eq-tractor-475.jpg";
@@ -15,18 +14,17 @@ import eqTractor475 from "@/assets/eq-tractor-475.jpg";
 const PHONE_1 = "9443361295";
 const PHONE_2 = "9382334477";
 const WA = `https://wa.me/91${PHONE_1}?text=${encodeURIComponent("Hello Sri Mariamman Tractor Center, I'd like to know more about your tractors and services.")}`;
-const MAPS = "https://maps.google.com/?q=Sri+Mariamman+Tractor+Center+Paramathi+Velur+Namakkal";
-const ADDRESS = "Main Road, Near G.H Hospital, N. Kandhampalayam, Paramathi Velur, Namakkal — 637203";
+const MAPS = "https://maps.app.goo.gl/ie2L7h3c2tf3VtHn6";
+const MAPS_EMBED = "https://www.google.com/maps?q=Sri+Mariamman+Tractor+Center+Paramathi+Velur+Namakkal&output=embed";
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "AutomotiveBusiness",
   name: "Sri Mariamman Tractor Center",
-  image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Mahindra_575_Di_-Tamil_girl_watching_sunset_at_a_village_sugar_cane_field_and_palm_trees_sitting_barefoot_in_pink_Sari_on_a_red_tractor_-_Tamil_Nadu_village_gas_station_with_her_mobile_phone_-_myindiaexperience_-feature_story_photo.jpg/1280px-thumbnail.jpg",
-  description: "Trusted tractor sales, service, spare parts and agricultural equipment in Namakkal. 25+ years of experience.",
+  description: "Trusted tractor sales, brokerage, service, spare parts and agricultural equipment in Namakkal. 25+ years of experience, 1,000+ farmers served.",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Main Road, Near G.H Hospital, N. Kandhampalayam",
+    streetAddress: "Main Road, Near G.H Hospital, N. Kandampalayam",
     addressLocality: "Paramathi Velur",
     addressRegion: "Tamil Nadu",
     postalCode: "637203",
@@ -34,48 +32,37 @@ const localBusinessSchema = {
   },
   telephone: ["+91-9443361295", "+91-9382334477"],
   priceRange: "₹₹",
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-      opens: "08:00",
-      closes: "19:00",
-    },
-  ],
+  hasMap: MAPS,
+  url: "https://srimariammantractor.in/",
+  openingHoursSpecification: [{
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    opens: "08:00", closes: "19:00",
+  }],
   areaServed: "Namakkal, Tamil Nadu",
   makesOffer: [
-    "Mahindra 575 DI", "Mahindra 475 DI", "Tractor Service",
-    "Genuine Spare Parts", "Rotavator", "Trailer", "Water Tanker",
+    "Mahindra 575 DI", "Mahindra 475 DI", "Tractor Sales", "Tractor Brokerage",
+    "Tractor Service", "Genuine Spare Parts", "Rotavator", "Water Tanker",
   ],
-  sameAs: [
-    `https://wa.me/91${PHONE_1}`,
-  ],
+  sameAs: [`https://wa.me/91${PHONE_1}`],
 };
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Sri Mariamman Tractor Center — Sales & Service, Namakkal" },
-      { name: "description", content: "25+ years of trusted Mahindra tractor sales, servicing, spare parts & agricultural equipment in Paramathi Velur, Namakkal. Mon–Fri 8am–7pm. Call 94433 61295." },
-      { name: "keywords", content: "tractor service Namakkal, Mahindra 575, Mahindra 475, tractor mechanic Paramathi Velur, rotavator, trailer, water tanker" },
+      { title: "Sri Mariamman Tractor Center — Sales, Broker & Service, Namakkal" },
+      { name: "description", content: "25+ years of trusted Mahindra tractor sales, brokerage, servicing & spare parts in Paramathi Velur, Namakkal. 1,000+ farmers served. Mon–Fri 8am–7pm." },
+      { name: "keywords", content: "tractor service Namakkal, tractor broker Namakkal, Mahindra 575, Mahindra 475, Paramathi Velur, rotavator, water tanker, agricultural equipment Tamil Nadu" },
       { name: "geo.region", content: "IN-TN" },
       { name: "geo.placename", content: "Paramathi Velur, Namakkal" },
       { property: "og:title", content: "Sri Mariamman Tractor Center — Namakkal" },
-      { property: "og:description", content: "25+ years of trusted Mahindra tractor sales, service & spares in Paramathi Velur, Namakkal." },
+      { property: "og:description", content: "25+ years · 1,000+ farmers served. Tractor sales, broker, service & spares in Paramathi Velur, Namakkal." },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Mahindra_575_Di_-Tamil_girl_watching_sunset_at_a_village_sugar_cane_field_and_palm_trees_sitting_barefoot_in_pink_Sari_on_a_red_tractor_-_Tamil_Nadu_village_gas_station_with_her_mobile_phone_-_myindiaexperience_-feature_story_photo.jpg/1280px-thumbnail.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [
-      { rel: "canonical", href: "https://srimariammantractor.in/" },
-    ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify(localBusinessSchema),
-      },
-    ],
+    links: [{ rel: "canonical", href: "https://srimariammantractor.in/" }],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(localBusinessSchema) }],
   }),
 });
 
@@ -86,22 +73,24 @@ const t = {
     nav: ["About", "Services", "Equipment", "Why Us", "Contact"],
     badge: "ESTABLISHED 25+ YEARS · NAMAKKAL",
     h1a: "Powering modern", h1b: "agriculture", h1c: "with trusted tractor solutions.",
-    sub: "Sales · Service · Agricultural Equipment · Spare Parts. Built for farmers who demand reliability — every season, every harvest.",
+    sub: "Sales · Brokerage · Service · Agricultural Equipment · Spare Parts. Built for farmers who demand reliability — every season, every harvest.",
     callNow: "Call Now", whatsapp: "WhatsApp", viewTractors: "View Tractors",
-    stats: [["25+","Years"],["5,000+","Farmers served"],["Mon–Fri","8 AM – 7 PM"]],
+    stats: [["25+","Years experience"],["1,000+","Farmers served"],["Mon–Fri","8 AM – 7 PM"]],
+    locStrip: "Near G.H · N. Kandampalayam · P. Velur (Tk) · Namakkal (Dt) · Tamil Nadu — 637203",
     aboutKicker: "About us",
-    aboutTitle: "Trusted tractor mechanic experts in Namakkal.",
-    aboutBody: "Sri Mariamman Tractor Center provides reliable tractor sales, agricultural equipment, spare parts, and servicing solutions for farmers and agricultural businesses across Namakkal and nearby regions.",
-    aboutPills: ["Quality service","Genuine work","Affordable pricing","Customer satisfaction"],
+    aboutTitle: "Trusted tractor experts serving 1,000+ farmers in Namakkal.",
+    aboutBody: "Sri Mariamman Tractor Center is a family-run dealership and service center providing reliable tractor sales, trusted brokerage of pre-owned tractors, agricultural equipment, genuine spare parts and field servicing for farmers across Namakkal and nearby districts.",
+    aboutPills: ["Quality service","Genuine parts","Fair brokerage","Customer satisfaction"],
     servicesKicker: "What we do",
     servicesTitle: "Everything your tractor needs — under one roof.",
     talk: "Talk to a specialist",
     services: [
-      ["Tractor Sales","New and used tractor solutions for all farming needs."],
-      ["Tractor Service","Engine repair, maintenance, oil service, and inspection."],
-      ["Spare Parts","High-quality genuine tractor spare parts available."],
-      ["Agricultural Equipment","Rotavators, cultivators, ploughs, trailers, and more."],
-      ["Doorstep Support","Quick on-site support and field assistance nearby."],
+      ["Tractor Sales","New Mahindra tractors with the right HP for your farm."],
+      ["Tractor Broker","Honest brokerage of used tractors — fair valuation, verified buyers & sellers."],
+      ["Tractor Service","Engine repair, periodic maintenance, oil service & full inspection."],
+      ["Genuine Spare Parts","OEM-quality tractor spare parts always in stock."],
+      ["Agricultural Equipment","Rotavators, cultivators, ploughs, sprayers and water tankers."],
+      ["Doorstep Field Support","Quick on-site assistance across nearby villages."],
     ],
     equipKicker: "Featured equipment",
     equipTitle: "Workhorses for every field.",
@@ -110,7 +99,6 @@ const t = {
       ["Mahindra 575 DI","Bestseller","India's most loved 47 HP workhorse — fuel-efficient and powerful."],
       ["Mahindra 475 DI","Classic","Reliable 42 HP all-rounder, perfect for medium farms."],
       ["Rotavator","Implement","Heavy-duty soil prep with even tilling depth."],
-      ["Trailer","Hauling","Strong steel trailer for crops and supplies."],
       ["Water Tanker","Irrigation","High-capacity tanker for irrigation & water transport."],
     ],
     whyKicker: "Why choose us",
@@ -120,15 +108,15 @@ const t = {
       ["Genuine spare parts","Sourced from authorized OEMs."],
       ["Fast servicing","Minimum downtime, maximum harvest."],
       ["Affordable pricing","Honest quotes, no surprises."],
-      ["Trusted by farmers","Loved across Namakkal region."],
+      ["1,000+ farmers served","Loved across Namakkal region."],
       ["Customer-first support","We pick up. We show up."],
     ],
     voiceKicker: "Farmer voices",
     voiceTitle: "Trusted across the region.",
     testimonials: [
       ["Best tractor service in Namakkal. Quick response and genuine parts.","Murugan S.","Paramathi Velur"],
-      ["Very friendly service and affordable pricing. Highly recommended!","Karthik R.","Namakkal"],
-      ["Fixed my Mahindra in a day during harvest. Lifesavers.","Selvam P.","Velur"],
+      ["They helped me sell my old Mahindra at a fair price. Honest brokers.","Karthik R.","Namakkal"],
+      ["Fixed my tractor in a day during harvest. Lifesavers.","Selvam P.","Velur"],
     ],
     contactKicker: "Get in touch",
     contactTitle: "Visit us, call us, or message on WhatsApp.",
@@ -143,31 +131,32 @@ const t = {
     nav: ["எங்களைப் பற்றி", "சேவைகள்", "உபகரணங்கள்", "ஏன் நாங்கள்", "தொடர்பு"],
     badge: "25+ ஆண்டுகள் அனுபவம் · நாமக்கல்",
     h1a: "நம்பகமான டிராக்டர் தீர்வுகளுடன்", h1b: "நவீன விவசாயத்திற்கு", h1c: "சக்தி அளிக்கிறோம்.",
-    sub: "விற்பனை · சேவை · விவசாய உபகரணங்கள் · உதிரி பாகங்கள். ஒவ்வொரு பருவத்திலும் நம்பகத்தன்மையை விரும்பும் விவசாயிகளுக்காக.",
+    sub: "விற்பனை · தரகு · சேவை · விவசாய உபகரணங்கள் · உதிரி பாகங்கள். நம்பகத்தன்மையை விரும்பும் விவசாயிகளுக்காக.",
     callNow: "அழைக்கவும்", whatsapp: "வாட்ஸ்அப்", viewTractors: "டிராக்டர்கள்",
-    stats: [["25+","ஆண்டுகள்"],["5,000+","விவசாயிகள்"],["திங்–வெள்","8 AM – 7 PM"]],
+    stats: [["25+","ஆண்டுகள்"],["1,000+","விவசாயிகள்"],["திங்–வெள்","8 AM – 7 PM"]],
+    locStrip: "G.H அருகில் · N. கந்தம்பாளையம் · ப.வேலூர் (வட்டம்) · நாமக்கல் (மாவட்டம்) · தமிழ்நாடு — 637203",
     aboutKicker: "எங்களைப் பற்றி",
-    aboutTitle: "நாமக்கலின் நம்பகமான டிராக்டர் நிபுணர்கள்.",
-    aboutBody: "ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர் நாமக்கல் மற்றும் அதைச் சுற்றியுள்ள பகுதிகளில் விவசாயிகளுக்கு டிராக்டர் விற்பனை, உபகரணங்கள், உதிரி பாகங்கள் மற்றும் சேவை வழங்குகிறது.",
-    aboutPills: ["தரமான சேவை","உண்மையான வேலை","மலிவான விலை","வாடிக்கையாளர் திருப்தி"],
+    aboutTitle: "நாமக்கலில் 1,000+ விவசாயிகளுக்கு சேவை செய்த நம்பகமான நிபுணர்கள்.",
+    aboutBody: "ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர் ஒரு குடும்ப நடத்தும் டீலர்ஷிப் & சர்வீஸ் சென்டர் — புதிய டிராக்டர் விற்பனை, பழைய டிராக்டர் தரகு (பிராக்கர்), விவசாய உபகரணங்கள், ஒரிஜினல் உதிரி பாகங்கள் மற்றும் கள சேவை வழங்குகிறது.",
+    aboutPills: ["தரமான சேவை","ஒரிஜினல் பாகங்கள்","நேர்மையான தரகு","வாடிக்கையாளர் திருப்தி"],
     servicesKicker: "நாங்கள் செய்வது",
     servicesTitle: "உங்கள் டிராக்டருக்கு தேவையான அனைத்தும் — ஒரே இடத்தில்.",
     talk: "நிபுணரிடம் பேசுங்கள்",
     services: [
-      ["டிராக்டர் விற்பனை","அனைத்து விவசாய தேவைகளுக்கும் புதிய மற்றும் பழைய டிராக்டர்கள்."],
-      ["டிராக்டர் சேவை","என்ஜின் ரிப்பேர், பராமரிப்பு, ஆயில் சர்வீஸ் மற்றும் பரிசோதனை."],
-      ["உதிரி பாகங்கள்","உயர் தரமான ஒரிஜினல் டிராக்டர் உதிரி பாகங்கள்."],
-      ["விவசாய உபகரணங்கள்","ரோட்டாவேட்டர், கல்டிவேட்டர், கலப்பை, டிரெய்லர் மற்றும் பல."],
-      ["வீடு சேவை","அருகிலுள்ள இடங்களில் விரைவான களச் சேவை."],
+      ["டிராக்டர் விற்பனை","உங்கள் பண்ணைக்கு ஏற்ற புதிய மஹிந்திரா டிராக்டர்கள்."],
+      ["டிராக்டர் தரகு","பழைய டிராக்டருக்கு நேர்மையான தரகு — சரியான விலை, நம்பகமான வாங்குபவர் & விற்பவர்."],
+      ["டிராக்டர் சேவை","என்ஜின் ரிப்பேர், பராமரிப்பு, ஆயில் சர்வீஸ் & பரிசோதனை."],
+      ["ஒரிஜினல் உதிரி பாகங்கள்","OEM தரத்தில் டிராக்டர் உதிரி பாகங்கள்."],
+      ["விவசாய உபகரணங்கள்","ரோட்டாவேட்டர், கல்டிவேட்டர், கலப்பை, ஸ்ப்ரேயர், தண்ணீர் டாங்கர்."],
+      ["வீடு சேவை","அருகிலுள்ள கிராமங்களில் விரைவான களச் சேவை."],
     ],
     equipKicker: "சிறப்பு உபகரணங்கள்",
     equipTitle: "ஒவ்வொரு வயலுக்கும் வேலைக்காரர்கள்.",
     enquire: "வாட்ஸ்அப்பில் கேளுங்கள்",
     equipment: [
-      ["மஹிந்திரா 575 DI","அதிகம் விற்பனை","இந்தியாவின் மிகவும் விரும்பப்படும் 47 HP — எரிபொருள் சிக்கனம்."],
+      ["மஹிந்திரா 575 DI","அதிகம் விற்பனை","இந்தியாவின் விரும்பப்படும் 47 HP — எரிபொருள் சிக்கனம்."],
       ["மஹிந்திரா 475 DI","கிளாசிக்","நம்பகமான 42 HP, நடுத்தர பண்ணைகளுக்கு ஏற்றது."],
       ["ரோட்டாவேட்டர்","உபகரணம்","சீரான ஆழத்தில் கடினமான மண் தயாரிப்பு."],
-      ["டிரெய்லர்","ஏற்றுமதி","பயிர்கள் மற்றும் பொருட்களுக்கான வலிமையான ஸ்டீல் டிரெய்லர்."],
       ["தண்ணீர் டாங்கர்","பாசனம்","பாசனம் மற்றும் தண்ணீர் கொண்டு செல்ல உயர் கொள்ளளவு டாங்கர்."],
     ],
     whyKicker: "ஏன் நாங்கள்",
@@ -177,15 +166,15 @@ const t = {
       ["ஒரிஜினல் உதிரி பாகங்கள்","அங்கீகரிக்கப்பட்ட OEM-களிடமிருந்து."],
       ["விரைவான சேவை","குறைந்த நேர விரயம், அதிக அறுவடை."],
       ["மலிவான விலை","நேர்மையான விலை, மறைவில்லை."],
-      ["விவசாயிகளின் நம்பிக்கை","நாமக்கல் முழுவதும் விரும்பப்படுகிறது."],
+      ["1,000+ விவசாயிகள்","நாமக்கல் முழுவதும் விரும்பப்படுகிறது."],
       ["வாடிக்கையாளர் முதல்","நாங்கள் பதிலளிப்போம். வந்து சேருவோம்."],
     ],
     voiceKicker: "விவசாயிகளின் குரல்",
     voiceTitle: "மக்கள் நம்பும் சேவை.",
     testimonials: [
-      ["நாமக்கலில் சிறந்த டிராக்டர் சேவை. விரைவான பதில் மற்றும் ஒரிஜினல் பாகங்கள்.","முருகன் எஸ்.","பரமத்தி வேலூர்"],
-      ["மிகவும் நட்பான சேவை மற்றும் மலிவான விலை. மிகவும் பரிந்துரை செய்கிறேன்!","கார்த்திக் ஆர்.","நாமக்கல்"],
-      ["அறுவடை நேரத்தில் என் மஹிந்திராவை ஒரே நாளில் சரி செய்தனர். உயிர் காப்பாளர்கள்.","செல்வம் பி.","வேலூர்"],
+      ["நாமக்கலில் சிறந்த டிராக்டர் சேவை. விரைவான பதில் & ஒரிஜினல் பாகங்கள்.","முருகன் எஸ்.","பரமத்தி வேலூர்"],
+      ["என் பழைய மஹிந்திராவை நல்ல விலையில் விற்க உதவினர். நேர்மையான தரகர்கள்.","கார்த்திக் ஆர்.","நாமக்கல்"],
+      ["அறுவடை நேரத்தில் என் டிராக்டரை ஒரே நாளில் சரி செய்தனர். உயிர் காப்பாளர்கள்.","செல்வம் பி.","வேலூர்"],
     ],
     contactKicker: "தொடர்பு கொள்ளுங்கள்",
     contactTitle: "வாருங்கள், அழையுங்கள், அல்லது வாட்ஸ்அப் செய்யுங்கள்.",
@@ -228,6 +217,7 @@ function Index() {
     <main className="min-h-screen bg-cream">
       <Nav L={L} lang={lang} setLang={setLang} />
       <Hero L={L} />
+      <LocationStrip L={L} />
       <About L={L} />
       <Services L={L} />
       <Equipment L={L} />
@@ -256,7 +246,7 @@ function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: La
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-soil/80">
           {L.nav.map((label, i) => {
             const slugs = ["about","services","equipment","why-us","contact"];
-            return <a key={i} href={`#${slugs[i]}`} className="hover:text-soil transition">{label}</a>;
+            return <a key={i} href={`#${slugs[i]}`} className="hover:text-soil transition story-link">{label}</a>;
           })}
         </nav>
         <div className="flex items-center gap-2">
@@ -277,11 +267,16 @@ function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: La
 }
 
 function Hero({ L }: { L: typeof t.en }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.4]);
+
   return (
-    <section id="top" className="relative overflow-hidden">
+    <section id="top" ref={ref} className="relative overflow-hidden">
       <div className="absolute inset-0 grain pointer-events-none" />
       <div className="mx-auto max-w-7xl px-5 lg:px-10 pt-12 pb-20 lg:pt-20 lg:pb-32 grid lg:grid-cols-12 gap-10 items-center">
-        <div className="lg:col-span-6">
+        <motion.div className="lg:col-span-6" style={{ opacity }}>
           <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.6}}
             className="inline-flex items-center gap-3 text-[11px] font-bold tracking-[0.32em] uppercase text-soil/70">
             <span className="h-px w-10 bg-soil/40" />
@@ -323,12 +318,13 @@ function Hero({ L }: { L: typeof t.en }) {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         <div className="lg:col-span-6 relative">
           <div className="absolute -inset-6 bg-gradient-to-br from-harvest/40 via-transparent to-rust/20 blur-3xl rounded-full" />
           <motion.div
             initial={{opacity:0, scale:0.95}} animate={{opacity:1, scale:1}} transition={{duration:0.8}}
+            style={{ y }}
             className="relative">
             <div className="absolute -top-4 -left-4 h-24 w-24 rounded-full bg-harvest" />
             <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full border-4 border-soil" />
@@ -353,8 +349,21 @@ function Hero({ L }: { L: typeof t.en }) {
   );
 }
 
+function LocationStrip({ L }: { L: typeof t.en }) {
+  return (
+    <a href={MAPS} target="_blank" rel="noopener"
+      className="block bg-harvest/90 text-soil hover:bg-harvest transition border-y border-soil/10">
+      <div className="mx-auto max-w-7xl px-5 lg:px-10 py-3 flex items-center justify-center gap-3 text-center">
+        <MapPin className="h-4 w-4 flex-shrink-0" />
+        <p className="text-[12px] sm:text-sm font-semibold tracking-wide">{L.locStrip}</p>
+        <ArrowUpRight className="h-4 w-4 flex-shrink-0" />
+      </div>
+    </a>
+  );
+}
+
 function Marquee() {
-  const items = ["Mahindra 575 DI", "Mahindra 475 DI", "Genuine Spare Parts", "Field Service", "Rotavators", "Trailers", "Water Tankers", "Engine Repair"];
+  const items = ["Mahindra 575 DI", "Mahindra 475 DI", "Tractor Brokerage", "Genuine Spare Parts", "Field Service", "Rotavators", "Water Tankers", "Engine Repair"];
   const row = [...items, ...items];
   return (
     <div className="border-y border-soil/10 bg-soil text-cream py-4 overflow-hidden">
@@ -372,39 +381,39 @@ function Marquee() {
 function About({ L }: { L: typeof t.en }) {
   return (
     <section id="about" className="mx-auto max-w-7xl px-5 lg:px-10 py-24 grid lg:grid-cols-12 gap-10">
-      <div className="lg:col-span-5">
+      <motion.div initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="lg:col-span-5">
         <p className="text-xs font-semibold tracking-[0.25em] uppercase text-rust">{L.aboutKicker}</p>
         <h2 className="mt-3 font-display font-black text-4xl lg:text-5xl text-soil text-balance leading-[1.05]">
           {L.aboutTitle}
         </h2>
-      </div>
-      <div className="lg:col-span-7 space-y-6">
+      </motion.div>
+      <motion.div initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6, delay:0.1}} className="lg:col-span-7 space-y-6">
         <p className="text-lg text-muted-foreground leading-relaxed">{L.aboutBody}</p>
         <ul className="grid sm:grid-cols-2 gap-3">
           {L.aboutPills.map(p=>(
-            <li key={p} className="flex items-center gap-3 rounded-xl border border-border bg-card p-4">
+            <li key={p} className="flex items-center gap-3 rounded-xl border border-border bg-card p-4 hover-scale">
               <span className="h-8 w-8 grid place-items-center rounded-full bg-harvest text-soil"><CheckCircle2 className="h-4 w-4"/></span>
               <span className="font-semibold text-soil">{p}</span>
             </li>
           ))}
         </ul>
-      </div>
+      </motion.div>
     </section>
   );
 }
 
 function Services({ L }: { L: typeof t.en }) {
-  const icons = [Tractor, Wrench, Cog, Sprout, Truck];
+  const icons = [Tractor, Handshake, Wrench, Cog, Sprout, Truck];
   return (
     <section id="services" className="bg-soil text-cream py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-12">
-          <div>
+          <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}}>
             <p className="text-xs font-semibold tracking-[0.25em] uppercase text-harvest">{L.servicesKicker}</p>
             <h2 className="mt-3 font-display font-black text-4xl lg:text-5xl text-balance max-w-2xl leading-[1.05]">
               {L.servicesTitle}
             </h2>
-          </div>
+          </motion.div>
           <a href={`tel:+91${PHONE_1}`} className="inline-flex items-center gap-2 text-harvest hover:text-cream font-semibold">
             {L.talk} <ArrowUpRight className="h-4 w-4"/>
           </a>
@@ -414,8 +423,8 @@ function Services({ L }: { L: typeof t.en }) {
             const Icon = icons[i];
             return (
               <motion.div key={title}
-                initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.05}}
-                className="group relative rounded-2xl border border-cream/10 bg-cream/[0.04] p-7 hover:bg-harvest hover:text-soil transition-all duration-300">
+                initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.06, duration:0.5}}
+                className="group relative rounded-2xl border border-cream/10 bg-cream/[0.04] p-7 hover:bg-harvest hover:text-soil hover:-translate-y-1 transition-all duration-300">
                 <div className="flex items-center justify-between mb-8">
                   <div className="h-12 w-12 grid place-items-center rounded-xl bg-harvest text-soil group-hover:bg-soil group-hover:text-harvest transition">
                     <Icon className="h-6 w-6" />
@@ -434,33 +443,32 @@ function Services({ L }: { L: typeof t.en }) {
 }
 
 function Equipment({ L }: { L: typeof t.en }) {
-  const imgs = [eqTractor575, eqTractor475, eqRotavator, eqTrailer, eqTanker];
+  const imgs = [eqTractor575, eqTractor475, eqRotavator, eqTanker];
   const alts = [
     "Mahindra 575 DI tractor for farming",
     "Mahindra 475 DI tractor for medium farms",
     "Agricultural rotavator for soil preparation",
-    "Robust tractor trailer for farm hauling",
     "High-capacity water tanker for farm irrigation",
   ];
   return (
     <section id="equipment" className="mx-auto max-w-7xl px-5 lg:px-10 py-24">
       <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
-        <div>
+        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}}>
           <p className="text-xs font-semibold tracking-[0.25em] uppercase text-rust">{L.equipKicker}</p>
           <h2 className="mt-3 font-display font-black text-4xl lg:text-5xl text-soil leading-[1.05]">{L.equipTitle}</h2>
-        </div>
+        </motion.div>
         <a href={WA} target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-semibold text-soil hover:text-rust">
           {L.enquire} <ArrowUpRight className="h-4 w-4"/>
         </a>
       </div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {L.equipment.map(([title, tag, desc], i)=>(
           <motion.article key={title}
-            initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.07}}
-            className="group rounded-2xl overflow-hidden bg-card border border-border hover:border-rust transition">
+            initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.08, duration:0.5}}
+            className="group rounded-2xl overflow-hidden bg-card border border-border hover:border-rust hover:-translate-y-1 transition-all duration-300">
             <div className="relative aspect-[4/3] overflow-hidden bg-muted">
               <img src={imgs[i]} alt={alts[i]} loading="lazy" width={800} height={600}
-                className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
               <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider bg-cream text-soil px-2 py-1 rounded-full">{tag}</span>
             </div>
             <div className="p-5">
@@ -478,15 +486,16 @@ function WhyUs({ L }: { L: typeof t.en }) {
   return (
     <section id="why-us" className="bg-cream py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
-        <div className="max-w-2xl mb-12">
+        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="max-w-2xl mb-12">
           <p className="text-xs font-semibold tracking-[0.25em] uppercase text-rust">{L.whyKicker}</p>
           <h2 className="mt-3 font-display font-black text-4xl lg:text-5xl text-soil text-balance leading-[1.05]">
             {L.whyTitle}
           </h2>
-        </div>
+        </motion.div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
           {L.reasons.map(([t, d], i)=>(
-            <div key={t}
+            <motion.div key={t}
+              initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once:true}} transition={{delay:i*0.05}}
               className="group bg-cream p-8 hover:bg-soil hover:text-cream transition-all duration-300">
               <div className="flex items-center gap-3 mb-3">
                 <span className="font-display text-sm text-rust group-hover:text-harvest">0{i+1}</span>
@@ -494,7 +503,7 @@ function WhyUs({ L }: { L: typeof t.en }) {
               </div>
               <h3 className="font-display text-xl font-bold mb-2 leading-tight">{t}</h3>
               <p className="text-sm opacity-75 leading-relaxed">{d}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -505,15 +514,15 @@ function WhyUs({ L }: { L: typeof t.en }) {
 function Testimonials({ L }: { L: typeof t.en }) {
   return (
     <section className="mx-auto max-w-7xl px-5 lg:px-10 py-24">
-      <div className="text-center max-w-2xl mx-auto mb-12">
+      <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="text-center max-w-2xl mx-auto mb-12">
         <p className="text-xs font-semibold tracking-[0.25em] uppercase text-rust">{L.voiceKicker}</p>
         <h2 className="mt-3 font-display font-black text-4xl lg:text-5xl text-soil leading-[1.05]">{L.voiceTitle}</h2>
-      </div>
+      </motion.div>
       <div className="grid md:grid-cols-3 gap-5">
         {L.testimonials.map(([q, n, r],i)=>(
           <motion.div key={i}
-            initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.1}}
-            className="rounded-2xl border border-border bg-card p-7 relative">
+            initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.1, duration:0.5}}
+            className="rounded-2xl border border-border bg-card p-7 relative hover:-translate-y-1 transition-transform duration-300">
             <Quote className="absolute top-5 right-5 h-8 w-8 text-harvest/40"/>
             <div className="flex gap-1 mb-4">
               {[...Array(5)].map((_,j)=><Star key={j} className="h-4 w-4 fill-harvest text-harvest"/>)}
@@ -545,9 +554,9 @@ function Contact({ L }: { L: typeof t.en }) {
               <div>
                 <div className="text-[11px] uppercase tracking-[0.2em] text-harvest mb-1">{L.address}</div>
                 <p className="text-cream/90 leading-relaxed">
-                  Main Road, Near G.H Hospital,<br/>
-                  N. Kandhampalayam, Paramathi Velur,<br/>
-                  Namakkal — 637203
+                  Near G.H, N. Kandampalayam,<br/>
+                  P. Velur (Tk), Namakkal (Dt),<br/>
+                  Tamil Nadu — 637203
                 </p>
               </div>
             </div>
@@ -579,7 +588,17 @@ function Contact({ L }: { L: typeof t.en }) {
           </div>
         </div>
 
-        <div className="lg:col-span-7">
+        <div className="lg:col-span-7 space-y-5">
+          <div className="rounded-3xl overflow-hidden border border-cream/10 aspect-[16/10] bg-cream/[0.05]">
+            <iframe
+              src={MAPS_EMBED}
+              title="Sri Mariamman Tractor Center location"
+              className="w-full h-full"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
           <div className="rounded-3xl bg-cream/[0.05] border border-cream/10 p-8 lg:p-10">
             <h3 className="font-display text-2xl font-bold mb-6">{L.quickActions}</h3>
             <div className="grid sm:grid-cols-2 gap-3">
@@ -610,7 +629,7 @@ function Contact({ L }: { L: typeof t.en }) {
                   { Icon: YouTubeIcon, href: "#", label: "YouTube" },
                 ].map(({ Icon, href, label }) => (
                   <a key={label} href={href} target="_blank" rel="noopener" aria-label={label}
-                    className="h-11 w-11 grid place-items-center rounded-full bg-cream/10 hover:bg-harvest hover:text-soil text-cream transition">
+                    className="h-11 w-11 grid place-items-center rounded-full bg-cream/10 hover:bg-harvest hover:text-soil text-cream transition hover:scale-110">
                     <Icon className="h-5 w-5" />
                   </a>
                 ))}
