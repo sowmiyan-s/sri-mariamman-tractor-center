@@ -459,7 +459,7 @@ function Equipment({ L }: { L: typeof t.en }) {
             initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.07}}
             className="group rounded-2xl overflow-hidden bg-card border border-border hover:border-rust transition">
             <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-              <img src={imgs[i]} alt={title} loading="lazy" width={800} height={600}
+              <img src={imgs[i]} alt={alts[i]} loading="lazy" width={800} height={600}
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
               <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider bg-cream text-soil px-2 py-1 rounded-full">{tag}</span>
             </div>
