@@ -558,20 +558,20 @@ function Testimonials({ L }: { L: typeof t.en }) {
     <section className="py-40">
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="text-center max-w-2xl mx-auto mb-24">
-          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6">{L.voiceKicker}</p>
-          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9]">{L.voiceTitle}</h2>
+          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6 text-readable">{L.voiceKicker}</p>
+          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9] text-readable-strong">{L.voiceTitle}</h2>
         </motion.div>
         <div className="grid md:grid-cols-3 gap-8">
           {L.testimonials.map(([q, n, r], i)=>(
             <motion.div key={i}
               initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.1}}
-              className="rounded-[2.5rem] border border-white/20 bg-white/10 backdrop-blur-2xl p-12 relative shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-              <Quote className="absolute top-12 right-12 h-12 w-12 text-primary/5"/>
+              className="glass rounded-[2.5rem] p-12 relative hover:-translate-y-2 hover:border-primary/60 transition-all duration-500">
+              <Quote className="absolute top-12 right-12 h-12 w-12 text-primary/15"/>
               <div className="flex gap-1.5 mb-8">
                 {[...Array(5)].map((_,j)=><Star key={j} className="h-4 w-4 fill-primary text-primary"/>)}
               </div>
               <p className="font-display text-2xl font-black text-soil leading-[1.1] tracking-tight mb-10">"{q}"</p>
-              <div className="pt-8 border-t border-white/10">
+              <div className="pt-8 border-t border-white/30">
                 <div className="font-black text-soil uppercase tracking-widest text-sm mb-1">{n}</div>
                 <div className="text-xs font-bold text-primary uppercase tracking-[0.2em]">{r}</div>
               </div>
