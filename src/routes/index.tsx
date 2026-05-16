@@ -288,13 +288,13 @@ function Hero({ L }: { L: typeof t.en }) {
           </motion.div>
           <motion.h1
             initial={{opacity:0,y:40}} animate={{opacity:1,y:0}} transition={{duration:0.9, ease: [0.16, 1, 0.3, 1], delay:0.2}}
-            className="mt-7 font-display font-black text-soil leading-[0.9] text-balance text-5xl sm:text-7xl lg:text-[6.5rem] tracking-tighter">
+            className="mt-7 font-display font-black text-soil leading-[0.9] text-balance text-5xl sm:text-7xl lg:text-[6.5rem] tracking-tighter text-readable-strong">
             {L.h1a} <em className="italic font-light text-primary">{L.h1b}</em> {L.h1c}
           </motion.h1>
-          <p className="mt-4 font-display italic text-xl text-rust/80" style={{ fontFamily: 'var(--font-tamil)' }}>
+          <p className="mt-4 font-display italic text-xl text-rust text-readable" style={{ fontFamily: 'var(--font-tamil)' }}>
             ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
           </p>
-          <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed font-light">{L.sub}</p>
+          <p className="mt-6 text-lg text-soil/85 max-w-xl leading-relaxed font-medium text-readable">{L.sub}</p>
 
           <div className="mt-8 flex flex-wrap gap-4">
             <MagneticButton>
