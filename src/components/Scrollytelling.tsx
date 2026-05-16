@@ -66,8 +66,8 @@ export const Scrollytelling = () => {
         
         context.clearRect(0, 0, canvas.width, canvas.height);
         
-        // Premium saturation and contrast enhancement
-        context.filter = "saturate(1.8) contrast(1.15) brightness(1.05)";
+        // Premium tone — balanced for readable foreground text
+        context.filter = "saturate(1.35) contrast(1.05) brightness(1.08)";
         
         context.drawImage(
           img, 0, 0, img.width, img.height,
