@@ -90,7 +90,7 @@ export const Scrollytelling = () => {
       {/* The actual image sequence canvas */}
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: isLoaded ? 0.9 : 0 }}
+        animate={{ opacity: isLoaded ? 0.78 : 0 }}
         transition={{ duration: 1 }}
         className="w-full h-full"
       >
