@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 export const Scrollytelling = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { scrollYProgress } = useScroll();
-  
+
   // High-end spring physics for "liquid" smoothness
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 40,  // Lower stiffness for more fluid motion
-    damping: 20,    // Balanced damping for smooth settling
-    restDelta: 0.001
+    stiffness: 40, // Lower stiffness for more fluid motion
+    damping: 20, // Balanced damping for smooth settling
+    restDelta: 0.001,
   });
 
   const frameCount = 240;
@@ -21,12 +21,12 @@ export const Scrollytelling = () => {
     const preloadImages = () => {
       for (let i = 1; i <= frameCount; i++) {
         const img = new Image();
-        img.src = `/sequence/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
+        img.src = `/sequence/ezgif-frame-${i.toString().padStart(3, "0")}.jpg`;
         img.onload = () => {
-          setLoadedCount(prev => prev + 1);
+          setLoadedCount((prev) => prev + 1);
         };
         img.onerror = () => {
-          setLoadedCount(prev => prev + 1);
+          setLoadedCount((prev) => prev + 1);
         };
         images.current[i - 1] = img;
       }
@@ -51,10 +51,10 @@ export const Scrollytelling = () => {
       const canvas = canvasRef.current;
       const context = canvas?.getContext("2d");
       if (!context || !canvas) return;
-      
+
       const index = Math.round(frameIndex.get());
       const img = images.current[index];
-      
+
       if (img && img.complete && img.naturalWidth !== 0) {
         context.imageSmoothingEnabled = true;
         context.imageSmoothingQuality = "high";
@@ -64,17 +64,24 @@ export const Scrollytelling = () => {
         const ratio = Math.max(hRatio, vRatio);
         const centerShiftX = (canvas.width - img.width * ratio) / 2;
         const centerShiftY = (canvas.height - img.height * ratio) / 2;
-        
+
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.drawImage(
-          img, 0, 0, img.width, img.height,
-          centerShiftX, centerShiftY, img.width * ratio, img.height * ratio
+          img,
+          0,
+          0,
+          img.width,
+          img.height,
+          centerShiftX,
+          centerShiftY,
+          img.width * ratio,
+          img.height * ratio,
         );
       }
-      
+
       requestAnimationFrame(render);
     };
-    
+
     const animationFrame = requestAnimationFrame(render);
     return () => {
       cancelAnimationFrame(animationFrame);
@@ -86,16 +93,13 @@ export const Scrollytelling = () => {
 
   return (
     <div className="fixed inset-0 -z-20 pointer-events-none overflow-hidden bg-background">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isVisible ? 1 : 0 }}
         transition={{ duration: 1.5 }}
         className="w-full h-full"
       >
-        <canvas
-          ref={canvasRef}
-          className="w-full h-full"
-        />
+        <canvas ref={canvasRef} className="w-full h-full" />
       </motion.div>
     </div>
   );

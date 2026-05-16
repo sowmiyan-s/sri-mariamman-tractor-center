@@ -7,21 +7,26 @@ interface MagneticButtonProps {
   distance?: number;
 }
 
-export const MagneticButton: React.FC<MagneticButtonProps> = ({ 
-  children, 
-  className = "", 
-  distance = 0.4 
+export const MagneticButton: React.FC<MagneticButtonProps> = ({
+  children,
+  className = "",
+  distance = 0.4,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const { clientX, clientY } = e;
-    const { left, top, width, height } = ref.current?.getBoundingClientRect() || { left: 0, top: 0, width: 0, height: 0 };
-    
+    const { left, top, width, height } = ref.current?.getBoundingClientRect() || {
+      left: 0,
+      top: 0,
+      width: 0,
+      height: 0,
+    };
+
     const x = (clientX - (left + width / 2)) * distance;
     const y = (clientY - (top + height / 2)) * distance;
-    
+
     setPosition({ x, y });
   };
 

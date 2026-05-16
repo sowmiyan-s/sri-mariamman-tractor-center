@@ -4,7 +4,7 @@ import { motion, useSpring } from "framer-motion";
 export const CustomCursor = () => {
   const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  
+
   const mouseX = useSpring(0, { stiffness: 500, damping: 28 });
   const mouseY = useSpring(0, { stiffness: 500, damping: 28 });
 
@@ -12,14 +12,14 @@ export const CustomCursor = () => {
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
-      
+
       const target = e.target as HTMLElement;
       setIsPointer(
-        window.getComputedStyle(target).cursor === "pointer" || 
-        target.tagName === "A" || 
-        target.tagName === "BUTTON"
+        window.getComputedStyle(target).cursor === "pointer" ||
+          target.tagName === "A" ||
+          target.tagName === "BUTTON",
       );
-      
+
       if (!isVisible) setIsVisible(true);
     };
 

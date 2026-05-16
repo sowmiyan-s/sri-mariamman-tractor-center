@@ -45,13 +45,13 @@
 :root {
   --radius: 1rem;
   /* Luxury Agricultural Palette - Deep Emerald, Gold, and Crimson */
-  --background: oklch(0.99 0.005 85);          /* Pure white/ivory */
-  --foreground: oklch(0.15 0.04 150);            /* Deep obsidian emerald */
+  --background: oklch(0.99 0.005 85); /* Pure white/ivory */
+  --foreground: oklch(0.15 0.04 150); /* Deep obsidian emerald */
   --cream: oklch(0.99 0.005 85);
-  --soil: oklch(0.12 0.03 150);                /* Luxury deep green */
-  --leaf: oklch(0.4 0.12 145);                 /* Vibrant field green */
-  --harvest: oklch(0.75 0.12 85);              /* Rich gold */
-  --rust: oklch(0.5 0.18 25);                  /* Mahindra crimson */
+  --soil: oklch(0.12 0.03 150); /* Luxury deep green */
+  --leaf: oklch(0.4 0.12 145); /* Vibrant field green */
+  --harvest: oklch(0.75 0.12 85); /* Rich gold */
+  --rust: oklch(0.5 0.18 25); /* Mahindra crimson */
 
   --card: oklch(1 0 0);
   --card-foreground: var(--foreground);
@@ -103,15 +103,22 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     background-color: transparent;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1,h2,h3,h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     letter-spacing: -0.04em;
     text-transform: uppercase;
@@ -119,10 +126,13 @@
 }
 
 @layer utilities {
-  .text-balance { text-wrap: balance; }
+  .text-balance {
+    text-wrap: balance;
+  }
   .glow-harvest {
-    box-shadow: 0 30px 80px -20px oklch(0.78 0.16 75 / 0.55),
-                0 10px 30px -10px oklch(0.55 0.18 32 / 0.35);
+    box-shadow:
+      0 30px 80px -20px oklch(0.78 0.16 75 / 0.55),
+      0 10px 30px -10px oklch(0.55 0.18 32 / 0.35);
   }
 
   /* Premium glass with defined borders */
@@ -147,7 +157,9 @@
     backdrop-filter: blur(20px) saturate(1.6);
     -webkit-backdrop-filter: blur(20px) saturate(1.6);
     border: 1px solid oklch(1 0 0 / 0.15);
-    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.12), 0 40px 100px -20px oklch(0 0 0 / 0.6);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.12),
+      0 40px 100px -20px oklch(0 0 0 / 0.6);
   }
 
   /* Text Stroke Utility (instead of shadow) */
@@ -170,25 +182,50 @@
   }
   .section-veil::before {
     content: "";
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at center, oklch(1 0 0 / 0.45) 0%, oklch(1 0 0 / 0.15) 60%, transparent 100%);
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      oklch(1 0 0 / 0.45) 0%,
+      oklch(1 0 0 / 0.15) 60%,
+      transparent 100%
+    );
     pointer-events: none;
     z-index: -1;
   }
 }
 
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50% { transform: translateY(-18px) rotate(1deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(1deg);
+  }
 }
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 oklch(0.55 0.18 32 / 0.6); }
-  100% { box-shadow: 0 0 0 22px oklch(0.55 0.18 32 / 0); }
+  0% {
+    box-shadow: 0 0 0 0 oklch(0.55 0.18 32 / 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 22px oklch(0.55 0.18 32 / 0);
+  }
 }
-.animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
-.animate-marquee { animation: marquee 35s linear infinite; }
-.animate-pulse-ring { animation: pulse-ring 2s ease-out infinite; }
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
+}
