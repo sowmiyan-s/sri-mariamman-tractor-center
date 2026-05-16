@@ -529,22 +529,22 @@ function WhyUs({ L }: { L: typeof t.en }) {
     <section id="why-us" className="py-40">
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="max-w-2xl mb-24">
-          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6">{L.whyKicker}</p>
-          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9]">
+          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6 text-readable">{L.whyKicker}</p>
+          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9] text-readable-strong">
             {L.whyTitle}
           </h2>
         </motion.div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {L.reasons.map(([t, d], i)=>(
             <motion.div key={t}
               initial={{opacity:0, y: 20}} whileInView={{opacity:1, y: 0}} viewport={{once:true}} transition={{delay:i*0.1}}
-              className="group relative rounded-[2.5rem] border border-white/20 bg-white/5 backdrop-blur-2xl p-10 hover:bg-white/10 transition-all duration-500 shadow-2xl">
-              <div className="h-16 w-16 rounded-2xl bg-soil text-white grid place-items-center mb-8 group-hover:bg-primary transition-all duration-500 shadow-2xl group-hover:shadow-primary/30 group-hover:-rotate-6">
+              className="group glass relative rounded-[2.5rem] p-10 hover:-translate-y-2 hover:border-primary/60 transition-all duration-500">
+              <div className="h-16 w-16 rounded-2xl bg-soil text-white grid place-items-center mb-8 group-hover:bg-primary transition-all duration-500 shadow-2xl group-hover:shadow-primary/40 group-hover:-rotate-6">
                 <ShieldCheck className="h-8 w-8" />
               </div>
               <h3 className="font-display text-2xl font-black mb-4 tracking-tighter uppercase leading-[1.1] text-soil">{t}</h3>
-              <p className="text-base text-muted-foreground leading-relaxed font-light">{d}</p>
-              <div className="mt-8 h-1 w-0 bg-primary/20 group-hover:w-full transition-all duration-700" />
+              <p className="text-base text-soil/80 leading-relaxed font-medium">{d}</p>
+              <div className="mt-8 h-1 w-0 bg-primary group-hover:w-full transition-all duration-700 rounded-full" />
             </motion.div>
           ))}
         </div>
