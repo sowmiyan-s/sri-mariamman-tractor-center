@@ -595,33 +595,33 @@ function Contact({ L }: { L: typeof t.en }) {
     >
       <div className="grid lg:grid-cols-12 gap-20">
         <div className="lg:col-span-5">
-          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6">{L.contactKicker}</p>
-          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil leading-[0.9] tracking-tighter">
+          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6 text-readable">{L.contactKicker}</p>
+          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil leading-[0.9] tracking-tighter text-readable-strong">
             {L.contactTitle}
           </h2>
-          <div className="mt-16 space-y-12">
-            <div className="flex gap-8">
-              <div className="h-16 w-16 rounded-3xl bg-soil text-white grid place-items-center flex-shrink-0 shadow-2xl">
+          <div className="mt-16 space-y-8">
+            <div className="glass flex gap-6 rounded-[2rem] p-6">
+              <div className="h-16 w-16 rounded-2xl bg-soil text-white grid place-items-center flex-shrink-0 shadow-xl">
                 <Phone className="h-7 w-7" />
               </div>
               <div>
-                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-2">{L.phone}</div>
-                <a href={`tel:+91${PHONE_1}`} className="block text-3xl font-black text-soil hover:text-primary transition-colors tracking-tighter">94433 61295</a>
-                <a href={`tel:+91${PHONE_2}`} className="block text-3xl font-black text-soil hover:text-primary transition-colors tracking-tighter">93823 34477</a>
+                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-soil/70 mb-2">{L.phone}</div>
+                <a href={`tel:+91${PHONE_1}`} className="block text-2xl font-black text-soil hover:text-primary transition-colors tracking-tighter">94433 61295</a>
+                <a href={`tel:+91${PHONE_2}`} className="block text-2xl font-black text-soil hover:text-primary transition-colors tracking-tighter">93823 34477</a>
               </div>
             </div>
-            <div className="flex gap-8">
-              <div className="h-16 w-16 rounded-3xl bg-primary/10 text-primary grid place-items-center flex-shrink-0 shadow-inner">
+            <div className="glass flex gap-6 rounded-[2rem] p-6">
+              <div className="h-16 w-16 rounded-2xl bg-primary text-white grid place-items-center flex-shrink-0 shadow-xl shadow-primary/30">
                 <MapPin className="h-7 w-7" />
               </div>
               <div>
-                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-2">{L.address}</div>
-                <p className="text-2xl font-black text-soil tracking-tighter leading-tight">{L.footerNote}, India</p>
+                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-soil/70 mb-2">{L.address}</div>
+                <p className="text-xl font-black text-soil tracking-tight leading-tight">{L.locStrip}</p>
               </div>
             </div>
           </div>
         </div>
-        <div className="lg:col-span-7 rounded-[3rem] bg-soil/90 text-white p-12 lg:p-16 backdrop-blur-3xl border border-white/10 shadow-[0_60px_120px_-20px_rgba(0,0,0,0.6)] relative overflow-hidden flex flex-col justify-between">
+        <div className="lg:col-span-7 glass-dark rounded-[3rem] text-white p-12 lg:p-16 relative overflow-hidden flex flex-col justify-between">
           <div className="absolute top-0 right-0 h-64 w-64 bg-primary/10 blur-[100px] pointer-events-none" />
           <div>
             <h3 className="font-display text-4xl font-black mb-10 tracking-tighter uppercase">{L.quickActions}</h3>
