@@ -3,7 +3,6 @@
 @import "tailwindcss" source(none);
 
 @source ".";
-@custom-variant dark (&:is(.dark *));
 
 :root {
   --radius: 1rem;
@@ -36,6 +35,8 @@
 }
 
 @theme inline {
+  @custom-variant dark (&:is(.dark *));
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
