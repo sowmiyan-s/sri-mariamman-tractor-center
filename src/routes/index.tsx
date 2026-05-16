@@ -665,16 +665,16 @@ function Footer({ L }: { L: typeof t.en }) {
               <Tractor className="h-8 w-8" />
             </div>
             <div>
-              <div className="font-display font-black text-soil text-2xl tracking-tighter uppercase leading-none mb-1">Sri Mariamman</div>
+              <div className="font-display font-black text-white text-2xl tracking-tighter uppercase leading-none mb-1">Sri Mariamman</div>
               <div className="text-[10px] tracking-[0.4em] uppercase text-primary font-black">Tractor Center</div>
             </div>
           </div>
-          <div className="flex gap-12 text-[10px] font-black uppercase tracking-[0.3em] text-soil/40">
+          <div className="flex gap-12 text-[10px] font-black uppercase tracking-[0.3em] text-white/60">
             {L.nav.map((l, i) => (
               <a key={i} href={`#${["about","services","equipment","why-us","contact"][i]}`} className="hover:text-primary transition-colors">{l}</a>
             ))}
           </div>
-          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-soil/20">
+          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">
             © {new Date().getFullYear()} · {L.footerNote}
           </div>
         </div>
