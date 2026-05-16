@@ -455,15 +455,15 @@ function Services({ L }: { L: typeof t.en }) {
             return (
               <motion.div key={title}
                 initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.06, duration:0.5}}
-                className="group relative rounded-[2.5rem] border border-white/20 bg-white/5 backdrop-blur-2xl p-10 hover:bg-white hover:text-soil hover:-translate-y-3 transition-all duration-500 shadow-2xl">
+                className="group glass relative rounded-[2.5rem] p-10 hover:-translate-y-3 hover:border-primary/60 transition-all duration-500">
                 <div className="flex items-center justify-between mb-12">
-                  <div className="h-16 w-16 grid place-items-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  <div className="h-16 w-16 grid place-items-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/30 group-hover:rotate-6 transition-transform duration-500">
                     <Icon className="h-8 w-8" />
                   </div>
-                  <span className="font-display font-black text-6xl opacity-5 group-hover:opacity-10 transition-opacity tracking-tighter text-soil">0{i+1}</span>
+                  <span className="font-display font-black text-6xl opacity-10 group-hover:opacity-20 transition-opacity tracking-tighter text-soil">0{i+1}</span>
                 </div>
                 <h3 className="font-display text-3xl font-black mb-4 leading-[0.9] tracking-tighter uppercase text-soil">{title}</h3>
-                <p className="text-base text-muted-foreground leading-relaxed font-light group-hover:text-soil/80 transition-colors">{desc}</p>
+                <p className="text-base text-soil/80 leading-relaxed font-medium">{desc}</p>
               </motion.div>
             );
           })}
