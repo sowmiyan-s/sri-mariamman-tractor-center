@@ -438,8 +438,8 @@ function Services({ L }: { L: typeof t.en }) {
       <div className="mx-auto max-w-7xl px-5 lg:px-10 relative z-10">
         <div className="flex items-end justify-between flex-wrap gap-8 mb-20">
           <motion.div initial={{opacity:0,x:-30}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{duration:0.8}}>
-            <p className="text-xs font-black tracking-[0.4em] uppercase text-primary/80 mb-4">{L.servicesKicker}</p>
-            <h2 className="font-display font-black text-4xl lg:text-7xl text-balance max-w-3xl leading-[0.9] tracking-tighter">
+            <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-4 text-readable">{L.servicesKicker}</p>
+            <h2 className="font-display font-black text-4xl lg:text-7xl text-balance max-w-3xl leading-[0.9] tracking-tighter text-soil text-readable-strong">
               {L.servicesTitle}
             </h2>
           </motion.div>
