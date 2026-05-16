@@ -372,7 +372,7 @@ function Marquee() {
   const items = ["Mahindra 575 DI", "Mahindra 475 DI", "Tractor Brokerage", "Genuine Spare Parts", "Field Service", "Rotavators", "Water Tankers", "Engine Repair"];
   const row = [...items, ...items];
   return (
-    <div className="border-y border-border/10 bg-soil/10 backdrop-blur-md text-soil py-6 overflow-hidden">
+    <div className="glass-dark text-white py-6 overflow-hidden border-y border-white/10">
       <div className="flex gap-16 animate-marquee whitespace-nowrap">
         {row.map((t,i)=>(
           <span key={i} className="inline-flex items-center gap-4 font-display font-black text-2xl tracking-tighter uppercase opacity-80 hover:opacity-100 transition-opacity">
