@@ -657,7 +657,7 @@ function Contact({ L }: { L: typeof t.en }) {
 
 function Footer({ L }: { L: typeof t.en }) {
   return (
-    <footer className="bg-white/10 backdrop-blur-2xl border-t border-white/10 py-20">
+    <footer className="glass-dark text-white/90 border-t border-white/10 py-20 mt-10">
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="flex items-center gap-4">
