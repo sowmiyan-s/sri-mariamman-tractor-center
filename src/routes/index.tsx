@@ -338,12 +338,12 @@ function Hero({ L }: { L: typeof t.en }) {
             </div>
             <motion.div
               initial={{opacity:0, scale:0.8}} animate={{opacity:1, scale:1}} transition={{delay:0.8}}
-              className="absolute -left-4 bottom-10 hidden sm:flex items-center gap-4 rounded-3xl bg-white/40 backdrop-blur shadow-2xl px-6 py-5 border border-white/20">
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 text-primary grid place-items-center">
+              className="glass absolute -left-4 bottom-10 hidden sm:flex items-center gap-4 rounded-3xl px-6 py-5">
+              <div className="h-12 w-12 rounded-2xl bg-primary text-white grid place-items-center shadow-lg">
                 <Clock className="h-6 w-6" />
               </div>
               <div>
-                <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-black mb-1">{L.hours}</div>
+                <div className="text-[10px] uppercase tracking-widest text-soil/70 font-black mb-1">{L.hours}</div>
                 <div className="font-black text-soil text-sm tracking-tight">{L.hoursLine}</div>
               </div>
             </motion.div>
