@@ -2,8 +2,38 @@
 @import "tw-animate-css";
 @import "tailwindcss" source(none);
 
-@source "../src";
+@source ".";
 @custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 1rem;
+  /* Luxury Agricultural Palette - Deep Emerald, Gold, and Crimson */
+  --background: oklch(0.99 0.005 85); /* Pure white/ivory */
+  --foreground: oklch(0.15 0.04 150); /* Deep obsidian emerald */
+  --cream: oklch(0.99 0.005 85);
+  --soil: oklch(0.12 0.03 150); /* Luxury deep green */
+  --leaf: oklch(0.4 0.12 145); /* Vibrant field green */
+  --harvest: oklch(0.75 0.12 85); /* Rich gold */
+  --rust: oklch(0.5 0.18 25); /* Mahindra crimson */
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: var(--rust);
+  --primary-foreground: oklch(0.98 0.01 85);
+  --secondary: var(--harvest);
+  --secondary-foreground: var(--soil);
+  --muted: oklch(0.95 0.01 85);
+  --muted-foreground: oklch(0.4 0.02 150);
+  --accent: var(--harvest);
+  --accent-foreground: var(--soil);
+  --destructive: oklch(0.4 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0 0 0 / 12%);
+  --input: oklch(0.9 0.01 85);
+  --ring: var(--rust);
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -40,36 +70,6 @@
   --font-sans: "Outfit", "Hind Madurai", system-ui, sans-serif;
   --font-tamil: "Hind Madurai", serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-}
-
-:root {
-  --radius: 1rem;
-  /* Luxury Agricultural Palette - Deep Emerald, Gold, and Crimson */
-  --background: oklch(0.99 0.005 85); /* Pure white/ivory */
-  --foreground: oklch(0.15 0.04 150); /* Deep obsidian emerald */
-  --cream: oklch(0.99 0.005 85);
-  --soil: oklch(0.12 0.03 150); /* Luxury deep green */
-  --leaf: oklch(0.4 0.12 145); /* Vibrant field green */
-  --harvest: oklch(0.75 0.12 85); /* Rich gold */
-  --rust: oklch(0.5 0.18 25); /* Mahindra crimson */
-
-  --card: oklch(1 0 0);
-  --card-foreground: var(--foreground);
-  --popover: var(--card);
-  --popover-foreground: var(--foreground);
-  --primary: var(--rust);
-  --primary-foreground: oklch(0.98 0.01 85);
-  --secondary: var(--harvest);
-  --secondary-foreground: var(--soil);
-  --muted: oklch(0.95 0.01 85);
-  --muted-foreground: oklch(0.4 0.02 150);
-  --accent: var(--harvest);
-  --accent-foreground: var(--soil);
-  --destructive: oklch(0.4 0.2 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0 0 0 / 12%);
-  --input: oklch(0.9 0.01 85);
-  --ring: var(--rust);
 }
 
 .img-premium {
