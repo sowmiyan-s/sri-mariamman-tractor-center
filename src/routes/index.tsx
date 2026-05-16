@@ -314,11 +314,11 @@ function Hero({ L }: { L: typeof t.en }) {
             </MagneticButton>
           </div>
 
-          <div className="mt-12 grid grid-cols-3 gap-8 max-w-md">
+          <div className="mt-12 grid grid-cols-3 gap-4 max-w-md">
             {L.stats.map(([k, v]) => (
-              <div key={v} className="border-l-2 border-primary/30 pl-4">
+              <div key={v} className="glass-soft rounded-2xl px-4 py-3">
                 <div className="font-display text-3xl font-black text-soil tracking-tighter">{k}</div>
-                <div className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] mt-1 font-bold">{v}</div>
+                <div className="text-[10px] text-soil/70 uppercase tracking-[0.2em] mt-1 font-bold">{v}</div>
               </div>
             ))}
           </div>
