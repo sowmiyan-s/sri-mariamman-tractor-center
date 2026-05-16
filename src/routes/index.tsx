@@ -239,8 +239,8 @@ function Index() {
 
 function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: Lang) => void }) {
   return (
-    <header className="fixed top-8 inset-x-0 z-50 flex justify-center px-5 pointer-events-none">
-      <div className="pointer-events-auto flex items-center gap-8 rounded-full border border-white/20 bg-white/40 backdrop-blur-3xl px-8 py-3 shadow-2xl">
+    <header className="fixed top-6 inset-x-0 z-50 flex justify-center px-5 pointer-events-none">
+      <div className="pointer-events-auto glass flex items-center gap-8 rounded-full px-8 py-3">
         <nav className="flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.3em] text-soil/80">
           {L.nav.map((label, i) => {
             const slugs = ["about","services","equipment","why-us","contact"];
