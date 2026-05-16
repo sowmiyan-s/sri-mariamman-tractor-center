@@ -10,6 +10,11 @@ import eqRotavator from "@/assets/eq-rotavator.jpg";
 import eqTanker from "@/assets/eq-tanker.jpg";
 import eqTractor575 from "@/assets/eq-tractor-575.jpg";
 import eqTractor475 from "@/assets/eq-tractor-475.jpg";
+import { Scrollytelling } from "@/components/Scrollytelling";
+import { CustomCursor } from "@/components/CustomCursor";
+import { MagneticButton } from "@/components/ui/magnetic-button";
+import { Hero3D } from "@/components/Hero3D";
+import { Suspense } from "react";
 
 const PHONE_1 = "9443361295";
 const PHONE_2 = "9382334477";
@@ -214,7 +219,9 @@ function Index() {
   const L = t[lang];
 
   return (
-    <main className="min-h-screen bg-cream">
+    <main className="relative min-h-screen cursor-none overflow-x-hidden">
+      <CustomCursor />
+      <Scrollytelling />
       <Nav L={L} lang={lang} setLang={setLang} />
       <Hero L={L} />
       <LocationStrip L={L} />
@@ -232,34 +239,29 @@ function Index() {
 
 function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: Lang) => void }) {
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-cream/80 border-b border-border/60">
-      <div className="mx-auto max-w-7xl px-5 lg:px-10 h-16 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-2.5">
-          <div className="h-9 w-9 rounded-lg bg-soil text-cream grid place-items-center">
-            <Tractor className="h-5 w-5" />
-          </div>
-          <div className="leading-tight">
-            <div className="font-display font-extrabold text-soil text-[15px] tracking-tight">Sri Mariamman</div>
-            <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Tractor Center</div>
-          </div>
-        </a>
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-soil/80">
+    <header className="fixed top-8 inset-x-0 z-50 flex justify-center px-5 pointer-events-none">
+      <div className="pointer-events-auto flex items-center gap-8 rounded-full border border-white/20 bg-white/40 backdrop-blur-3xl px-8 py-3 shadow-2xl">
+        <nav className="flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.3em] text-soil/80">
           {L.nav.map((label, i) => {
             const slugs = ["about","services","equipment","why-us","contact"];
-            return <a key={i} href={`#${slugs[i]}`} className="hover:text-soil transition story-link">{label}</a>;
+            return <a key={i} href={`#${slugs[i]}`} className="hover:text-primary transition-colors">
+              {label}
+            </a>;
           })}
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="h-4 w-px bg-soil/20" />
+        <div className="flex items-center gap-4">
           <button
             onClick={() => setLang(lang === "en" ? "ta" : "en")}
-            className="inline-flex items-center gap-1.5 rounded-full border border-soil/15 bg-cream px-3 py-1.5 text-xs font-semibold text-soil hover:border-soil transition"
+            className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-soil/60 hover:text-primary transition"
             aria-label="Toggle language">
-            <Languages className="h-3.5 w-3.5" />
-            {lang === "en" ? "தமிழ்" : "English"}
+            {lang === "en" ? "TA" : "EN"}
           </button>
-          <a href={`tel:+91${PHONE_1}`} className="inline-flex items-center gap-2 rounded-full bg-soil text-cream px-4 py-2 text-sm font-semibold hover:bg-leaf transition">
-            <Phone className="h-4 w-4" /> {L.callNow}
-          </a>
+          <MagneticButton>
+            <a href={`tel:+91${PHONE_1}`} className="h-10 w-10 rounded-full bg-primary text-white grid place-items-center hover:scale-110 transition shadow-lg shadow-primary/20">
+              <Phone className="h-4 w-4" />
+            </a>
+          </MagneticButton>
         </div>
       </div>
     </header>
@@ -273,9 +275,11 @@ function Hero({ L }: { L: typeof t.en }) {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.4]);
 
   return (
-    <section id="top" ref={ref} className="relative overflow-hidden">
-      <div className="absolute inset-0 grain pointer-events-none" />
-      <div className="mx-auto max-w-7xl px-5 lg:px-10 pt-12 pb-20 lg:pt-20 lg:pb-32 grid lg:grid-cols-12 gap-10 items-center">
+    <section id="top" ref={ref} className="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
+      <Suspense fallback={null}>
+        <Hero3D />
+      </Suspense>
+      <div className="mx-auto max-w-7xl px-5 lg:px-10 grid lg:grid-cols-12 gap-16 items-center">
         <motion.div className="lg:col-span-6" style={{ opacity }}>
           <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.6}}
             className="inline-flex items-center gap-3 text-[11px] font-bold tracking-[0.32em] uppercase text-soil/70">
@@ -283,62 +287,64 @@ function Hero({ L }: { L: typeof t.en }) {
             {L.badge}
           </motion.div>
           <motion.h1
-            initial={{opacity:0,y:30}} animate={{opacity:1,y:0}} transition={{duration:0.7, delay:0.1}}
-            className="mt-7 font-display font-bold text-soil leading-[0.95] text-balance text-5xl sm:text-6xl lg:text-[5.5rem]">
-            {L.h1a} <em className="italic font-normal text-leaf">{L.h1b}</em> {L.h1c}
+            initial={{opacity:0,y:40}} animate={{opacity:1,y:0}} transition={{duration:0.9, ease: [0.16, 1, 0.3, 1], delay:0.2}}
+            className="mt-7 font-display font-black text-soil leading-[0.9] text-balance text-5xl sm:text-7xl lg:text-[6.5rem] tracking-tighter">
+            {L.h1a} <em className="italic font-light text-primary">{L.h1b}</em> {L.h1c}
           </motion.h1>
           <p className="mt-4 font-display italic text-xl text-rust/80" style={{ fontFamily: 'var(--font-tamil)' }}>
             ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
           </p>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed font-light">{L.sub}</p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href={`tel:+91${PHONE_1}`}
-              className="group inline-flex items-center gap-2.5 rounded-full bg-soil text-cream pl-5 pr-2 py-2 text-base font-semibold hover:bg-leaf transition">
-              <Phone className="h-5 w-5" /> {L.callNow}
-              <span className="ml-1 grid h-9 w-9 place-items-center rounded-full bg-harvest text-soil group-hover:rotate-45 transition">
-                <ArrowUpRight className="h-4 w-4" />
-              </span>
-            </a>
-            <a href={WA} target="_blank" rel="noopener"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-soil/15 bg-cream px-5 py-3 text-base font-semibold text-soil hover:border-soil transition">
-              <WhatsAppIcon className="h-5 w-5 text-leaf" /> {L.whatsapp}
-            </a>
-            <a href="#equipment"
-              className="inline-flex items-center gap-2 rounded-full bg-harvest px-5 py-3 text-base font-semibold text-soil hover:brightness-95 transition">
-              <Tractor className="h-5 w-5" /> {L.viewTractors}
-            </a>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <MagneticButton>
+              <a href={`tel:+91${PHONE_1}`}
+                className="group inline-flex items-center gap-2.5 rounded-full bg-soil text-white pl-5 pr-2 py-2 text-base font-semibold hover:bg-primary transition shadow-lg shadow-soil/20">
+                <Phone className="h-5 w-5" /> {L.callNow}
+                <span className="ml-1 grid h-9 w-9 place-items-center rounded-full bg-primary text-white group-hover:rotate-45 transition">
+                  <ArrowUpRight className="h-4 w-4" />
+                </span>
+              </a>
+            </MagneticButton>
+            <MagneticButton>
+              <a href={WA} target="_blank" rel="noopener"
+                className="inline-flex items-center gap-2 rounded-full border border-soil/15 bg-white/40 backdrop-blur-xl px-6 py-3 text-base font-semibold text-soil hover:border-primary transition shadow-lg shadow-soil/5">
+                <WhatsAppIcon className="h-5 w-5 text-primary" /> {L.whatsapp}
+              </a>
+            </MagneticButton>
           </div>
 
-          <div className="mt-12 grid grid-cols-3 gap-4 max-w-md">
+          <div className="mt-12 grid grid-cols-3 gap-8 max-w-md">
             {L.stats.map(([k, v]) => (
-              <div key={v} className="border-l-2 border-rust pl-3">
-                <div className="font-display text-2xl font-extrabold text-soil tracking-tight">{k}</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider mt-0.5">{v}</div>
+              <div key={v} className="border-l-2 border-primary/30 pl-4">
+                <div className="font-display text-3xl font-black text-soil tracking-tighter">{k}</div>
+                <div className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] mt-1 font-bold">{v}</div>
               </div>
             ))}
           </div>
         </motion.div>
 
         <div className="lg:col-span-6 relative">
-          <div className="absolute -inset-6 bg-gradient-to-br from-harvest/40 via-transparent to-rust/20 blur-3xl rounded-full" />
+          <div className="absolute -inset-6 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 blur-3xl rounded-full" />
           <motion.div
-            initial={{opacity:0, scale:0.95}} animate={{opacity:1, scale:1}} transition={{duration:0.8}}
+            initial={{opacity:0, x: 50}} animate={{opacity:1, x: 0}} transition={{duration:1, ease: [0.16, 1, 0.3, 1]}}
             style={{ y }}
             className="relative">
-            <div className="absolute -top-4 -left-4 h-24 w-24 rounded-full bg-harvest" />
-            <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full border-4 border-soil" />
-            <div className="relative rounded-3xl overflow-hidden glow-harvest animate-float-slow aspect-[4/5]">
-              <img src={heroTractor} alt="Mahindra 575 DI tractor at sunset in a Tamil Nadu sugarcane field"
-                width={1280} height={1600} className="w-full h-full object-cover" />
+            <div className="absolute -top-4 -left-4 h-24 w-24 rounded-full bg-primary/20 blur-xl" />
+            <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full border-4 border-soil/5" />
+            <div className="relative rounded-[2.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] animate-float-slow aspect-[4/5]">
+              <img src={heroTractor} alt="Mahindra 575 DI tractor"
+                width={1280} height={1600} className="w-full h-full object-cover img-premium" />
             </div>
             <motion.div
-              initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:0.6}}
-              className="absolute -left-4 bottom-10 hidden sm:flex items-center gap-3 rounded-2xl bg-cream/95 backdrop-blur shadow-xl px-4 py-3 border border-border">
-              <Clock className="h-5 w-5 text-leaf" />
+              initial={{opacity:0, scale:0.8}} animate={{opacity:1, scale:1}} transition={{delay:0.8}}
+              className="absolute -left-4 bottom-10 hidden sm:flex items-center gap-4 rounded-3xl bg-white/40 backdrop-blur shadow-2xl px-6 py-5 border border-white/20">
+              <div className="h-12 w-12 rounded-2xl bg-primary/10 text-primary grid place-items-center">
+                <Clock className="h-6 w-6" />
+              </div>
               <div>
-                <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{L.hours}</div>
-                <div className="font-semibold text-soil text-sm">Mon–Fri · 8 AM – 7 PM</div>
+                <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-black mb-1">{L.hours}</div>
+                <div className="font-black text-soil text-sm tracking-tight">{L.hoursLine}</div>
               </div>
             </motion.div>
           </motion.div>
@@ -352,10 +358,10 @@ function Hero({ L }: { L: typeof t.en }) {
 function LocationStrip({ L }: { L: typeof t.en }) {
   return (
     <a href={MAPS} target="_blank" rel="noopener"
-      className="block bg-harvest/90 text-soil hover:bg-harvest transition border-y border-soil/10">
-      <div className="mx-auto max-w-7xl px-5 lg:px-10 py-3 flex items-center justify-center gap-3 text-center">
+      className="block bg-primary text-white hover:bg-soil transition duration-500">
+      <div className="mx-auto max-w-7xl px-5 lg:px-10 py-4 flex items-center justify-center gap-4 text-center">
         <MapPin className="h-4 w-4 flex-shrink-0" />
-        <p className="text-[12px] sm:text-sm font-semibold tracking-wide">{L.locStrip}</p>
+        <p className="text-[11px] sm:text-xs font-black uppercase tracking-[0.2em]">{L.locStrip}</p>
         <ArrowUpRight className="h-4 w-4 flex-shrink-0" />
       </div>
     </a>
@@ -366,11 +372,11 @@ function Marquee() {
   const items = ["Mahindra 575 DI", "Mahindra 475 DI", "Tractor Brokerage", "Genuine Spare Parts", "Field Service", "Rotavators", "Water Tankers", "Engine Repair"];
   const row = [...items, ...items];
   return (
-    <div className="border-y border-soil/10 bg-soil text-cream py-4 overflow-hidden">
-      <div className="flex gap-12 animate-marquee whitespace-nowrap">
+    <div className="border-y border-border/10 bg-soil/10 backdrop-blur-md text-soil py-6 overflow-hidden">
+      <div className="flex gap-16 animate-marquee whitespace-nowrap">
         {row.map((t,i)=>(
-          <span key={i} className="inline-flex items-center gap-3 font-display text-xl tracking-tight">
-            <Sprout className="h-4 w-4 text-harvest" /> {t}
+          <span key={i} className="inline-flex items-center gap-4 font-display font-black text-2xl tracking-tighter uppercase opacity-80 hover:opacity-100 transition-opacity">
+            <Sprout className="h-5 w-5 text-primary" /> {t}
           </span>
         ))}
       </div>
@@ -380,65 +386,90 @@ function Marquee() {
 
 function About({ L }: { L: typeof t.en }) {
   return (
-    <section id="about" className="mx-auto max-w-7xl px-5 lg:px-10 py-24 grid lg:grid-cols-12 gap-10">
-      <motion.div initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="lg:col-span-5">
-        <p className="text-xs font-semibold tracking-[0.25em] uppercase text-rust">{L.aboutKicker}</p>
-        <h2 className="mt-3 font-display font-black text-4xl lg:text-5xl text-soil text-balance leading-[1.05]">
+    <motion.section 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      id="about" 
+      className="relative mx-auto max-w-7xl px-5 lg:px-10 py-40 grid lg:grid-cols-12 gap-16 items-center"
+    >
+      <div className="lg:col-span-5">
+        <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6">{L.aboutKicker}</p>
+        <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9]">
           {L.aboutTitle}
         </h2>
-      </motion.div>
-      <motion.div initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6, delay:0.1}} className="lg:col-span-7 space-y-6">
-        <p className="text-lg text-muted-foreground leading-relaxed">{L.aboutBody}</p>
-        <ul className="grid sm:grid-cols-2 gap-3">
-          {L.aboutPills.map(p=>(
-            <li key={p} className="flex items-center gap-3 rounded-xl border border-border bg-card p-4 hover-scale">
-              <span className="h-8 w-8 grid place-items-center rounded-full bg-harvest text-soil"><CheckCircle2 className="h-4 w-4"/></span>
-              <span className="font-semibold text-soil">{p}</span>
-            </li>
+      </div>
+      <div className="lg:col-span-7">
+        <p className="text-xl text-muted-foreground leading-relaxed font-light mb-12">{L.aboutBody}</p>
+        <div className="grid sm:grid-cols-2 gap-4">
+          {L.aboutPills.map((p, i) => (
+            <motion.div 
+              key={p} 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="flex items-center gap-4 rounded-[2rem] border border-white/20 bg-white/10 backdrop-blur-xl p-5 hover:border-primary hover:shadow-2xl transition-all duration-500"
+            >
+              <div className="h-10 w-10 grid place-items-center rounded-full bg-primary/10 text-primary shadow-inner">
+                <CheckCircle2 className="h-5 w-5"/>
+              </div>
+              <span className="font-black text-soil text-sm uppercase tracking-widest">{p}</span>
+            </motion.div>
           ))}
-        </ul>
-      </motion.div>
-    </section>
+        </div>
+      </div>
+    </motion.section>
   );
 }
 
 function Services({ L }: { L: typeof t.en }) {
   const icons = [Tractor, Handshake, Wrench, Cog, Sprout, Truck];
   return (
-    <section id="services" className="bg-soil text-cream py-24">
-      <div className="mx-auto max-w-7xl px-5 lg:px-10">
-        <div className="flex items-end justify-between flex-wrap gap-6 mb-12">
-          <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}}>
-            <p className="text-xs font-semibold tracking-[0.25em] uppercase text-harvest">{L.servicesKicker}</p>
-            <h2 className="mt-3 font-display font-black text-4xl lg:text-5xl text-balance max-w-2xl leading-[1.05]">
+    <motion.section 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1 }}
+      id="services" 
+      className="relative py-40 overflow-hidden"
+    >
+      <div className="mx-auto max-w-7xl px-5 lg:px-10 relative z-10">
+        <div className="flex items-end justify-between flex-wrap gap-8 mb-20">
+          <motion.div initial={{opacity:0,x:-30}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{duration:0.8}}>
+            <p className="text-xs font-black tracking-[0.4em] uppercase text-primary/80 mb-4">{L.servicesKicker}</p>
+            <h2 className="font-display font-black text-4xl lg:text-7xl text-balance max-w-3xl leading-[0.9] tracking-tighter">
               {L.servicesTitle}
             </h2>
           </motion.div>
-          <a href={`tel:+91${PHONE_1}`} className="inline-flex items-center gap-2 text-harvest hover:text-cream font-semibold">
-            {L.talk} <ArrowUpRight className="h-4 w-4"/>
-          </a>
+          <MagneticButton>
+            <a href={`tel:+91${PHONE_1}`} className="inline-flex items-center gap-3 bg-soil text-white px-8 py-5 rounded-full font-black uppercase tracking-widest text-xs hover:bg-primary transition-all duration-500 shadow-2xl">
+              {L.talk} <ArrowUpRight className="h-5 w-5"/>
+            </a>
+          </MagneticButton>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {L.services.map(([title, desc], i) => {
             const Icon = icons[i];
             return (
               <motion.div key={title}
                 initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.06, duration:0.5}}
-                className="group relative rounded-2xl border border-cream/10 bg-cream/[0.04] p-7 hover:bg-harvest hover:text-soil hover:-translate-y-1 transition-all duration-300">
-                <div className="flex items-center justify-between mb-8">
-                  <div className="h-12 w-12 grid place-items-center rounded-xl bg-harvest text-soil group-hover:bg-soil group-hover:text-harvest transition">
-                    <Icon className="h-6 w-6" />
+                className="group relative rounded-[2.5rem] border border-white/20 bg-white/5 backdrop-blur-2xl p-10 hover:bg-white hover:text-soil hover:-translate-y-3 transition-all duration-500 shadow-2xl">
+                <div className="flex items-center justify-between mb-12">
+                  <div className="h-16 w-16 grid place-items-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                    <Icon className="h-8 w-8" />
                   </div>
-                  <span className="font-display text-3xl text-cream/20 group-hover:text-soil/30">0{i+1}</span>
+                  <span className="font-display font-black text-6xl opacity-5 group-hover:opacity-10 transition-opacity tracking-tighter text-soil">0{i+1}</span>
                 </div>
-                <h3 className="font-display text-2xl font-bold mb-2 leading-tight">{title}</h3>
-                <p className="text-sm opacity-80 leading-relaxed">{desc}</p>
+                <h3 className="font-display text-3xl font-black mb-4 leading-[0.9] tracking-tighter uppercase text-soil">{title}</h3>
+                <p className="text-base text-muted-foreground leading-relaxed font-light group-hover:text-soil/80 transition-colors">{desc}</p>
               </motion.div>
             );
           })}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -451,58 +482,69 @@ function Equipment({ L }: { L: typeof t.en }) {
     "High-capacity water tanker for farm irrigation",
   ];
   return (
-    <section id="equipment" className="mx-auto max-w-7xl px-5 lg:px-10 py-24">
-      <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
-        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}}>
-          <p className="text-xs font-semibold tracking-[0.25em] uppercase text-rust">{L.equipKicker}</p>
-          <h2 className="mt-3 font-display font-black text-4xl lg:text-5xl text-soil leading-[1.05]">{L.equipTitle}</h2>
-        </motion.div>
-        <a href={WA} target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-semibold text-soil hover:text-rust">
-          {L.enquire} <ArrowUpRight className="h-4 w-4"/>
+    <motion.section 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      id="equipment" 
+      className="relative mx-auto max-w-7xl px-5 lg:px-10 py-40"
+    >
+      <div className="flex items-end justify-between flex-wrap gap-8 mb-16">
+        <div>
+          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-4">{L.equipKicker}</p>
+          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9]">
+            {L.equipTitle}
+          </h2>
+        </div>
+        <a href={WA} target="_blank" rel="noopener" className="font-black uppercase tracking-widest text-xs text-soil/50 hover:text-primary transition group">
+          {L.enquire} <ArrowUpRight className="inline-block h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ml-1"/>
         </a>
       </div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {L.equipment.map(([title, tag, desc], i)=>(
           <motion.article key={title}
             initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.08, duration:0.5}}
-            className="group rounded-2xl overflow-hidden bg-card border border-border hover:border-rust hover:-translate-y-1 transition-all duration-300">
-            <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-              <img src={imgs[i]} alt={alts[i]} loading="lazy" width={800} height={600}
-                className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
-              <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider bg-cream text-soil px-2 py-1 rounded-full">{tag}</span>
+            className="group rounded-[2rem] overflow-hidden bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-primary hover:-translate-y-2 transition-all duration-700 shadow-xl hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)]">
+            <div className="relative aspect-[3/4] overflow-hidden bg-muted/20">
+              <img src={imgs[i]} alt={alts[i]} loading="lazy" width={800} height={1000}
+                className="w-full h-full object-cover group-hover:scale-110 transition duration-1000 img-premium grayscale-[0.2] group-hover:grayscale-0" />
+              <div className="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur text-[10px] font-black uppercase tracking-[0.2em] text-soil shadow-sm">
+                {tag}
+              </div>
             </div>
-            <div className="p-5">
-              <h3 className="font-display text-xl font-bold text-soil leading-tight">{title}</h3>
-              <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{desc}</p>
+            <div className="p-8">
+              <h3 className="font-display text-2xl font-black text-soil leading-tight tracking-tight mb-2">{title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed font-light">{desc}</p>
             </div>
           </motion.article>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }
 
 function WhyUs({ L }: { L: typeof t.en }) {
   return (
-    <section id="why-us" className="bg-cream py-24">
+    <section id="why-us" className="py-40">
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
-        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="max-w-2xl mb-12">
-          <p className="text-xs font-semibold tracking-[0.25em] uppercase text-rust">{L.whyKicker}</p>
-          <h2 className="mt-3 font-display font-black text-4xl lg:text-5xl text-soil text-balance leading-[1.05]">
+        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="max-w-2xl mb-24">
+          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6">{L.whyKicker}</p>
+          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9]">
             {L.whyTitle}
           </h2>
         </motion.div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
           {L.reasons.map(([t, d], i)=>(
             <motion.div key={t}
-              initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once:true}} transition={{delay:i*0.05}}
-              className="group bg-cream p-8 hover:bg-soil hover:text-cream transition-all duration-300">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="font-display text-sm text-rust group-hover:text-harvest">0{i+1}</span>
-                <ShieldCheck className="h-5 w-5 text-leaf group-hover:text-harvest"/>
+              initial={{opacity:0, y: 20}} whileInView={{opacity:1, y: 0}} viewport={{once:true}} transition={{delay:i*0.1}}
+              className="group relative rounded-[2.5rem] border border-white/20 bg-white/5 backdrop-blur-2xl p-10 hover:bg-white/10 transition-all duration-500 shadow-2xl">
+              <div className="h-16 w-16 rounded-2xl bg-soil text-white grid place-items-center mb-8 group-hover:bg-primary transition-all duration-500 shadow-2xl group-hover:shadow-primary/30 group-hover:-rotate-6">
+                <ShieldCheck className="h-8 w-8" />
               </div>
-              <h3 className="font-display text-xl font-bold mb-2 leading-tight">{t}</h3>
-              <p className="text-sm opacity-75 leading-relaxed">{d}</p>
+              <h3 className="font-display text-2xl font-black mb-4 tracking-tighter uppercase leading-[1.1] text-soil">{t}</h3>
+              <p className="text-base text-muted-foreground leading-relaxed font-light">{d}</p>
+              <div className="mt-8 h-1 w-0 bg-primary/20 group-hover:w-full transition-all duration-700" />
             </motion.div>
           ))}
         </div>
@@ -513,27 +555,29 @@ function WhyUs({ L }: { L: typeof t.en }) {
 
 function Testimonials({ L }: { L: typeof t.en }) {
   return (
-    <section className="mx-auto max-w-7xl px-5 lg:px-10 py-24">
-      <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="text-center max-w-2xl mx-auto mb-12">
-        <p className="text-xs font-semibold tracking-[0.25em] uppercase text-rust">{L.voiceKicker}</p>
-        <h2 className="mt-3 font-display font-black text-4xl lg:text-5xl text-soil leading-[1.05]">{L.voiceTitle}</h2>
-      </motion.div>
-      <div className="grid md:grid-cols-3 gap-5">
-        {L.testimonials.map(([q, n, r],i)=>(
-          <motion.div key={i}
-            initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.1, duration:0.5}}
-            className="rounded-2xl border border-border bg-card p-7 relative hover:-translate-y-1 transition-transform duration-300">
-            <Quote className="absolute top-5 right-5 h-8 w-8 text-harvest/40"/>
-            <div className="flex gap-1 mb-4">
-              {[...Array(5)].map((_,j)=><Star key={j} className="h-4 w-4 fill-harvest text-harvest"/>)}
-            </div>
-            <p className="font-display text-lg text-soil leading-snug">"{q}"</p>
-            <div className="mt-5 pt-5 border-t border-border">
-              <div className="font-semibold text-soil">{n}</div>
-              <div className="text-xs text-muted-foreground">{r}</div>
-            </div>
-          </motion.div>
-        ))}
+    <section className="py-40">
+      <div className="mx-auto max-w-7xl px-5 lg:px-10">
+        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="text-center max-w-2xl mx-auto mb-24">
+          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6">{L.voiceKicker}</p>
+          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9]">{L.voiceTitle}</h2>
+        </motion.div>
+        <div className="grid md:grid-cols-3 gap-8">
+          {L.testimonials.map(([q, n, r], i)=>(
+            <motion.div key={i}
+              initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.1}}
+              className="rounded-[2.5rem] border border-white/20 bg-white/10 backdrop-blur-2xl p-12 relative shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+              <Quote className="absolute top-12 right-12 h-12 w-12 text-primary/5"/>
+              <div className="flex gap-1.5 mb-8">
+                {[...Array(5)].map((_,j)=><Star key={j} className="h-4 w-4 fill-primary text-primary"/>)}
+              </div>
+              <p className="font-display text-2xl font-black text-soil leading-[1.1] tracking-tight mb-10">"{q}"</p>
+              <div className="pt-8 border-t border-white/10">
+                <div className="font-black text-soil uppercase tracking-widest text-sm mb-1">{n}</div>
+                <div className="text-xs font-bold text-primary uppercase tracking-[0.2em]">{r}</div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -541,116 +585,99 @@ function Testimonials({ L }: { L: typeof t.en }) {
 
 function Contact({ L }: { L: typeof t.en }) {
   return (
-    <section id="contact" className="bg-soil text-cream py-24">
-      <div className="mx-auto max-w-7xl px-5 lg:px-10 grid lg:grid-cols-12 gap-10">
+    <motion.section 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      id="contact" 
+      className="mx-auto max-w-7xl px-5 lg:px-10 py-40"
+    >
+      <div className="grid lg:grid-cols-12 gap-20">
         <div className="lg:col-span-5">
-          <p className="text-xs font-semibold tracking-[0.25em] uppercase text-harvest">{L.contactKicker}</p>
-          <h2 className="mt-3 font-display font-black text-4xl lg:text-5xl text-balance leading-[1.05]">
+          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6">{L.contactKicker}</p>
+          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil leading-[0.9] tracking-tighter">
             {L.contactTitle}
           </h2>
-          <div className="mt-10 space-y-6">
-            <div className="flex items-start gap-4">
-              <span className="h-11 w-11 grid place-items-center rounded-full bg-harvest text-soil flex-shrink-0"><MapPin className="h-5 w-5"/></span>
+          <div className="mt-16 space-y-12">
+            <div className="flex gap-8">
+              <div className="h-16 w-16 rounded-3xl bg-soil text-white grid place-items-center flex-shrink-0 shadow-2xl">
+                <Phone className="h-7 w-7" />
+              </div>
               <div>
-                <div className="text-[11px] uppercase tracking-[0.2em] text-harvest mb-1">{L.address}</div>
-                <p className="text-cream/90 leading-relaxed">
-                  Near G.H, N. Kandampalayam,<br/>
-                  P. Velur (Tk), Namakkal (Dt),<br/>
-                  Tamil Nadu — 637203
-                </p>
+                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-2">{L.phone}</div>
+                <a href={`tel:+91${PHONE_1}`} className="block text-3xl font-black text-soil hover:text-primary transition-colors tracking-tighter">94433 61295</a>
+                <a href={`tel:+91${PHONE_2}`} className="block text-3xl font-black text-soil hover:text-primary transition-colors tracking-tighter">93823 34477</a>
               </div>
             </div>
-            <div className="flex items-start gap-4">
-              <span className="relative h-11 w-11 grid place-items-center rounded-full bg-rust text-cream flex-shrink-0">
-                <Phone className="h-5 w-5"/>
-                <span className="absolute inset-0 rounded-full animate-pulse-ring"/>
-              </span>
-              <div>
-                <div className="text-[11px] uppercase tracking-[0.2em] text-harvest mb-1">{L.phone}</div>
-                <a href={`tel:+91${PHONE_1}`} className="block font-display text-2xl font-bold hover:text-harvest tracking-tight">94433 61295</a>
-                <a href={`tel:+91${PHONE_2}`} className="block font-display text-2xl font-bold hover:text-harvest tracking-tight">93823 34477</a>
+            <div className="flex gap-8">
+              <div className="h-16 w-16 rounded-3xl bg-primary/10 text-primary grid place-items-center flex-shrink-0 shadow-inner">
+                <MapPin className="h-7 w-7" />
               </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <span className="h-11 w-11 grid place-items-center rounded-full bg-leaf text-cream flex-shrink-0"><Clock className="h-5 w-5"/></span>
               <div>
-                <div className="text-[11px] uppercase tracking-[0.2em] text-harvest mb-1">{L.hours}</div>
-                <p className="text-cream/90 font-semibold">{L.hoursLine}</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <span className="h-11 w-11 grid place-items-center rounded-full bg-cream/10 text-harvest flex-shrink-0"><Languages className="h-5 w-5"/></span>
-              <div>
-                <div className="text-[11px] uppercase tracking-[0.2em] text-harvest mb-1">Languages</div>
-                <p className="text-cream/90">{L.langs}</p>
+                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-2">{L.address}</div>
+                <p className="text-2xl font-black text-soil tracking-tighter leading-tight">{L.footerNote}, India</p>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="lg:col-span-7 space-y-5">
-          <div className="rounded-3xl overflow-hidden border border-cream/10 aspect-[16/10] bg-cream/[0.05]">
-            <iframe
-              src={MAPS_EMBED}
-              title="Sri Mariamman Tractor Center location"
-              className="w-full h-full"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-            />
+        <div className="lg:col-span-7 rounded-[3rem] bg-soil/90 text-white p-12 lg:p-16 backdrop-blur-3xl border border-white/10 shadow-[0_60px_120px_-20px_rgba(0,0,0,0.6)] relative overflow-hidden flex flex-col justify-between">
+          <div className="absolute top-0 right-0 h-64 w-64 bg-primary/10 blur-[100px] pointer-events-none" />
+          <div>
+            <h3 className="font-display text-4xl font-black mb-10 tracking-tighter uppercase">{L.quickActions}</h3>
+            <div className="grid gap-6">
+              <MagneticButton>
+                <a href={WA} target="_blank" rel="noopener" className="flex items-center justify-between rounded-3xl bg-white text-soil p-8 font-black uppercase tracking-[0.2em] text-xs hover:bg-primary hover:text-white transition-all duration-500 shadow-xl group">
+                  <span className="flex items-center gap-6"><WhatsAppIcon className="h-8 w-8" /> {L.whatsapp}</span>
+                  <ArrowUpRight className="h-6 w-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </a>
+              </MagneticButton>
+              <MagneticButton>
+                <a href={MAPS} target="_blank" rel="noopener" className="flex items-center justify-between rounded-3xl border-2 border-white/10 p-8 font-black uppercase tracking-[0.2em] text-xs hover:bg-white/10 transition-all group">
+                  <span className="flex items-center gap-6"><MapPin className="h-8 w-8" /> {L.googleMaps}</span>
+                  <ArrowUpRight className="h-6 w-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </a>
+              </MagneticButton>
+            </div>
           </div>
-          <div className="rounded-3xl bg-cream/[0.05] border border-cream/10 p-8 lg:p-10">
-            <h3 className="font-display text-2xl font-bold mb-6">{L.quickActions}</h3>
-            <div className="grid sm:grid-cols-2 gap-3">
-              <a href={`tel:+91${PHONE_1}`} className="flex items-center justify-between rounded-xl bg-harvest text-soil p-5 font-semibold hover:brightness-95 transition">
-                <span className="flex items-center gap-3"><Phone className="h-5 w-5"/> {L.callNow}</span>
-                <ArrowUpRight className="h-5 w-5"/>
-              </a>
-              <a href={WA} target="_blank" rel="noopener" className="flex items-center justify-between rounded-xl bg-leaf text-cream p-5 font-semibold hover:brightness-110 transition">
-                <span className="flex items-center gap-3"><WhatsAppIcon /> {L.whatsapp}</span>
-                <ArrowUpRight className="h-5 w-5"/>
-              </a>
-              <a href={MAPS} target="_blank" rel="noopener" className="flex items-center justify-between rounded-xl bg-cream text-soil p-5 font-semibold hover:bg-cream/90 transition">
-                <span className="flex items-center gap-3"><MapPin className="h-5 w-5"/> {L.googleMaps}</span>
-                <ArrowUpRight className="h-5 w-5"/>
-              </a>
-              <a href={`tel:+91${PHONE_2}`} className="flex items-center justify-between rounded-xl border border-cream/20 p-5 font-semibold hover:bg-cream/5 transition">
-                <span className="flex items-center gap-3"><Phone className="h-5 w-5"/> {L.altNumber}</span>
-                <ArrowUpRight className="h-5 w-5"/>
-              </a>
-            </div>
-            <div className="mt-8 pt-8 border-t border-cream/10">
-              <div className="text-[11px] uppercase tracking-[0.2em] text-harvest mb-3">Follow us</div>
-              <div className="flex gap-3">
-                {[
-                  { Icon: WhatsAppIcon, href: WA, label: "WhatsApp" },
-                  { Icon: InstagramIcon, href: "#", label: "Instagram" },
-                  { Icon: FacebookIcon, href: "#", label: "Facebook" },
-                  { Icon: YouTubeIcon, href: "#", label: "YouTube" },
-                ].map(({ Icon, href, label }) => (
-                  <a key={label} href={href} target="_blank" rel="noopener" aria-label={label}
-                    className="h-11 w-11 grid place-items-center rounded-full bg-cream/10 hover:bg-harvest hover:text-soil text-cream transition hover:scale-110">
-                    <Icon className="h-5 w-5" />
-                  </a>
-                ))}
-              </div>
-            </div>
+          <div className="mt-16 pt-16 border-t border-white/5 flex flex-wrap gap-8">
+            {[WhatsAppIcon, InstagramIcon, FacebookIcon, YouTubeIcon].map((Icon, i) => (
+              <MagneticButton key={i}>
+                <a href="#" className="h-14 w-14 rounded-2xl bg-white/5 grid place-items-center hover:bg-primary transition-all duration-300">
+                  <Icon className="h-6 w-6" />
+                </a>
+              </MagneticButton>
+            ))}
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
 function Footer({ L }: { L: typeof t.en }) {
   return (
-    <footer className="bg-cream border-t border-border">
-      <div className="mx-auto max-w-7xl px-5 lg:px-10 py-10 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-2.5">
-          <div className="h-8 w-8 rounded-md bg-soil text-cream grid place-items-center"><Tractor className="h-4 w-4"/></div>
-          <div className="font-display font-bold text-soil tracking-tight">Sri Mariamman Tractor Center</div>
+    <footer className="bg-white/10 backdrop-blur-2xl border-t border-white/10 py-20">
+      <div className="mx-auto max-w-7xl px-5 lg:px-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="flex items-center gap-4">
+            <div className="h-14 w-14 rounded-2xl bg-soil text-white grid place-items-center shadow-2xl">
+              <Tractor className="h-8 w-8" />
+            </div>
+            <div>
+              <div className="font-display font-black text-soil text-2xl tracking-tighter uppercase leading-none mb-1">Sri Mariamman</div>
+              <div className="text-[10px] tracking-[0.4em] uppercase text-primary font-black">Tractor Center</div>
+            </div>
+          </div>
+          <div className="flex gap-12 text-[10px] font-black uppercase tracking-[0.3em] text-soil/40">
+            {L.nav.map((l, i) => (
+              <a key={i} href={`#${["about","services","equipment","why-us","contact"][i]}`} className="hover:text-primary transition-colors">{l}</a>
+            ))}
+          </div>
+          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-soil/20">
+            © {new Date().getFullYear()} · {L.footerNote}
+          </div>
         </div>
-        <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} · {L.footerNote}</p>
       </div>
     </footer>
   );
@@ -659,8 +686,8 @@ function Footer({ L }: { L: typeof t.en }) {
 function FloatingWA() {
   return (
     <a href={WA} target="_blank" rel="noopener" aria-label="WhatsApp"
-      className="fixed bottom-5 right-5 z-50 h-14 w-14 rounded-full bg-leaf text-cream grid place-items-center shadow-2xl hover:scale-110 transition">
-      <WhatsAppIcon className="h-6 w-6"/>
+      className="fixed bottom-8 right-8 z-50 h-16 w-16 rounded-full bg-leaf text-white grid place-items-center shadow-[0_20px_50px_rgba(37,211,102,0.4)] hover:scale-110 transition duration-500">
+      <WhatsAppIcon className="h-7 w-7"/>
       <span className="absolute inset-0 rounded-full animate-pulse-ring"/>
     </a>
   );
