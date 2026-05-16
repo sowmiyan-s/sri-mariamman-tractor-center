@@ -395,24 +395,24 @@ function About({ L }: { L: typeof t.en }) {
       className="relative mx-auto max-w-7xl px-5 lg:px-10 py-40 grid lg:grid-cols-12 gap-16 items-center"
     >
       <div className="lg:col-span-5">
-        <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6">{L.aboutKicker}</p>
-        <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9]">
+        <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6 text-readable">{L.aboutKicker}</p>
+        <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9] text-readable-strong">
           {L.aboutTitle}
         </h2>
       </div>
       <div className="lg:col-span-7">
-        <p className="text-xl text-muted-foreground leading-relaxed font-light mb-12">{L.aboutBody}</p>
+        <p className="text-xl text-soil/85 leading-relaxed font-medium mb-12 text-readable">{L.aboutBody}</p>
         <div className="grid sm:grid-cols-2 gap-4">
           {L.aboutPills.map((p, i) => (
-            <motion.div 
-              key={p} 
+            <motion.div
+              key={p}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="flex items-center gap-4 rounded-[2rem] border border-white/20 bg-white/10 backdrop-blur-xl p-5 hover:border-primary hover:shadow-2xl transition-all duration-500"
+              className="glass flex items-center gap-4 rounded-[2rem] p-5 hover:border-primary/60 hover:-translate-y-1 transition-all duration-500"
             >
-              <div className="h-10 w-10 grid place-items-center rounded-full bg-primary/10 text-primary shadow-inner">
+              <div className="h-10 w-10 grid place-items-center rounded-full bg-primary text-white shadow-lg shadow-primary/30">
                 <CheckCircle2 className="h-5 w-5"/>
               </div>
               <span className="font-black text-soil text-sm uppercase tracking-widest">{p}</span>
