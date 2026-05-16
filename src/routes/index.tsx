@@ -239,8 +239,8 @@ function Index() {
 
 function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: Lang) => void }) {
   return (
-    <header className="fixed top-8 inset-x-0 z-50 flex justify-center px-5 pointer-events-none">
-      <div className="pointer-events-auto flex items-center gap-8 rounded-full border border-white/20 bg-white/40 backdrop-blur-3xl px-8 py-3 shadow-2xl">
+    <header className="fixed top-6 inset-x-0 z-50 flex justify-center px-5 pointer-events-none">
+      <div className="pointer-events-auto glass flex items-center gap-8 rounded-full px-8 py-3">
         <nav className="flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.3em] text-soil/80">
           {L.nav.map((label, i) => {
             const slugs = ["about","services","equipment","why-us","contact"];
@@ -288,13 +288,13 @@ function Hero({ L }: { L: typeof t.en }) {
           </motion.div>
           <motion.h1
             initial={{opacity:0,y:40}} animate={{opacity:1,y:0}} transition={{duration:0.9, ease: [0.16, 1, 0.3, 1], delay:0.2}}
-            className="mt-7 font-display font-black text-soil leading-[0.9] text-balance text-5xl sm:text-7xl lg:text-[6.5rem] tracking-tighter">
+            className="mt-7 font-display font-black text-soil leading-[0.9] text-balance text-5xl sm:text-7xl lg:text-[6.5rem] tracking-tighter text-readable-strong">
             {L.h1a} <em className="italic font-light text-primary">{L.h1b}</em> {L.h1c}
           </motion.h1>
-          <p className="mt-4 font-display italic text-xl text-rust/80" style={{ fontFamily: 'var(--font-tamil)' }}>
+          <p className="mt-4 font-display italic text-xl text-rust text-readable" style={{ fontFamily: 'var(--font-tamil)' }}>
             ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
           </p>
-          <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed font-light">{L.sub}</p>
+          <p className="mt-6 text-lg text-soil/85 max-w-xl leading-relaxed font-medium text-readable">{L.sub}</p>
 
           <div className="mt-8 flex flex-wrap gap-4">
             <MagneticButton>
@@ -314,11 +314,11 @@ function Hero({ L }: { L: typeof t.en }) {
             </MagneticButton>
           </div>
 
-          <div className="mt-12 grid grid-cols-3 gap-8 max-w-md">
+          <div className="mt-12 grid grid-cols-3 gap-4 max-w-md">
             {L.stats.map(([k, v]) => (
-              <div key={v} className="border-l-2 border-primary/30 pl-4">
+              <div key={v} className="glass-soft rounded-2xl px-4 py-3">
                 <div className="font-display text-3xl font-black text-soil tracking-tighter">{k}</div>
-                <div className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] mt-1 font-bold">{v}</div>
+                <div className="text-[10px] text-soil/70 uppercase tracking-[0.2em] mt-1 font-bold">{v}</div>
               </div>
             ))}
           </div>
@@ -338,12 +338,12 @@ function Hero({ L }: { L: typeof t.en }) {
             </div>
             <motion.div
               initial={{opacity:0, scale:0.8}} animate={{opacity:1, scale:1}} transition={{delay:0.8}}
-              className="absolute -left-4 bottom-10 hidden sm:flex items-center gap-4 rounded-3xl bg-white/40 backdrop-blur shadow-2xl px-6 py-5 border border-white/20">
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 text-primary grid place-items-center">
+              className="glass absolute -left-4 bottom-10 hidden sm:flex items-center gap-4 rounded-3xl px-6 py-5">
+              <div className="h-12 w-12 rounded-2xl bg-primary text-white grid place-items-center shadow-lg">
                 <Clock className="h-6 w-6" />
               </div>
               <div>
-                <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-black mb-1">{L.hours}</div>
+                <div className="text-[10px] uppercase tracking-widest text-soil/70 font-black mb-1">{L.hours}</div>
                 <div className="font-black text-soil text-sm tracking-tight">{L.hoursLine}</div>
               </div>
             </motion.div>
@@ -372,7 +372,7 @@ function Marquee() {
   const items = ["Mahindra 575 DI", "Mahindra 475 DI", "Tractor Brokerage", "Genuine Spare Parts", "Field Service", "Rotavators", "Water Tankers", "Engine Repair"];
   const row = [...items, ...items];
   return (
-    <div className="border-y border-border/10 bg-soil/10 backdrop-blur-md text-soil py-6 overflow-hidden">
+    <div className="glass-dark text-white py-6 overflow-hidden border-y border-white/10">
       <div className="flex gap-16 animate-marquee whitespace-nowrap">
         {row.map((t,i)=>(
           <span key={i} className="inline-flex items-center gap-4 font-display font-black text-2xl tracking-tighter uppercase opacity-80 hover:opacity-100 transition-opacity">
@@ -395,24 +395,24 @@ function About({ L }: { L: typeof t.en }) {
       className="relative mx-auto max-w-7xl px-5 lg:px-10 py-40 grid lg:grid-cols-12 gap-16 items-center"
     >
       <div className="lg:col-span-5">
-        <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6">{L.aboutKicker}</p>
-        <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9]">
+        <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6 text-readable">{L.aboutKicker}</p>
+        <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9] text-readable-strong">
           {L.aboutTitle}
         </h2>
       </div>
       <div className="lg:col-span-7">
-        <p className="text-xl text-muted-foreground leading-relaxed font-light mb-12">{L.aboutBody}</p>
+        <p className="text-xl text-soil/85 leading-relaxed font-medium mb-12 text-readable">{L.aboutBody}</p>
         <div className="grid sm:grid-cols-2 gap-4">
           {L.aboutPills.map((p, i) => (
-            <motion.div 
-              key={p} 
+            <motion.div
+              key={p}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="flex items-center gap-4 rounded-[2rem] border border-white/20 bg-white/10 backdrop-blur-xl p-5 hover:border-primary hover:shadow-2xl transition-all duration-500"
+              className="glass flex items-center gap-4 rounded-[2rem] p-5 hover:border-primary/60 hover:-translate-y-1 transition-all duration-500"
             >
-              <div className="h-10 w-10 grid place-items-center rounded-full bg-primary/10 text-primary shadow-inner">
+              <div className="h-10 w-10 grid place-items-center rounded-full bg-primary text-white shadow-lg shadow-primary/30">
                 <CheckCircle2 className="h-5 w-5"/>
               </div>
               <span className="font-black text-soil text-sm uppercase tracking-widest">{p}</span>
@@ -438,8 +438,8 @@ function Services({ L }: { L: typeof t.en }) {
       <div className="mx-auto max-w-7xl px-5 lg:px-10 relative z-10">
         <div className="flex items-end justify-between flex-wrap gap-8 mb-20">
           <motion.div initial={{opacity:0,x:-30}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{duration:0.8}}>
-            <p className="text-xs font-black tracking-[0.4em] uppercase text-primary/80 mb-4">{L.servicesKicker}</p>
-            <h2 className="font-display font-black text-4xl lg:text-7xl text-balance max-w-3xl leading-[0.9] tracking-tighter">
+            <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-4 text-readable">{L.servicesKicker}</p>
+            <h2 className="font-display font-black text-4xl lg:text-7xl text-balance max-w-3xl leading-[0.9] tracking-tighter text-soil text-readable-strong">
               {L.servicesTitle}
             </h2>
           </motion.div>
@@ -455,15 +455,15 @@ function Services({ L }: { L: typeof t.en }) {
             return (
               <motion.div key={title}
                 initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.06, duration:0.5}}
-                className="group relative rounded-[2.5rem] border border-white/20 bg-white/5 backdrop-blur-2xl p-10 hover:bg-white hover:text-soil hover:-translate-y-3 transition-all duration-500 shadow-2xl">
+                className="group glass relative rounded-[2.5rem] p-10 hover:-translate-y-3 hover:border-primary/60 transition-all duration-500">
                 <div className="flex items-center justify-between mb-12">
-                  <div className="h-16 w-16 grid place-items-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  <div className="h-16 w-16 grid place-items-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/30 group-hover:rotate-6 transition-transform duration-500">
                     <Icon className="h-8 w-8" />
                   </div>
-                  <span className="font-display font-black text-6xl opacity-5 group-hover:opacity-10 transition-opacity tracking-tighter text-soil">0{i+1}</span>
+                  <span className="font-display font-black text-6xl opacity-10 group-hover:opacity-20 transition-opacity tracking-tighter text-soil">0{i+1}</span>
                 </div>
                 <h3 className="font-display text-3xl font-black mb-4 leading-[0.9] tracking-tighter uppercase text-soil">{title}</h3>
-                <p className="text-base text-muted-foreground leading-relaxed font-light group-hover:text-soil/80 transition-colors">{desc}</p>
+                <p className="text-base text-soil/80 leading-relaxed font-medium">{desc}</p>
               </motion.div>
             );
           })}
@@ -492,12 +492,12 @@ function Equipment({ L }: { L: typeof t.en }) {
     >
       <div className="flex items-end justify-between flex-wrap gap-8 mb-16">
         <div>
-          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-4">{L.equipKicker}</p>
-          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9]">
+          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-4 text-readable">{L.equipKicker}</p>
+          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9] text-readable-strong">
             {L.equipTitle}
           </h2>
         </div>
-        <a href={WA} target="_blank" rel="noopener" className="font-black uppercase tracking-widest text-xs text-soil/50 hover:text-primary transition group">
+        <a href={WA} target="_blank" rel="noopener" className="font-black uppercase tracking-widest text-xs text-soil hover:text-primary transition group text-readable">
           {L.enquire} <ArrowUpRight className="inline-block h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ml-1"/>
         </a>
       </div>
@@ -505,17 +505,17 @@ function Equipment({ L }: { L: typeof t.en }) {
         {L.equipment.map(([title, tag, desc], i)=>(
           <motion.article key={title}
             initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.08, duration:0.5}}
-            className="group rounded-[2rem] overflow-hidden bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-primary hover:-translate-y-2 transition-all duration-700 shadow-xl hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)]">
-            <div className="relative aspect-[3/4] overflow-hidden bg-muted/20">
+            className="group glass rounded-[2rem] overflow-hidden hover:border-primary/60 hover:-translate-y-2 transition-all duration-700">
+            <div className="relative aspect-[3/4] overflow-hidden bg-white/10">
               <img src={imgs[i]} alt={alts[i]} loading="lazy" width={800} height={1000}
-                className="w-full h-full object-cover group-hover:scale-110 transition duration-1000 img-premium grayscale-[0.2] group-hover:grayscale-0" />
-              <div className="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur text-[10px] font-black uppercase tracking-[0.2em] text-soil shadow-sm">
+                className="w-full h-full object-cover group-hover:scale-110 transition duration-1000 img-premium" />
+              <div className="absolute top-6 left-6 glass-soft px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] text-soil">
                 {tag}
               </div>
             </div>
             <div className="p-8">
               <h3 className="font-display text-2xl font-black text-soil leading-tight tracking-tight mb-2">{title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed font-light">{desc}</p>
+              <p className="text-sm text-soil/80 leading-relaxed font-medium">{desc}</p>
             </div>
           </motion.article>
         ))}
@@ -529,22 +529,22 @@ function WhyUs({ L }: { L: typeof t.en }) {
     <section id="why-us" className="py-40">
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="max-w-2xl mb-24">
-          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6">{L.whyKicker}</p>
-          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9]">
+          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6 text-readable">{L.whyKicker}</p>
+          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9] text-readable-strong">
             {L.whyTitle}
           </h2>
         </motion.div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {L.reasons.map(([t, d], i)=>(
             <motion.div key={t}
               initial={{opacity:0, y: 20}} whileInView={{opacity:1, y: 0}} viewport={{once:true}} transition={{delay:i*0.1}}
-              className="group relative rounded-[2.5rem] border border-white/20 bg-white/5 backdrop-blur-2xl p-10 hover:bg-white/10 transition-all duration-500 shadow-2xl">
-              <div className="h-16 w-16 rounded-2xl bg-soil text-white grid place-items-center mb-8 group-hover:bg-primary transition-all duration-500 shadow-2xl group-hover:shadow-primary/30 group-hover:-rotate-6">
+              className="group glass relative rounded-[2.5rem] p-10 hover:-translate-y-2 hover:border-primary/60 transition-all duration-500">
+              <div className="h-16 w-16 rounded-2xl bg-soil text-white grid place-items-center mb-8 group-hover:bg-primary transition-all duration-500 shadow-2xl group-hover:shadow-primary/40 group-hover:-rotate-6">
                 <ShieldCheck className="h-8 w-8" />
               </div>
               <h3 className="font-display text-2xl font-black mb-4 tracking-tighter uppercase leading-[1.1] text-soil">{t}</h3>
-              <p className="text-base text-muted-foreground leading-relaxed font-light">{d}</p>
-              <div className="mt-8 h-1 w-0 bg-primary/20 group-hover:w-full transition-all duration-700" />
+              <p className="text-base text-soil/80 leading-relaxed font-medium">{d}</p>
+              <div className="mt-8 h-1 w-0 bg-primary group-hover:w-full transition-all duration-700 rounded-full" />
             </motion.div>
           ))}
         </div>
@@ -558,20 +558,20 @@ function Testimonials({ L }: { L: typeof t.en }) {
     <section className="py-40">
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="text-center max-w-2xl mx-auto mb-24">
-          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6">{L.voiceKicker}</p>
-          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9]">{L.voiceTitle}</h2>
+          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6 text-readable">{L.voiceKicker}</p>
+          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9] text-readable-strong">{L.voiceTitle}</h2>
         </motion.div>
         <div className="grid md:grid-cols-3 gap-8">
           {L.testimonials.map(([q, n, r], i)=>(
             <motion.div key={i}
               initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.1}}
-              className="rounded-[2.5rem] border border-white/20 bg-white/10 backdrop-blur-2xl p-12 relative shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-              <Quote className="absolute top-12 right-12 h-12 w-12 text-primary/5"/>
+              className="glass rounded-[2.5rem] p-12 relative hover:-translate-y-2 hover:border-primary/60 transition-all duration-500">
+              <Quote className="absolute top-12 right-12 h-12 w-12 text-primary/15"/>
               <div className="flex gap-1.5 mb-8">
                 {[...Array(5)].map((_,j)=><Star key={j} className="h-4 w-4 fill-primary text-primary"/>)}
               </div>
               <p className="font-display text-2xl font-black text-soil leading-[1.1] tracking-tight mb-10">"{q}"</p>
-              <div className="pt-8 border-t border-white/10">
+              <div className="pt-8 border-t border-white/30">
                 <div className="font-black text-soil uppercase tracking-widest text-sm mb-1">{n}</div>
                 <div className="text-xs font-bold text-primary uppercase tracking-[0.2em]">{r}</div>
               </div>
@@ -595,33 +595,33 @@ function Contact({ L }: { L: typeof t.en }) {
     >
       <div className="grid lg:grid-cols-12 gap-20">
         <div className="lg:col-span-5">
-          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6">{L.contactKicker}</p>
-          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil leading-[0.9] tracking-tighter">
+          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-6 text-readable">{L.contactKicker}</p>
+          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil leading-[0.9] tracking-tighter text-readable-strong">
             {L.contactTitle}
           </h2>
-          <div className="mt-16 space-y-12">
-            <div className="flex gap-8">
-              <div className="h-16 w-16 rounded-3xl bg-soil text-white grid place-items-center flex-shrink-0 shadow-2xl">
+          <div className="mt-16 space-y-8">
+            <div className="glass flex gap-6 rounded-[2rem] p-6">
+              <div className="h-16 w-16 rounded-2xl bg-soil text-white grid place-items-center flex-shrink-0 shadow-xl">
                 <Phone className="h-7 w-7" />
               </div>
               <div>
-                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-2">{L.phone}</div>
-                <a href={`tel:+91${PHONE_1}`} className="block text-3xl font-black text-soil hover:text-primary transition-colors tracking-tighter">94433 61295</a>
-                <a href={`tel:+91${PHONE_2}`} className="block text-3xl font-black text-soil hover:text-primary transition-colors tracking-tighter">93823 34477</a>
+                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-soil/70 mb-2">{L.phone}</div>
+                <a href={`tel:+91${PHONE_1}`} className="block text-2xl font-black text-soil hover:text-primary transition-colors tracking-tighter">94433 61295</a>
+                <a href={`tel:+91${PHONE_2}`} className="block text-2xl font-black text-soil hover:text-primary transition-colors tracking-tighter">93823 34477</a>
               </div>
             </div>
-            <div className="flex gap-8">
-              <div className="h-16 w-16 rounded-3xl bg-primary/10 text-primary grid place-items-center flex-shrink-0 shadow-inner">
+            <div className="glass flex gap-6 rounded-[2rem] p-6">
+              <div className="h-16 w-16 rounded-2xl bg-primary text-white grid place-items-center flex-shrink-0 shadow-xl shadow-primary/30">
                 <MapPin className="h-7 w-7" />
               </div>
               <div>
-                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-2">{L.address}</div>
-                <p className="text-2xl font-black text-soil tracking-tighter leading-tight">{L.footerNote}, India</p>
+                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-soil/70 mb-2">{L.address}</div>
+                <p className="text-xl font-black text-soil tracking-tight leading-tight">{L.locStrip}</p>
               </div>
             </div>
           </div>
         </div>
-        <div className="lg:col-span-7 rounded-[3rem] bg-soil/90 text-white p-12 lg:p-16 backdrop-blur-3xl border border-white/10 shadow-[0_60px_120px_-20px_rgba(0,0,0,0.6)] relative overflow-hidden flex flex-col justify-between">
+        <div className="lg:col-span-7 glass-dark rounded-[3rem] text-white p-12 lg:p-16 relative overflow-hidden flex flex-col justify-between">
           <div className="absolute top-0 right-0 h-64 w-64 bg-primary/10 blur-[100px] pointer-events-none" />
           <div>
             <h3 className="font-display text-4xl font-black mb-10 tracking-tighter uppercase">{L.quickActions}</h3>
@@ -657,7 +657,7 @@ function Contact({ L }: { L: typeof t.en }) {
 
 function Footer({ L }: { L: typeof t.en }) {
   return (
-    <footer className="bg-white/10 backdrop-blur-2xl border-t border-white/10 py-20">
+    <footer className="glass-dark text-white/90 border-t border-white/10 py-20 mt-10">
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="flex items-center gap-4">
@@ -665,16 +665,16 @@ function Footer({ L }: { L: typeof t.en }) {
               <Tractor className="h-8 w-8" />
             </div>
             <div>
-              <div className="font-display font-black text-soil text-2xl tracking-tighter uppercase leading-none mb-1">Sri Mariamman</div>
+              <div className="font-display font-black text-white text-2xl tracking-tighter uppercase leading-none mb-1">Sri Mariamman</div>
               <div className="text-[10px] tracking-[0.4em] uppercase text-primary font-black">Tractor Center</div>
             </div>
           </div>
-          <div className="flex gap-12 text-[10px] font-black uppercase tracking-[0.3em] text-soil/40">
+          <div className="flex gap-12 text-[10px] font-black uppercase tracking-[0.3em] text-white/60">
             {L.nav.map((l, i) => (
               <a key={i} href={`#${["about","services","equipment","why-us","contact"][i]}`} className="hover:text-primary transition-colors">{l}</a>
             ))}
           </div>
-          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-soil/20">
+          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">
             © {new Date().getFullYear()} · {L.footerNote}
           </div>
         </div>
