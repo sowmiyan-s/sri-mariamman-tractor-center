@@ -492,12 +492,12 @@ function Equipment({ L }: { L: typeof t.en }) {
     >
       <div className="flex items-end justify-between flex-wrap gap-8 mb-16">
         <div>
-          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-4">{L.equipKicker}</p>
-          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9]">
+          <p className="text-xs font-black tracking-[0.4em] uppercase text-primary mb-4 text-readable">{L.equipKicker}</p>
+          <h2 className="font-display font-black text-4xl lg:text-7xl text-soil tracking-tighter leading-[0.9] text-readable-strong">
             {L.equipTitle}
           </h2>
         </div>
-        <a href={WA} target="_blank" rel="noopener" className="font-black uppercase tracking-widest text-xs text-soil/50 hover:text-primary transition group">
+        <a href={WA} target="_blank" rel="noopener" className="font-black uppercase tracking-widest text-xs text-soil hover:text-primary transition group text-readable">
           {L.enquire} <ArrowUpRight className="inline-block h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ml-1"/>
         </a>
       </div>
@@ -505,17 +505,17 @@ function Equipment({ L }: { L: typeof t.en }) {
         {L.equipment.map(([title, tag, desc], i)=>(
           <motion.article key={title}
             initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.08, duration:0.5}}
-            className="group rounded-[2rem] overflow-hidden bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-primary hover:-translate-y-2 transition-all duration-700 shadow-xl hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)]">
-            <div className="relative aspect-[3/4] overflow-hidden bg-muted/20">
+            className="group glass rounded-[2rem] overflow-hidden hover:border-primary/60 hover:-translate-y-2 transition-all duration-700">
+            <div className="relative aspect-[3/4] overflow-hidden bg-white/10">
               <img src={imgs[i]} alt={alts[i]} loading="lazy" width={800} height={1000}
-                className="w-full h-full object-cover group-hover:scale-110 transition duration-1000 img-premium grayscale-[0.2] group-hover:grayscale-0" />
-              <div className="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur text-[10px] font-black uppercase tracking-[0.2em] text-soil shadow-sm">
+                className="w-full h-full object-cover group-hover:scale-110 transition duration-1000 img-premium" />
+              <div className="absolute top-6 left-6 glass-soft px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] text-soil">
                 {tag}
               </div>
             </div>
             <div className="p-8">
               <h3 className="font-display text-2xl font-black text-soil leading-tight tracking-tight mb-2">{title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed font-light">{desc}</p>
+              <p className="text-sm text-soil/80 leading-relaxed font-medium">{desc}</p>
             </div>
           </motion.article>
         ))}
