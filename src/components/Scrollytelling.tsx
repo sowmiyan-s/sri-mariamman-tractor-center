@@ -5,29 +5,28 @@ export const Scrollytelling = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { scrollYProgress } = useScroll();
   
-  // Use a spring for smoother frame transitions (Awwwards level smoothness)
+  // High-end spring physics for "liquid" smoothness
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 40,  // Lower stiffness for more fluid motion
+    damping: 20,    // Balanced damping for smooth settling
     restDelta: 0.001
   });
 
   const frameCount = 240;
   const images = useRef<HTMLImageElement[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadedCount, setLoadedCount] = useState(0);
 
   // Preload images
   useEffect(() => {
-    let loadedCount = 0;
     const preloadImages = () => {
       for (let i = 1; i <= frameCount; i++) {
         const img = new Image();
         img.src = `/sequence/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
         img.onload = () => {
-          loadedCount++;
-          if (loadedCount === frameCount) {
-            setIsLoaded(true);
-          }
+          setLoadedCount(prev => prev + 1);
+        };
+        img.onerror = () => {
+          setLoadedCount(prev => prev + 1);
         };
         images.current[i - 1] = img;
       }
@@ -56,8 +55,10 @@ export const Scrollytelling = () => {
       const index = Math.round(frameIndex.get());
       const img = images.current[index];
       
-      if (img && img.complete) {
-        // Draw image with "object-fit: cover" logic
+      if (img && img.complete && img.naturalWidth !== 0) {
+        context.imageSmoothingEnabled = true;
+        context.imageSmoothingQuality = "high";
+
         const hRatio = canvas.width / img.width;
         const vRatio = canvas.height / img.height;
         const ratio = Math.max(hRatio, vRatio);
@@ -65,10 +66,6 @@ export const Scrollytelling = () => {
         const centerShiftY = (canvas.height - img.height * ratio) / 2;
         
         context.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Premium tone — balanced for readable foreground text
-        context.filter = "saturate(1.35) contrast(1.05) brightness(1.08)";
-        
         context.drawImage(
           img, 0, 0, img.width, img.height,
           centerShiftX, centerShiftY, img.width * ratio, img.height * ratio
@@ -85,13 +82,14 @@ export const Scrollytelling = () => {
     };
   }, [frameIndex]);
 
+  const isVisible = loadedCount >= 20;
+
   return (
-    <div className="fixed inset-0 -z-20 pointer-events-none overflow-hidden bg-white">
-      {/* The actual image sequence canvas */}
+    <div className="fixed inset-0 -z-20 pointer-events-none overflow-hidden bg-background">
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: isLoaded ? 0.78 : 0 }}
-        transition={{ duration: 1 }}
+        animate={{ opacity: isVisible ? 1 : 0 }}
+        transition={{ duration: 1.5 }}
         className="w-full h-full"
       >
         <canvas
@@ -99,8 +97,6 @@ export const Scrollytelling = () => {
           className="w-full h-full"
         />
       </motion.div>
-
-      {/* Fully transparent background to let the sequence shine */}
     </div>
   );
 };

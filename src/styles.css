@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600;1,800&family=Inter:wght@300;400;500;600;700&family=Hind+Madurai:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600;1,800&family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Hind+Madurai:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap");
 @import "tw-animate-css";
 @import "tailwindcss" source(none);
 
@@ -36,19 +36,19 @@
   --color-cream: var(--cream);
   --color-leaf: var(--leaf);
   --color-rust: var(--rust);
-  --font-display: "Inter", system-ui, sans-serif;
-  --font-sans: "Inter", "Hind Madurai", system-ui, sans-serif;
+  --font-display: "Syne", system-ui, sans-serif;
+  --font-sans: "Outfit", "Hind Madurai", system-ui, sans-serif;
   --font-tamil: "Hind Madurai", serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 1rem;
   /* Luxury Agricultural Palette - Deep Emerald, Gold, and Crimson */
   --background: oklch(0.99 0.005 85);          /* Pure white/ivory */
-  --foreground: oklch(0.2 0.04 150);            /* Deep obsidian emerald */
+  --foreground: oklch(0.15 0.04 150);            /* Deep obsidian emerald */
   --cream: oklch(0.99 0.005 85);
-  --soil: oklch(0.18 0.03 150);                /* Luxury deep green */
+  --soil: oklch(0.12 0.03 150);                /* Luxury deep green */
   --leaf: oklch(0.4 0.12 145);                 /* Vibrant field green */
   --harvest: oklch(0.75 0.12 85);              /* Rich gold */
   --rust: oklch(0.5 0.18 25);                  /* Mahindra crimson */
@@ -67,7 +67,7 @@
   --accent-foreground: var(--soil);
   --destructive: oklch(0.4 0.2 25);
   --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.9 0.01 85);
+  --border: oklch(0 0 0 / 12%);
   --input: oklch(0.9 0.01 85);
   --ring: var(--rust);
 }
@@ -97,7 +97,7 @@
   --muted-foreground: oklch(0.75 0.03 85);
   --accent: oklch(0.78 0.16 75);
   --accent-foreground: oklch(0.22 0.04 145);
-  --border: oklch(1 0 0 / 12%);
+  --border: oklch(1 0 0 / 15%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.78 0.16 75);
 }
@@ -113,10 +113,8 @@
   }
   h1,h2,h3,h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    text-shadow:
-      0 1px 0 oklch(1 0 0 / 0.5),
-      0 2px 24px oklch(1 0 0 / 0.45);
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
   }
 }
 
@@ -127,51 +125,42 @@
                 0 10px 30px -10px oklch(0.55 0.18 32 / 0.35);
   }
 
-  /* Premium glass — translucent so the scrollytelling background shows through */
+  /* Premium glass with defined borders */
   .glass {
-    background: linear-gradient(135deg, oklch(1 0 0 / 0.55), oklch(1 0 0 / 0.22));
-    backdrop-filter: blur(14px) saturate(1.5);
-    -webkit-backdrop-filter: blur(14px) saturate(1.5);
-    border: 1px solid oklch(1 0 0 / 0.5);
+    background: linear-gradient(135deg, oklch(1 0 0 / 0.75), oklch(1 0 0 / 0.45));
+    backdrop-filter: blur(24px) saturate(1.8);
+    -webkit-backdrop-filter: blur(24px) saturate(1.8);
+    border: 1px solid oklch(0 0 0 / 12%);
     box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 0.7),
-      inset 0 -1px 0 oklch(0 0 0 / 0.05),
-      0 20px 60px -20px oklch(0 0 0 / 0.25);
+      inset 0 1px 0 oklch(1 0 0 / 0.8),
+      0 30px 60px -20px oklch(0 0 0 / 0.15);
   }
   .glass-soft {
-    background: oklch(1 0 0 / 0.35);
-    backdrop-filter: blur(10px) saturate(1.3);
-    -webkit-backdrop-filter: blur(10px) saturate(1.3);
-    border: 1px solid oklch(1 0 0 / 0.45);
+    background: oklch(1 0 0 / 0.45);
+    backdrop-filter: blur(12px) saturate(1.4);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    border: 1.5px solid oklch(0 0 0 / 8%);
     box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.6);
   }
   .glass-dark {
-    background: linear-gradient(135deg, oklch(0.18 0.03 150 / 0.78), oklch(0.18 0.03 150 / 0.55));
-    backdrop-filter: blur(18px) saturate(1.4);
-    -webkit-backdrop-filter: blur(18px) saturate(1.4);
-    border: 1px solid oklch(1 0 0 / 0.1);
-    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.08), 0 30px 80px -20px oklch(0 0 0 / 0.5);
+    background: oklch(0.12 0.03 150 / 0.85);
+    backdrop-filter: blur(20px) saturate(1.6);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+    border: 1px solid oklch(1 0 0 / 0.15);
+    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.12), 0 40px 100px -20px oklch(0 0 0 / 0.6);
   }
 
-  /* Readability on busy backgrounds */
-  .text-readable {
-    text-shadow:
-      0 1px 2px oklch(1 0 0 / 0.7),
-      0 0 18px oklch(1 0 0 / 0.55);
+  /* Text Stroke Utility (instead of shadow) */
+  .text-stroke {
+    -webkit-text-stroke: 1px currentColor;
+    paint-order: stroke fill;
   }
-  .text-readable-strong {
-    text-shadow:
-      0 1px 0 oklch(1 0 0 / 0.85),
-      0 2px 10px oklch(1 0 0 / 0.7),
-      0 0 30px oklch(1 0 0 / 0.55);
-  }
-  .text-readable-dark {
-    text-shadow:
-      0 1px 2px oklch(0 0 0 / 0.45),
-      0 0 24px oklch(0 0 0 / 0.35);
+  .text-stroke-thick {
+    -webkit-text-stroke: 2px currentColor;
+    paint-order: stroke fill;
   }
   .text-stroke-light {
-    -webkit-text-stroke: 0.4px oklch(1 0 0 / 0.45);
+    -webkit-text-stroke: 0.5px oklch(0 0 0 / 30%);
     paint-order: stroke fill;
   }
 
