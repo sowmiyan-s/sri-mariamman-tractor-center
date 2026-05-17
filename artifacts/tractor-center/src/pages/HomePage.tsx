@@ -236,21 +236,6 @@ function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: La
                 <Phone className="h-3.5 w-3.5" />
               </a>
             </MagneticButton>
-            {/* WhatsApp Header Button */}
-            <MagneticButton>
-              <a
-                href={WA}
-                target="_blank"
-                rel="noopener"
-                className="border-2 border-[#25D366] flex items-center justify-between p-5 font-mono font-black uppercase tracking-[0.2em] text-[10px] bg-[#25D366] text-white hover:bg-[#128C7E] hover:border-[#128C7E] transition-all duration-500 group shadow-lg w-full"
-              >
-                <span className="flex items-center gap-3">
-                  <WhatsAppIcon className="h-5 w-5 text-white" /> {L.whatsapp}
-                </span>
-                <ArrowUpRight className="h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </a>
-            </MagneticButton>
-
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
