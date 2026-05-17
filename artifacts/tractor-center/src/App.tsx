@@ -5,6 +5,8 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={HomePage} />
+      {/* Fallback route to render the landing page and avoid blank screens on subpaths (e.g. Vercel preview/health checks) */}
+      <Route component={HomePage} />
     </Switch>
   );
 }
