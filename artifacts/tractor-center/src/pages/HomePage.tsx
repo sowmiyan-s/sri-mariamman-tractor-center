@@ -242,11 +242,11 @@ function Hero({ L }: { L: typeof t.en }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-4 text-[10px] md:text-[11px] font-black tracking-[0.5em] uppercase text-soil/30 mb-10"
+          className="inline-flex items-center gap-4 text-[10px] md:text-[11px] font-black tracking-[0.5em] uppercase text-soil/70 mb-10"
         >
-          <span className="h-px w-6 md:w-10 bg-soil/10" />
+          <span className="h-px w-6 md:w-10 bg-soil/30" />
           {L.badge}
-          <span className="h-px w-6 md:w-10 bg-soil/10" />
+          <span className="h-px w-6 md:w-10 bg-soil/30" />
         </motion.div>
 
         <motion.h1
@@ -254,6 +254,7 @@ function Hero({ L }: { L: typeof t.en }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="font-display font-black text-soil leading-[1.05] text-balance text-3xl xs:text-4xl sm:text-6xl lg:text-7xl tracking-tight uppercase"
+          style={{ textShadow: "0 2px 6px rgba(255, 255, 255, 0.95)" }}
         >
           {L.h1a} <br />
           <span className="text-primary">{L.h1b}</span>
@@ -276,7 +277,10 @@ function Hero({ L }: { L: typeof t.en }) {
           >
             ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
           </p>
-          <p className="text-base md:text-lg text-soil/50 font-medium leading-tight max-w-xl mx-auto tracking-wide">
+          <p
+            className="text-base md:text-lg text-soil/80 font-bold leading-tight max-w-xl mx-auto tracking-wide"
+            style={{ textShadow: "0 1px 3px rgba(255, 255, 255, 0.9)" }}
+          >
             {L.sub}
           </p>
         </motion.div>
@@ -311,7 +315,7 @@ function Hero({ L }: { L: typeof t.en }) {
               <div className="font-display text-3xl md:text-4xl font-extrabold text-soil tracking-tighter">
                 {k}
               </div>
-              <div className="text-[9px] md:text-[10px] text-soil/20 font-black uppercase tracking-[0.2em] mt-2 leading-none">
+              <div className="text-[9px] md:text-[10px] text-soil/75 font-black uppercase tracking-[0.2em] mt-2 leading-none">
                 {v}
               </div>
             </div>
@@ -382,7 +386,7 @@ function About({ L }: { L: typeof t.en }) {
           {L.aboutTitle}
         </h2>
         <div className="max-w-2xl">
-          <p className="text-lg md:text-xl text-soil/60 font-medium leading-relaxed mb-12 tracking-wide">
+          <p className="text-lg md:text-xl text-soil/85 font-medium leading-relaxed mb-12 tracking-wide">
             {L.aboutBody}
           </p>
           <div className="flex flex-wrap justify-center gap-5 md:gap-8">
@@ -432,7 +436,7 @@ function Services({ L }: { L: typeof t.en }) {
                 <h3 className="font-sans text-xl font-black mb-3 tracking-tight uppercase text-soil">
                   {title}
                 </h3>
-                <p className="text-sm text-soil/50 font-medium leading-relaxed">{desc}</p>
+                <p className="text-sm text-soil/75 font-medium leading-relaxed">{desc}</p>
               </motion.div>
             );
           })}
@@ -491,7 +495,7 @@ function Equipment({ L }: { L: typeof t.en }) {
               <h3 className="font-display text-lg font-black text-soil leading-tight tracking-tight mb-2 uppercase">
                 {title}
               </h3>
-              <p className="text-xs text-soil/50 font-medium leading-relaxed">{desc}</p>
+              <p className="text-xs text-soil/75 font-medium leading-relaxed">{desc}</p>
             </div>
           </motion.article>
         ))}
@@ -522,7 +526,7 @@ function WhyUs({ L }: { L: typeof t.en }) {
                 <h3 className="font-mono text-lg font-bold mb-3 tracking-tight uppercase text-soil">
                   {title}
                 </h3>
-                <p className="text-sm text-soil/40 font-medium leading-relaxed group-hover:text-soil transition-colors">
+                <p className="text-sm text-soil/75 font-semibold leading-relaxed group-hover:text-soil transition-colors">
                   {desc}
                 </p>
               </div>
@@ -581,7 +585,7 @@ function Contact({ L }: { L: typeof t.en }) {
           </h2>
           <div className="space-y-10">
             <div className="flex flex-col gap-3">
-              <div className="text-[9px] font-black uppercase tracking-[0.4em] text-soil/20">{L.phone}</div>
+              <div className="text-[9px] font-black uppercase tracking-[0.4em] text-soil/60">{L.phone}</div>
               <a href={`tel:+91${PHONE_1}`} className="block text-3xl md:text-4xl font-black text-soil hover:text-primary transition-colors tracking-tighter">
                 94433 61295
               </a>
@@ -590,7 +594,7 @@ function Contact({ L }: { L: typeof t.en }) {
               </a>
             </div>
             <div className="flex flex-col gap-3">
-              <div className="text-[9px] font-black uppercase tracking-[0.4em] text-soil/20">{L.address}</div>
+              <div className="text-[9px] font-black uppercase tracking-[0.4em] text-soil/60">{L.address}</div>
               <p className="text-xl md:text-2xl font-black text-soil tracking-tighter leading-tight">
                 {L.footerNote}, India
               </p>
