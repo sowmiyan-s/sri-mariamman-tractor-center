@@ -427,16 +427,18 @@ function MarqueeStrip() {
     "Engine Repair",
   ];
   return (
-    <div className="relative w-full overflow-hidden bg-white border-y-2 border-soil py-4 select-none">
-      <div className="flex w-[200%] animate-marquee">
-        {[...Array(4)].map((_, groupIdx) => (
-          <div key={groupIdx} className="flex justify-around w-1/4">
+    <div className="relative w-full overflow-hidden bg-white border-y-2 border-soil py-5 select-none whitespace-nowrap z-20">
+      {/* Container holding double marquee list for seamless loop */}
+      <div className="flex w-max animate-marquee gap-16">
+        {[...Array(2)].map((_, loopIdx) => (
+          <div key={loopIdx} className="flex items-center gap-16 min-w-full">
             {items.map((item) => (
               <span
                 key={item}
-                className="font-mono text-[9px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-soil/80 flex items-center gap-4"
+                className="font-mono text-[10px] sm:text-[11px] font-black uppercase tracking-[0.3em] text-soil/90 flex items-center gap-4 whitespace-nowrap"
               >
-                <span className="h-2 w-2 rounded-full bg-primary" /> {item}
+                <span className="h-2.5 w-2.5 rounded-full bg-primary flex-shrink-0" />
+                {item}
               </span>
             ))}
           </div>
@@ -824,72 +826,134 @@ function Testimonials({ L }: { L: typeof t.en }) {
 
 function Contact({ L }: { L: typeof t.en }) {
   return (
-    <section id="contact" className="relative border-y-2 border-soil py-20 sm:py-32">
+    <section id="contact" className="relative border-y-2 border-soil py-20 sm:py-32 bg-white/60 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 md:px-10">
         
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
+        <div className="grid lg:grid-cols-12 gap-12 items-stretch">
           
-          {/* Grid Left: Big support details */}
-          <div className="lg:col-span-6">
-            <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
-              // {L.contactKicker}
-            </p>
-            <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-7xl text-soil leading-[0.95] tracking-tighter uppercase mb-10">
-              {L.contactTitle}
-            </h2>
-            
-            <div className="space-y-8">
-              <div className="border-l-4 border-primary pl-6 py-1">
-                <div className="font-mono text-[10px] font-black uppercase tracking-[0.25em] text-soil/55 mb-2">
-                  {L.phone}
-                </div>
-                <a href={`tel:+91${PHONE_1}`} className="block text-2xl sm:text-4xl font-black text-soil hover:text-primary transition-colors tracking-tighter font-display">
-                  94433 61295
-                </a>
-                <a href={`tel:+91${PHONE_2}`} className="block text-2xl sm:text-4xl font-black text-soil hover:text-primary transition-colors tracking-tighter font-display mt-2">
-                  93823 34477
-                </a>
+          {/* Asymmetric Left Panel: The Machinery Command Registry */}
+          <div className="lg:col-span-6 flex flex-col justify-between border-4 border-soil bg-white p-8 sm:p-12 shadow-2xl relative">
+            {/* Wix corner aesthetic indicators */}
+            <div className="absolute -top-2 -left-2 h-3.5 w-3.5 bg-primary" />
+            <div className="absolute -top-2 -right-2 h-3.5 w-3.5 bg-primary" />
+            <div className="absolute -bottom-2 -left-2 h-3.5 w-3.5 bg-primary" />
+            <div className="absolute -bottom-2 -right-2 h-3.5 w-3.5 bg-primary" />
+
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="h-1.5 w-1.5 bg-primary animate-ping" />
+                <span className="font-mono text-[9px] sm:text-[10px] font-black tracking-[0.35em] uppercase text-primary">
+                  [ SHOWROOM REGISTRY ]
+                </span>
               </div>
-              <div className="border-l-4 border-primary pl-6 py-1">
-                <div className="font-mono text-[10px] font-black uppercase tracking-[0.25em] text-soil/55 mb-2">
-                  {L.address}
+              
+              <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-soil leading-[0.95] tracking-tighter uppercase mb-10">
+                {L.contactTitle}
+              </h2>
+              
+              <div className="space-y-8">
+                {/* Phones Registry */}
+                <div className="border-l-4 border-primary pl-6 py-1">
+                  <div className="font-mono text-[10px] font-black uppercase tracking-[0.25em] text-soil/55 mb-2">
+                    {L.phone}
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <a
+                      href={`tel:+91${PHONE_1}`}
+                      className="group inline-flex items-center gap-3 text-2xl sm:text-4xl font-black text-soil hover:text-primary transition-colors tracking-tighter font-display"
+                    >
+                      <span>94433 61295</span>
+                      <ArrowUpRight className="h-5 w-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                    </a>
+                    <a
+                      href={`tel:+91${PHONE_2}`}
+                      className="group inline-flex items-center gap-3 text-2xl sm:text-4xl font-black text-soil hover:text-primary transition-colors tracking-tighter font-display"
+                    >
+                      <span>93823 34477</span>
+                      <ArrowUpRight className="h-5 w-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                    </a>
+                  </div>
                 </div>
-                <p className="text-xl sm:text-2xl font-black text-soil tracking-tighter font-display leading-tight">
-                  {L.footerNote}, India
-                </p>
+
+                {/* Address Registry */}
+                <div className="border-l-4 border-primary pl-6 py-1">
+                  <div className="font-mono text-[10px] font-black uppercase tracking-[0.25em] text-soil/55 mb-2">
+                    {L.address}
+                  </div>
+                  <p className="text-xl sm:text-2xl font-black text-soil tracking-tighter font-display leading-tight">
+                    {L.footerNote}, India
+                  </p>
+                </div>
               </div>
+            </div>
+
+            {/* Technical Subtext/Badge */}
+            <div className="mt-12 pt-6 border-t border-soil/10 flex items-center justify-between">
+              <span className="font-mono text-[8px] font-black text-soil/40 tracking-wider">
+                SRI MARIAMMAN TRACTOR CENTER · ESTD 1999
+              </span>
+              <span className="font-mono text-[8px] font-black text-primary tracking-wider">
+                LIVE STATUS: ACTIVE
+              </span>
             </div>
           </div>
 
-          {/* Grid Right: Massive mechanical blueprint links */}
-          <div className="lg:col-span-6 flex flex-col gap-6 pt-6 lg:pt-14">
-            <MagneticButton>
-              <a
-                href={WA}
-                target="_blank"
-                rel="noopener"
-                className="border-2 border-soil flex items-center justify-between p-6 sm:p-8 font-mono font-black uppercase tracking-[0.2em] text-[11px] bg-soil text-white hover:bg-primary hover:border-primary transition-all duration-700 group shadow-xl"
-              >
-                <span className="flex items-center gap-5">
-                  <WhatsAppIcon className="h-6 w-6 text-white" /> {L.whatsapp}
-                </span>
-                <ArrowUpRight className="h-6 w-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </a>
-            </MagneticButton>
+          {/* Asymmetric Right Panel: The Satellite Showroom Locator & Quick Action Buttons */}
+          <div className="lg:col-span-6 flex flex-col justify-between gap-6">
             
-            <MagneticButton>
-              <a
-                href={MAPS}
-                target="_blank"
-                rel="noopener"
-                className="border-2 border-soil flex items-center justify-between p-6 sm:p-8 font-mono font-black uppercase tracking-[0.2em] text-[11px] bg-white/80 backdrop-blur-sm text-soil hover:bg-soil hover:text-white transition-all duration-700 group shadow-md"
-              >
-                <span className="flex items-center gap-5">
-                  <MapPin className="h-6 w-6 text-primary animate-pulse" /> {L.googleMaps}
-                </span>
-                <ArrowUpRight className="h-6 w-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </a>
-            </MagneticButton>
+            {/* Interactive Embedded Satellite Map Container */}
+            <div className="border-4 border-soil bg-white p-4 shadow-xl flex-grow flex flex-col justify-between relative min-h-[300px]">
+              <div className="absolute top-6 left-6 z-10 bg-soil text-white px-3 py-1 font-mono text-[8px] font-black uppercase tracking-[0.2em] border border-white/20">
+                SATELLITE RADAR
+              </div>
+              
+              <div className="w-full flex-grow relative overflow-hidden bg-muted border-2 border-soil/15">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.1432427845344!2d78.1636181!3d11.026723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2faf828236d9%3A0x477193d1973452d7!2sSri%20Mariamman%20Tractor%20Center!5e0!3m2!1sen!2sin!4v1715878411032!5m2!1sen!2sin"
+                  className="absolute inset-0 w-full h-full border-0 grayscale saturate-[1.4] hover:grayscale-0 transition-all duration-700"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+              
+              <div className="mt-3 flex items-center justify-between font-mono text-[9px] font-black text-soil/60 uppercase tracking-widest px-1">
+                <span>COORD: 11.0267° N, 78.1636° E</span>
+                <span className="text-primary">NAMAKKAL, TAMIL NADU</span>
+              </div>
+            </div>
+
+            {/* Quick Action Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <MagneticButton>
+                <a
+                  href={WA}
+                  target="_blank"
+                  rel="noopener"
+                  className="border-2 border-soil flex items-center justify-between p-5 font-mono font-black uppercase tracking-[0.2em] text-[10px] bg-soil text-white hover:bg-primary hover:border-primary transition-all duration-500 group shadow-lg w-full"
+                >
+                  <span className="flex items-center gap-3">
+                    <WhatsAppIcon className="h-5 w-5 text-white" /> {L.whatsapp}
+                  </span>
+                  <ArrowUpRight className="h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </a>
+              </MagneticButton>
+              
+              <MagneticButton>
+                <a
+                  href={MAPS}
+                  target="_blank"
+                  rel="noopener"
+                  className="border-2 border-soil flex items-center justify-between p-5 font-mono font-black uppercase tracking-[0.2em] text-[10px] bg-white text-soil hover:bg-soil hover:text-white transition-all duration-500 group shadow-md w-full"
+                >
+                  <span className="flex items-center gap-3">
+                    <MapPin className="h-5 w-5 text-primary animate-bounce" /> {L.googleMaps}
+                  </span>
+                  <ArrowUpRight className="h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </a>
+              </MagneticButton>
+            </div>
+
           </div>
 
         </div>
