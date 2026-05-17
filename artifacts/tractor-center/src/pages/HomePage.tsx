@@ -878,7 +878,7 @@ function Contact({ L }: { L: typeof t.en }) {
                   href={WA}
                   target="_blank"
                   rel="noopener"
-                  className="border-2 border-soil flex items-center justify-between p-5 font-mono font-black uppercase tracking-[0.2em] text-[10px] bg-soil text-white hover:bg-primary hover:border-primary transition-all duration-500 group shadow-lg w-full"
+                  className="border-2 border-[#25D366] flex items-center justify-between p-5 font-mono font-black uppercase tracking-[0.2em] text-[10px] bg-[#25D366] text-white hover:bg-[#128C7E] hover:border-[#128C7E] transition-all duration-500 group shadow-lg w-full"
                 >
                   <span className="flex items-center gap-3">
                     <WhatsAppIcon className="h-5 w-5 text-white" /> {L.whatsapp}
@@ -892,7 +892,7 @@ function Contact({ L }: { L: typeof t.en }) {
                   href={MAPS}
                   target="_blank"
                   rel="noopener"
-                  className="border-2 border-primary flex items-center justify-between p-5 font-mono font-black uppercase tracking-[0.2em] text-[10px] bg-primary text-white hover:bg-soil hover:border-soil transition-all duration-500 group shadow-md w-full"
+                  className="border-2 border-[#4285F4] flex items-center justify-between p-5 font-mono font-black uppercase tracking-[0.2em] text-[10px] bg-[#4285F4] text-white hover:bg-[#1a56c4] hover:border-[#1a56c4] transition-all duration-500 group shadow-md w-full"
                 >
                   <span className="flex items-center gap-3">
                     <MapPin className="h-5 w-5 text-white animate-bounce" /> {L.googleMaps}
@@ -997,7 +997,7 @@ function FloatingWA() {
       target="_blank"
       rel="noopener"
       aria-label="WhatsApp Support"
-      className="fixed bottom-6 right-6 z-[100] h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-primary text-white grid place-items-center shadow-2xl hover:bg-soil transition-all duration-500 group animate-pulse-ring border-4 border-soil"
+      className="fixed bottom-6 right-6 z-[100] h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-[#25D366] text-white grid place-items-center shadow-2xl hover:bg-[#128C7E] transition-all duration-500 group animate-pulse-ring border-2 border-white/30"
     >
       <WhatsAppIcon className="h-6 w-6 sm:h-7 sm:w-7 group-hover:scale-110 transition-transform duration-500" />
     </a>
