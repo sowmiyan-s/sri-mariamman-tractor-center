@@ -256,7 +256,7 @@ function Hero({ L }: { L: typeof t.en }) {
           className="font-display font-black text-soil leading-[0.95] text-balance text-3xl xs:text-4xl sm:text-6xl lg:text-7xl tracking-tight uppercase"
         >
           {L.h1a} <br />
-          <span className="text-stroke text-transparent">{L.h1b}</span> <br />
+          <span className="text-primary">{L.h1b}</span> <br />
           {L.h1c}
         </motion.h1>
 
