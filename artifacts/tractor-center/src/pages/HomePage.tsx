@@ -18,7 +18,6 @@ import eqTractor575 from "@/assets/eq-tractor-575.jpg";
 import eqTractor475 from "@/assets/eq-tractor-475.jpg";
 import { Scrollytelling } from "@/components/Scrollytelling";
 import { MagneticButton } from "@/components/ui/magnetic-button";
-import { Hero3D } from "@/components/Hero3D";
 
 const PHONE_1 = "9443361295";
 const PHONE_2 = "9382334477";
@@ -234,9 +233,6 @@ function Hero({ L }: { L: typeof t.en }) {
       ref={ref}
       className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-16 overflow-hidden px-5"
     >
-      <Suspense fallback={null}>
-        <Hero3D />
-      </Suspense>
 
       <motion.div
         style={{ opacity }}
