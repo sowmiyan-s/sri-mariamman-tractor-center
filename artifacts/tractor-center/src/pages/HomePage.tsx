@@ -168,7 +168,7 @@ export default function HomePage() {
   const L = t[lang];
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-background selection:bg-primary selection:text-white">
+    <main className="relative min-h-screen overflow-x-hidden bg-transparent selection:bg-primary selection:text-white">
       <Scrollytelling />
       <Nav L={L} lang={lang} setLang={setLang} />
       <Hero L={L} />
@@ -186,13 +186,25 @@ export default function HomePage() {
 }
 
 function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: Lang) => void }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const slugs = ["about", "services", "equipment", "why-us", "contact"];
+
   return (
-    <header className="fixed top-4 md:top-8 inset-x-0 z-[100] flex justify-center px-4 pointer-events-none">
-      <div className="pointer-events-auto flex items-center gap-3 sm:gap-6 md:gap-10 rounded-full border-2 border-soil bg-white/80 backdrop-blur-3xl px-4 sm:px-8 py-2.5 sm:py-3.5 shadow-2xl transition-all duration-500 hover:shadow-primary/5">
-        <nav className="flex items-center gap-3 sm:gap-6 md:gap-8 text-[9px] sm:text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] text-soil">
-          {L.nav.map((label, i) => {
-            const slugs = ["about", "services", "equipment", "why-us", "contact"];
-            return (
+    <header className="fixed top-4 md:top-8 inset-x-0 z-[100] flex flex-col items-center px-4 pointer-events-none">
+      {/* Desktop & Mobile Capsule Dock */}
+      <div className="pointer-events-auto w-full max-w-sm md:max-w-4xl flex flex-col items-stretch rounded-2xl md:rounded-full border-2 border-soil bg-white/90 backdrop-blur-3xl p-2 md:p-3 shadow-2xl transition-all duration-500 hover:shadow-primary/5">
+        <div className="flex items-center justify-between gap-4 px-2 sm:px-4">
+          
+          {/* Logo / Title Kicker */}
+          <a href="#top" className="flex items-center gap-2">
+            <span className="font-display font-black text-[10px] sm:text-xs tracking-tighter text-soil">
+              SRI MARIAMMAN
+            </span>
+          </a>
+
+          {/* Inline Navigation (Desktop Only) */}
+          <nav className="hidden md:flex items-center gap-6 text-[10px] font-mono font-black uppercase tracking-[0.15em] text-soil">
+            {L.nav.map((label, i) => (
               <a
                 key={i}
                 href={`#${slugs[i]}`}
@@ -200,29 +212,64 @@ function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: La
               >
                 {label}
               </a>
-            );
-          })}
-        </nav>
-        <div className="h-5 w-0.5 bg-soil/20" />
-        <div className="flex items-center gap-3 sm:gap-5">
-          <button
-            onClick={() => setLang(lang === "en" ? "ta" : "en")}
-            className="flex items-center gap-1 sm:gap-1.5 text-[10px] font-mono font-black uppercase tracking-widest text-soil hover:text-primary transition-all duration-300"
-            aria-label="Toggle language"
-          >
-            <span className={lang === "ta" ? "text-primary" : "text-soil/30"}>தமிழ்</span>
-            <span className="text-soil/15">|</span>
-            <span className={lang === "en" ? "text-primary" : "text-soil/30"}>ENG</span>
-          </button>
-          <MagneticButton>
-            <a
-              href={`tel:+91${PHONE_1}`}
-              className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-primary text-white grid place-items-center hover:scale-110 transition shadow-lg shadow-primary/20"
+            ))}
+          </nav>
+
+          {/* Quick Console Controls */}
+          <div className="flex items-center gap-3">
+            {/* Language Switch */}
+            <button
+              onClick={() => setLang(lang === "en" ? "ta" : "en")}
+              className="flex items-center gap-1 text-[9px] sm:text-[10px] font-mono font-black uppercase tracking-widest text-soil hover:text-primary transition-all duration-300"
+              aria-label="Toggle language"
             >
-              <Phone className="h-3.5 w-3.5" />
-            </a>
-          </MagneticButton>
+              <span className={lang === "ta" ? "text-primary" : "text-soil/30"}>தமிழ்</span>
+              <span className="text-soil/15">|</span>
+              <span className={lang === "en" ? "text-primary" : "text-soil/30"}>ENG</span>
+            </button>
+
+            {/* Telephone Call Button */}
+            <MagneticButton>
+              <a
+                href={`tel:+91${PHONE_1}`}
+                className="h-8 w-8 rounded-full bg-primary text-white grid place-items-center hover:scale-105 transition shadow-lg shadow-primary/20"
+              >
+                <Phone className="h-3.5 w-3.5" />
+              </a>
+            </MagneticButton>
+
+            {/* Mobile Hamburger Toggle */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="flex md:hidden flex-col justify-center items-center gap-1 w-8 h-8 rounded-full border border-soil/20 text-soil hover:text-primary transition-colors focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              <span className={`h-0.5 w-4 bg-current transform transition-transform duration-300 ${isOpen ? "rotate-45 translate-y-1.5" : ""}`} />
+              <span className={`h-0.5 w-4 bg-current transition-opacity duration-300 ${isOpen ? "opacity-0" : ""}`} />
+              <span className={`h-0.5 w-4 bg-current transform transition-transform duration-300 ${isOpen ? "-rotate-45 -translate-y-1.5" : ""}`} />
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Dropdown Panel (Slides Open) */}
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            className="md:hidden mt-3 border-t border-soil/10 pt-3 pb-2 flex flex-col gap-2 px-2"
+          >
+            {L.nav.map((label, i) => (
+              <a
+                key={i}
+                href={`#${slugs[i]}`}
+                onClick={() => setIsOpen(false)}
+                className="text-left font-mono font-black uppercase text-[10px] tracking-widest text-soil hover:text-primary py-2 px-3 hover:bg-soil/5 transition-all duration-300 border-l-2 border-transparent hover:border-primary"
+              >
+                {label}
+              </a>
+            ))}
+          </motion.div>
+        )}
       </div>
     </header>
   );
@@ -269,7 +316,7 @@ function Hero({ L }: { L: typeof t.en }) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-display font-black text-soil leading-[0.95] text-balance text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter uppercase"
+            className="font-display font-black text-soil leading-[0.95] text-balance text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter uppercase"
           >
             <span className="text-stroke-bold-soil text-white drop-shadow-sm block mb-1">
               {L.h1a}
@@ -285,7 +332,7 @@ function Hero({ L }: { L: typeof t.en }) {
             className="mt-6 border-l-4 border-primary pl-4 py-1"
           >
             <p
-              className="font-serif italic text-2xl sm:text-3xl text-soil font-black tracking-tight"
+              className="font-serif italic text-lg sm:text-2xl md:text-3xl text-soil font-black tracking-tight"
               style={{ fontFamily: "var(--font-tamil)" }}
             >
               ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
@@ -297,7 +344,7 @@ function Hero({ L }: { L: typeof t.en }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="mt-8 text-sm sm:text-base md:text-lg text-soil/95 max-w-xl font-mono leading-relaxed"
+            className="mt-6 text-xs sm:text-sm md:text-base text-soil/95 max-w-xl font-mono leading-relaxed"
           >
             {L.sub}
           </motion.p>
@@ -405,7 +452,7 @@ function About({ L }: { L: typeof t.en }) {
       <div className="grid lg:grid-cols-12 gap-12 items-start">
         {/* Wix Studio Grid Left - Massive Physical Trust Box */}
         <div className="lg:col-span-5 relative">
-          <div className="border-4 border-soil rounded-none p-6 sm:p-10 bg-white shadow-2xl relative overflow-hidden group">
+          <div className="border-4 border-soil rounded-none p-6 sm:p-10 bg-white/80 backdrop-blur-md shadow-2xl relative overflow-hidden group">
             {/* Background pattern grid */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:24px_24px] opacity-[0.03]" />
             
@@ -476,7 +523,7 @@ function About({ L }: { L: typeof t.en }) {
 
 function Services({ L }: { L: typeof t.en }) {
   return (
-    <section id="services" className="relative bg-white border-y-2 border-soil py-20 sm:py-32">
+    <section id="services" className="relative border-y-2 border-soil py-20 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 md:px-10">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           
@@ -488,7 +535,7 @@ function Services({ L }: { L: typeof t.en }) {
             <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-soil tracking-tighter leading-[1] uppercase mb-6">
               {L.servicesTitle}
             </h2>
-            <div className="w-full aspect-[4/3] border-2 border-soil/15 p-4 rounded-none bg-background relative overflow-hidden hidden sm:block">
+            <div className="w-full aspect-[4/3] border-2 border-soil/15 p-4 rounded-none bg-white/40 backdrop-blur-sm relative overflow-hidden hidden sm:block">
               {/* Technical schematic box design */}
               <div className="absolute inset-0 bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:16px_16px] opacity-[0.04]" />
               <div className="absolute inset-6 border border-dashed border-soil/20 grid place-items-center">
@@ -579,7 +626,7 @@ function Equipment({ L }: { L: typeof t.en }) {
         {L.equipment.map(([title, tag, desc], i) => (
           <article
             key={title}
-            className="border-2 border-soil bg-white p-3 rounded-none flex flex-col group relative hover:shadow-2xl transition-all duration-500"
+            className="border-2 border-soil bg-white/80 backdrop-blur-md p-3 rounded-none flex flex-col group relative hover:shadow-2xl transition-all duration-500"
           >
             {/* Visual crop box */}
             <div className="relative aspect-[4/5] overflow-hidden mb-4 border-2 border-soil">
@@ -676,7 +723,7 @@ function Equipment({ L }: { L: typeof t.en }) {
 
 function WhyUs({ L }: { L: typeof t.en }) {
   return (
-    <section id="why-us" className="relative bg-white border-y-2 border-soil py-20 sm:py-32">
+    <section id="why-us" className="relative border-y-2 border-soil py-20 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 md:px-10">
         
         {/* Header block */}
@@ -694,7 +741,7 @@ function WhyUs({ L }: { L: typeof t.en }) {
           {L.reasons.map(([title, desc], i) => (
             <div
               key={title}
-              className="group border-2 border-soil bg-background p-6 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col justify-between min-h-[160px]"
+              className="group border-2 border-soil bg-white/60 backdrop-blur-sm p-6 hover:bg-white/95 hover:shadow-xl transition-all duration-300 flex flex-col justify-between min-h-[160px]"
             >
               <div className="flex justify-between items-start mb-4">
                 <span className="font-display text-4xl font-black text-soil/15 group-hover:text-primary/20 transition-colors">
@@ -739,7 +786,7 @@ function Testimonials({ L }: { L: typeof t.en }) {
           {L.testimonials.map(([q, n, r], i) => (
             <div
               key={i}
-              className="border-2 border-soil bg-white p-6 sm:p-10 flex flex-col justify-between min-h-[300px] hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 relative"
+              className="border-2 border-soil bg-white/80 backdrop-blur-md p-6 sm:p-10 flex flex-col justify-between min-h-[300px] hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 relative"
             >
               {/* Gold Stars Board */}
               <div className="flex justify-between items-start mb-6">
@@ -777,7 +824,7 @@ function Testimonials({ L }: { L: typeof t.en }) {
 
 function Contact({ L }: { L: typeof t.en }) {
   return (
-    <section id="contact" className="relative bg-white border-y-2 border-soil py-20 sm:py-32">
+    <section id="contact" className="relative border-y-2 border-soil py-20 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 md:px-10">
         
         <div className="grid lg:grid-cols-12 gap-12 items-start">
@@ -835,7 +882,7 @@ function Contact({ L }: { L: typeof t.en }) {
                 href={MAPS}
                 target="_blank"
                 rel="noopener"
-                className="border-2 border-soil flex items-center justify-between p-6 sm:p-8 font-mono font-black uppercase tracking-[0.2em] text-[11px] bg-white text-soil hover:bg-soil hover:text-white transition-all duration-700 group shadow-md"
+                className="border-2 border-soil flex items-center justify-between p-6 sm:p-8 font-mono font-black uppercase tracking-[0.2em] text-[11px] bg-white/80 backdrop-blur-sm text-soil hover:bg-soil hover:text-white transition-all duration-700 group shadow-md"
               >
                 <span className="flex items-center gap-5">
                   <MapPin className="h-6 w-6 text-primary animate-pulse" /> {L.googleMaps}
