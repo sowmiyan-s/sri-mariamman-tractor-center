@@ -1,6 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Float, MeshDistortMaterial, Sphere, OrbitControls } from "@react-three/drei";
 import { Suspense } from "react";
+import { useHydrated } from "@tanstack/react-router";
 
 const AnimatedObject = () => {
   return (
