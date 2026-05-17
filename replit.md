@@ -1,36 +1,41 @@
-# [Project name]
+# Sri Mariamman Tractor Center
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A bilingual (English/Tamil) landing page for Sri Mariamman Tractor Center — a Mahindra tractor sales, brokerage, service, and spare parts business in Paramathi Velur, Namakkal, Tamil Nadu.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/tractor-center run dev` — run the frontend (workflow: `artifacts/tractor-center: web`)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Frontend: React + Vite (TailwindCSS v4, Framer Motion, Three.js via @react-three/fiber)
+- No backend — purely static frontend
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/tractor-center/src/pages/HomePage.tsx` — entire page (all sections)
+- `artifacts/tractor-center/src/components/Scrollytelling.tsx` — scroll-driven canvas animation (240 frames)
+- `artifacts/tractor-center/src/components/Hero3D.tsx` — Three.js animated sphere (gracefully degrades if no WebGL)
+- `artifacts/tractor-center/src/styles.css` — Tailwind v4 theme with custom brand palette
+- `artifacts/tractor-center/public/sequence/` — 240 JPEG frames for scrollytelling animation
+- `artifacts/tractor-center/src/assets/` — product images (tractors, rotavator, tanker)
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- TanStack Start → Vite + React migration: replaced `createFileRoute`/`createRootRouteWithContext` with a plain React component; `useHydrated()` replaced with `useEffect` state pattern.
+- Bilingual i18n handled inline with a `lang` state toggle (EN/TA) — no i18n library needed for this scope.
+- Hero3D checks WebGL support before mounting the Canvas to avoid errors in environments without GPU.
+- No API server needed — this is a pure marketing/contact site with phone/WhatsApp CTAs.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Full-page bilingual website for a tractor dealership
+- Sections: Hero (3D + scrollytelling), Location strip, About, Services (6 cards), Equipment portfolio (4 products), Why Us, Testimonials, Contact, Footer
+- Language toggle between English and Tamil
+- WhatsApp and phone call CTAs throughout
 
 ## User preferences
 
@@ -38,7 +43,9 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- The scrollytelling sequence loads 240 JPEG frames from `/sequence/` — will be slow on first load.
+- The Three.js sphere won't render in the Replit preview (no GPU), but works fine in real browsers.
+- `@tanstack/react-router` is still installed (used by other packages) but only wouter is used for routing in this app.
 
 ## Pointers
 

@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Sri Mariamman Tractor Center"
+version = "1.0.0"
+id = "artifacts/tractor-center"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24667
+
+[services.development]
+run = "pnpm --filter @workspace/tractor-center run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/tractor-center", "run", "build" ]
+publicDir = "artifacts/tractor-center/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24667"
+BASE_PATH = "/"
