@@ -20,8 +20,8 @@ const AnimatedObject = () => {
 };
 
 export const Hero3D = () => {
-  // Simple check to ensure window is defined (for SSR safety)
-  if (typeof window === "undefined") return null;
+  const hydrated = useHydrated();
+  if (!hydrated) return null;
 
   return (
     <div className="absolute inset-0 -z-10 opacity-40">
