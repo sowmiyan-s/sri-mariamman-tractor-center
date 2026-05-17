@@ -45,8 +45,8 @@ export const Scrollytelling = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Complete the full sequence faster on mobile (by 60% scroll progress) to fit the mobile scroll ratio
-  const scrollRange = isMobile ? [0, 0.6] : [0, 1];
+  // Distribute the sequence smoothly across 100% of the website height on all devices
+  const scrollRange = [0, 1];
   const frameIndex = useTransform(smoothProgress, scrollRange, [0, frameCount - 1], { clamp: true });
 
   useEffect(() => {
