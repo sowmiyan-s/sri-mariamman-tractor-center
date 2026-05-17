@@ -1,5 +1,6 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useScrollReveal, fadeUp, fadeLeft, fadeRight, scaleIn, staggerContainer, lineReveal } from "@/hooks/use-scroll-reveal";
 import {
   Phone,
   MapPin,
@@ -13,19 +14,21 @@ import {
   Quote,
   Star,
   Clock,
+  Facebook,
+  Instagram,
 } from "lucide-react";
-import eqRotavator from "@/assets/eq-rotavator.png";
-import eqTrailer from "@/assets/eq-trailer.png";
-import eqTractor575 from "@/assets/eq-tractor-575.png";
-import eqTractor475 from "@/assets/eq-tractor-475.png";
-import eqMechanic from "@/assets/eq-servicing.png";
+import eqRotavator from "@/assets/equipment/eq-rotavator.png";
+import eqTrailer from "@/assets/equipment/eq-trailer.png";
+import eqTractor575 from "@/assets/equipment/eq-tractor-575.png";
+import eqTractor475 from "@/assets/equipment/eq-tractor-475.png";
+import eqMechanic from "@/assets/services/eq-servicing.png";
 import { Scrollytelling } from "@/components/Scrollytelling";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 
 const PHONE_1 = "9443361295";
 const PHONE_2 = "9382334477";
 const WA = `https://wa.me/91${PHONE_1}?text=${encodeURIComponent("Hello Sri Mariamman Tractor Center, I'd like to know more about your tractors and services.")}`;
-const MAPS = "https://maps.app.goo.gl/ie2L7h3c2tf3VtHn6";
+const MAPS = "https://www.google.com/maps/place/Sri+mariamman+tractor+center/@11.2674647,77.9444764,17z/data=!3m1!4b1!4m6!3m5!1s0x3babd7372ae993cd:0xc4036cb7f564a9e!8m2!3d11.2674647!4d77.9470513!16s%2Fg%2F11hfvsn7lk";
 
 type Lang = "en" | "ta";
 
@@ -233,6 +236,20 @@ function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: La
                 <Phone className="h-3.5 w-3.5" />
               </a>
             </MagneticButton>
+            {/* WhatsApp Header Button */}
+            <MagneticButton>
+              <a
+                href={WA}
+                target="_blank"
+                rel="noopener"
+                className="border-2 border-[#25D366] flex items-center justify-between p-5 font-mono font-black uppercase tracking-[0.2em] text-[10px] bg-[#25D366] text-white hover:bg-[#128C7E] hover:border-[#128C7E] transition-all duration-500 group shadow-lg w-full"
+              >
+                <span className="flex items-center gap-3">
+                  <WhatsAppIcon className="h-5 w-5 text-white" /> {L.whatsapp}
+                </span>
+                <ArrowUpRight className="h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </a>
+            </MagneticButton>
 
             {/* Mobile Hamburger Toggle */}
             <button
@@ -437,88 +454,98 @@ function MarqueeStrip() {
 }
 
 function About({ L }: { L: typeof t.en }) {
+  const { ref, isInView } = useScrollReveal();
   return (
-    <section id="about" className="relative mx-auto max-w-7xl px-4 md:px-10 py-20 sm:py-32">
+    <section id="about" className="relative mx-auto max-w-7xl px-4 md:px-10 py-20 sm:py-32" ref={ref}>
       <div className="grid lg:grid-cols-12 gap-12 items-start">
-        {/* Wix Studio Grid Left - Massive Physical Trust Box */}
-        <div className="lg:col-span-5 relative">
+        {/* Left — Trust Box slides in from left */}
+        <motion.div
+          className="lg:col-span-5 relative"
+          variants={fadeLeft}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           <div className="border-4 border-soil rounded-none p-6 sm:p-10 bg-white/80 backdrop-blur-md shadow-2xl relative overflow-hidden group">
-            {/* Background pattern grid */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:24px_24px] opacity-[0.03]" />
-            
             <div className="relative z-10">
-              <span className="font-mono text-[9px] font-black tracking-[0.4em] uppercase text-primary mb-6 block">
-                [ CREDENTIAL ]
-              </span>
-              <div className="font-display font-black text-soil text-7xl sm:text-8xl md:text-9xl leading-none tracking-tighter mb-4">
+              <span className="font-mono text-[9px] font-black tracking-[0.4em] uppercase text-primary mb-6 block">[ CREDENTIAL ]</span>
+              <motion.div
+                className="font-display font-black text-soil text-7xl sm:text-8xl md:text-9xl leading-none tracking-tighter mb-4"
+                initial={{ opacity: 0, scale: 0.7 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.7 }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+              >
                 25+
-              </div>
+              </motion.div>
               <div className="font-mono text-[10px] sm:text-11px font-black tracking-[0.45em] uppercase text-soil mb-6 border-b-2 border-soil/15 pb-6">
                 YEARS OF EXCELLENCE
               </div>
               <p className="text-xs sm:text-sm font-mono text-soil/80 leading-relaxed mb-8">
                 Providing local tractor dealerships, trustworthy pre-owned machinery brokerage, and professional engine mechanics inside Tamil Nadu.
               </p>
-              
-              {/* Wix Studio Physical Stamp Tags */}
-              <div className="flex flex-wrap gap-2 pt-4">
+              <motion.div
+                className="flex flex-wrap gap-2 pt-4"
+                variants={staggerContainer}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+              >
                 {L.aboutPills.map((pill) => (
-                  <span
+                  <motion.span
                     key={pill}
+                    variants={fadeUp}
                     className="font-mono text-[8px] sm:text-[9px] font-black uppercase tracking-wider bg-soil text-white px-2.5 py-1"
                   >
                     #{pill}
-                  </span>
+                  </motion.span>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Wix Studio Grid Right - Narrative & Bold Outlines */}
-        <div className="lg:col-span-7 flex flex-col justify-center bg-white/90 backdrop-blur-md border-4 border-soil p-8 sm:p-12 shadow-2xl relative">
-          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
-            // {L.aboutKicker}
-          </p>
+        {/* Right — Narrative panel slides in from right */}
+        <motion.div
+          className="lg:col-span-7 flex flex-col justify-center bg-white/90 backdrop-blur-md border-4 border-soil p-8 sm:p-12 shadow-2xl relative"
+          variants={fadeRight}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          custom={0.15}
+        >
+          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">// {L.aboutKicker}</p>
           <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-7xl text-soil tracking-tighter leading-[1] uppercase mb-8">
             {L.aboutTitle}
           </h2>
           <p className="font-serif italic text-xl sm:text-2xl text-soil/85 leading-snug mb-8 pl-4 border-l-4 border-primary">
             "{L.aboutBody}"
           </p>
-          
           <div className="grid sm:grid-cols-2 gap-6 mt-6">
-            <div className="border-t-2 border-soil pt-4">
-              <div className="font-mono text-[10px] font-black uppercase tracking-widest text-primary mb-2">
-                01 / LOCAL ORIGIN
-              </div>
-              <p className="text-xs text-soil/75 font-mono">
-                Serving the agriculture lands of Namakkal and surrounding districts since 1999.
-              </p>
-            </div>
-            <div className="border-t-2 border-soil pt-4">
-              <div className="font-mono text-[10px] font-black uppercase tracking-widest text-primary mb-2">
-                02 / PRE-OWNED BROKERAGE
-              </div>
-              <p className="text-xs text-soil/75 font-mono">
-                Fair valuation, transparency, and verified sellers across state lines.
-              </p>
-            </div>
+            <motion.div className="border-t-2 border-soil pt-4" variants={fadeUp} custom={0.3}>
+              <div className="font-mono text-[10px] font-black uppercase tracking-widest text-primary mb-2">01 / LOCAL ORIGIN</div>
+              <p className="text-xs text-soil/75 font-mono">Serving the agriculture lands of Namakkal and surrounding districts since 1999.</p>
+            </motion.div>
+            <motion.div className="border-t-2 border-soil pt-4" variants={fadeUp} custom={0.45}>
+              <div className="font-mono text-[10px] font-black uppercase tracking-widest text-primary mb-2">02 / PRE-OWNED BROKERAGE</div>
+              <p className="text-xs text-soil/75 font-mono">Fair valuation, transparency, and verified sellers across state lines.</p>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
 
 function Services({ L }: { L: typeof t.en }) {
+  const { ref, isInView } = useScrollReveal();
   return (
-    <section id="services" className="relative border-y-2 border-soil py-20 sm:py-32">
+    <section id="services" className="relative border-y-2 border-soil py-20 sm:py-32" ref={ref}>
       <div className="mx-auto max-w-7xl px-4 md:px-10">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
-          
-          {/* Wix Studio Sticky Blueprint Title Panel */}
-          <div className="lg:col-span-5 lg:sticky lg:top-32">
+          <motion.div
+            className="lg:col-span-5 lg:sticky lg:top-32"
+            variants={fadeLeft}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
             <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
               // {L.servicesKicker}
             </p>
@@ -530,46 +557,40 @@ function Services({ L }: { L: typeof t.en }) {
               <div className="absolute inset-0 bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:16px_16px] opacity-[0.04]" />
               <div className="absolute inset-4 border border-dashed border-soil/20 overflow-hidden group bg-white/50">
                 <img src={eqMechanic} alt="Mechanic Schematic" className="w-full h-full object-cover filter grayscale contrast-110 group-hover:grayscale-0 transition-all duration-700 opacity-90" />
-                <div className="absolute bottom-2 left-2 bg-white/90 px-2 py-1 font-mono text-[8px] text-soil font-black tracking-[0.2em] shadow-sm border border-soil/10">
-                  [ SCHEMATIC_BOARD_V1 ]
-                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Wix Studio Interactive Specs List (Accordions/Blueprints Grid) */}
-          <div className="lg:col-span-7 flex flex-col border-t-2 border-soil">
+          <motion.div
+            className="lg:col-span-7 flex flex-col border-t-2 border-soil"
+            variants={staggerContainer}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
             {L.services.map(([title, desc], i) => (
-              <div
+              <motion.div
                 key={title}
+                variants={fadeUp}
+                custom={i}
                 className="group py-6 border-b-2 border-soil/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 hover:bg-background px-4 transition-all duration-300 relative overflow-hidden"
               >
                 <div className="flex items-start gap-4">
                   <span className="font-mono text-xs text-primary font-black pt-1">
-                    [{String(i + 1).padStart(2, "0")}]
+                    [{String(i + 1).padStart(2, "00")}]
                   </span>
                   <div>
-                    <h3 className="font-display text-lg sm:text-xl font-black text-soil uppercase group-hover:text-primary transition-colors">
-                      {title}
-                    </h3>
-                    <p className="text-xs text-soil/75 font-mono max-w-lg mt-1">
-                      {desc}
-                    </p>
+                    <h3 className="font-display text-lg sm:text-xl font-black text-soil uppercase group-hover:text-primary transition-colors">{title}</h3>
+                    <p className="text-xs text-soil/75 font-mono max-w-lg mt-1">{desc}</p>
                   </div>
                 </div>
                 <div className="flex-shrink-0 self-end sm:self-center">
-                  <a
-                    href={WA}
-                    target="_blank"
-                    rel="noopener"
-                    className="h-9 w-9 rounded-full border-2 border-soil group-hover:border-primary group-hover:bg-primary group-hover:text-white flex items-center justify-center transition-all duration-500"
-                  >
+                  <a href={WA} target="_blank" rel="noopener" className="h-9 w-9 rounded-full border-2 border-soil group-hover:border-primary group-hover:bg-primary group-hover:text-white flex items-center justify-center transition-all duration-500">
                     <ArrowUpRight className="h-4 w-4" />
                   </a>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
         </div>
       </div>
@@ -579,107 +600,89 @@ function Services({ L }: { L: typeof t.en }) {
 
 function Equipment({ L }: { L: typeof t.en }) {
   const imgs = [eqTractor575, eqTractor475, eqRotavator, eqTrailer];
-  
-
-
+  const { ref, isInView } = useScrollReveal();
   return (
-    <section id="equipment" className="relative mx-auto max-w-7xl px-4 md:px-10 py-20 sm:py-32">
-      
+    <section id="equipment" className="relative mx-auto max-w-7xl px-4 md:px-10 py-20 sm:py-32" ref={ref}>
       {/* Editorial Header */}
-      <div className="flex flex-col items-start lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-20">
+      <motion.div
+        className="flex flex-col items-start lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-20"
+        variants={fadeUp}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
         <div>
-          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
-            // {L.equipKicker}
-          </p>
-          <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-7xl text-soil tracking-tighter leading-[1] uppercase">
-            {L.equipTitle}
-          </h2>
+          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">// {L.equipKicker}</p>
+          <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-7xl text-soil tracking-tighter leading-[1] uppercase">{L.equipTitle}</h2>
         </div>
         <MagneticButton>
-          <a
-            href={WA}
-            target="_blank"
-            rel="noopener"
-            className="flex items-center gap-4 rounded-none border-2 border-soil px-6 py-4 text-xs font-mono font-black uppercase tracking-[0.2em] bg-soil text-white hover:bg-primary hover:border-primary transition-all duration-500"
-          >
+          <a href={WA} target="_blank" rel="noopener" className="flex items-center gap-4 rounded-none border-2 border-soil px-6 py-4 text-xs font-mono font-black uppercase tracking-[0.2em] bg-soil text-white hover:bg-primary hover:border-primary transition-all duration-500">
             {L.enquire}
           </a>
         </MagneticButton>
-      </div>
+      </motion.div>
 
-      {/* Wix Studio Dealership Grid layout */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {/* Equipment cards — stagger in */}
+      <motion.div
+        className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+        variants={staggerContainer}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
         {L.equipment.map(([title, tag, desc], i) => (
-          <article
+          <motion.article
             key={title}
+            variants={scaleIn}
+            custom={i}
             className="border-2 border-soil bg-white/80 backdrop-blur-md p-3 rounded-none flex flex-col group relative hover:shadow-2xl transition-all duration-500"
           >
-            {/* Visual crop box */}
             <div className="relative aspect-[4/5] overflow-hidden mb-4 border-2 border-soil">
-              <img
-                src={imgs[i]}
-                alt={title}
-                loading="lazy"
-                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 grayscale group-hover:grayscale-0 filter saturate-125"
-              />
-              <div className="absolute top-2 left-2 px-2 py-0.5 bg-soil text-white font-mono text-[8px] font-black uppercase tracking-widest">
-                {tag}
-              </div>
-              
-              {/* Wix Studio Premium Hover Overlay Button */}
+              <img src={imgs[i]} alt={title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 grayscale group-hover:grayscale-0 filter saturate-125" />
+              <div className="absolute top-2 left-2 px-2 py-0.5 bg-soil text-white font-mono text-[8px] font-black uppercase tracking-widest">{tag}</div>
               <div className="absolute inset-0 bg-soil/25 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center pointer-events-none group-hover:pointer-events-auto">
-                <a
-                  href={`https://wa.me/91${PHONE_1}?text=${encodeURIComponent(`Hello Sri Mariamman Tractor Center, I am interested in inquiring about the ${title} (${tag}) shown on your website.`)}`}
-                  target="_blank"
-                  rel="noopener"
-                  className="font-mono text-[10px] font-black tracking-[0.25em] uppercase bg-white text-soil hover:bg-primary hover:text-white px-5 py-3 shadow-2xl scale-95 group-hover:scale-100 transition-all duration-500 flex items-center gap-2 border-2 border-soil"
-                >
+                <a href={`https://wa.me/91${PHONE_1}?text=${encodeURIComponent(`Hello Sri Mariamman Tractor Center, I am interested in inquiring about the ${title} (${tag}) shown on your website.`)}`} target="_blank" rel="noopener" className="font-mono text-[10px] font-black tracking-[0.25em] uppercase bg-white text-soil hover:bg-primary hover:text-white px-5 py-3 shadow-2xl scale-95 group-hover:scale-100 transition-all duration-500 flex items-center gap-2 border-2 border-soil">
                   ENQUIRE <ArrowUpRight className="h-4 w-4" />
                 </a>
               </div>
             </div>
-
-            {/* Spec Content & Tech Details Tables */}
             <div className="px-1 flex-grow flex flex-col justify-between">
               <div>
-                <h3 className="font-display text-lg font-black text-soil leading-tight mb-2 uppercase group-hover:text-primary transition-colors">
-                  {title}
-                </h3>
-                <p className="text-xs text-soil/75 font-mono mb-4 leading-relaxed">
-                  {desc}
-                </p>
+                <h3 className="font-display text-lg font-black text-soil leading-tight mb-2 uppercase group-hover:text-primary transition-colors">{title}</h3>
+                <p className="text-xs text-soil/75 font-mono mb-4 leading-relaxed">{desc}</p>
               </div>
-
             </div>
-
-          </article>
+          </motion.article>
         ))}
-      </div>
-
+      </motion.div>
     </section>
   );
 }
 
 function WhyUs({ L }: { L: typeof t.en }) {
+  const { ref, isInView } = useScrollReveal();
   return (
-    <section id="why-us" className="relative border-y-2 border-soil py-20 sm:py-32">
+    <section id="why-us" className="relative border-y-2 border-soil py-20 sm:py-32" ref={ref}>
       <div className="mx-auto max-w-7xl px-4 md:px-10">
-        
-        {/* Header block */}
-        <div className="text-left mb-16 max-w-lg">
-          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
-            // {L.whyKicker}
-          </p>
-          <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-soil tracking-tighter leading-[1] uppercase">
-            {L.whyTitle}
-          </h2>
-        </div>
+        <motion.div
+          className="text-left mb-16 max-w-lg"
+          variants={fadeUp}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">// {L.whyKicker}</p>
+          <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-soil tracking-tighter leading-[1] uppercase">{L.whyTitle}</h2>
+        </motion.div>
 
-        {/* Wix Studio Industrial Number Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={staggerContainer}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {L.reasons.map(([title, desc], i) => (
-            <div
+            <motion.div
               key={title}
+              variants={fadeUp}
+              custom={i}
               className="group border-2 border-soil bg-white/60 backdrop-blur-sm p-6 hover:bg-white/95 hover:shadow-xl transition-all duration-300 flex flex-col justify-between min-h-[160px]"
             >
               <div className="flex justify-between items-start mb-4">
@@ -689,42 +692,43 @@ function WhyUs({ L }: { L: typeof t.en }) {
                 <span className="h-1.5 w-1.5 bg-primary rounded-full opacity-30 group-hover:opacity-100 transition-opacity" />
               </div>
               <div>
-                <h3 className="font-display text-lg font-black text-soil uppercase mb-2 group-hover:text-primary transition-colors">
-                  {title}
-                </h3>
-                <p className="text-xs font-mono text-soil/75 leading-relaxed">
-                  {desc}
-                </p>
+                <h3 className="font-display text-lg font-black text-soil uppercase mb-2 group-hover:text-primary transition-colors">{title}</h3>
+                <p className="text-xs font-mono text-soil/75 leading-relaxed">{desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-
+        </motion.div>
       </div>
     </section>
   );
 }
 
 function Testimonials({ L }: { L: typeof t.en }) {
+  const { ref, isInView } = useScrollReveal();
   return (
-    <section className="py-20 sm:py-32 relative">
+    <section className="py-20 sm:py-32 relative" ref={ref}>
       <div className="mx-auto max-w-7xl px-4 md:px-10">
-        
-        {/* Editorial Heading */}
-        <div className="mb-16 text-left">
-          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
-            // {L.voiceKicker}
-          </p>
-          <h2 className="font-serif italic text-3xl sm:text-5xl lg:text-7xl font-black text-soil tracking-tight leading-[1]">
-            {L.voiceTitle}
-          </h2>
-        </div>
+        <motion.div
+          className="mb-16 text-left"
+          variants={fadeUp}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">// {L.voiceKicker}</p>
+          <h2 className="font-serif italic text-3xl sm:text-5xl lg:text-7xl font-black text-soil tracking-tight leading-[1]">{L.voiceTitle}</h2>
+        </motion.div>
 
-        {/* Technical Rated Cards Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <motion.div
+          className="grid md:grid-cols-3 gap-8"
+          variants={staggerContainer}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {L.testimonials.map(([q, n, r], i) => (
-            <div
+            <motion.div
               key={i}
+              variants={fadeUp}
+              custom={i}
               className="border-2 border-soil bg-white/80 backdrop-blur-md p-6 sm:p-10 flex flex-col justify-between min-h-[300px] hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 relative"
             >
               {/* Gold Stars Board */}
@@ -752,9 +756,9 @@ function Testimonials({ L }: { L: typeof t.en }) {
                   <div className="text-[9px] font-mono font-black text-primary uppercase tracking-[0.2em]">{r}</div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>
@@ -838,9 +842,6 @@ function Contact({ L }: { L: typeof t.en }) {
             <div className="w-full aspect-[2/1] border-2 border-soil/15 p-2 rounded-none bg-white/40 backdrop-blur-sm relative overflow-hidden group">
               <div className="absolute inset-2 border border-dashed border-soil/20 overflow-hidden">
                 <img src={eqMechanic} alt="Tractor Servicing" className="w-full h-full object-cover filter contrast-110 opacity-95 group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute bottom-2 left-2 bg-white/90 px-2 py-1 font-mono text-[8px] text-soil font-black tracking-[0.2em] shadow-sm border border-soil/10 z-10">
-                  [ SCHEMATIC_BOARD_V1 ]
-                </div>
               </div>
             </div>
           </div>
@@ -856,7 +857,7 @@ function Contact({ L }: { L: typeof t.en }) {
               
               <div className="w-full flex-grow relative overflow-hidden bg-muted border-2 border-soil/15">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.1432427845344!2d78.1636181!3d11.026723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2faf828236d9%3A0x477193d1973452d7!2sSri%20Mariamman%20Tractor%20Center!5e0!3m2!1sen!2sin!4v1715878411032!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1956.4271452596836!2d77.9463531!3d11.2721195!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babd7372ae993cd%3A0xc4036cb7f564a9e!2sSri%20mariamman%20tractor%20center!5e0!3m2!1sen!2sin!4v1779035835965!5m2!1sen!2sin"
                   className="absolute inset-0 w-full h-full border-0 grayscale saturate-[1.4] hover:grayscale-0 transition-all duration-700"
                   allowFullScreen
                   loading="lazy"
@@ -865,8 +866,8 @@ function Contact({ L }: { L: typeof t.en }) {
               </div>
               
               <div className="mt-3 flex items-center justify-between font-mono text-[9px] font-black text-soil/60 uppercase tracking-widest px-1">
-                <span>COORD: 11.0267° N, 78.1636° E</span>
-                <span className="text-primary">NAMAKKAL, TAMIL NADU</span>
+                <span>COORD: 11.2674° N, 77.9470° E</span>
+                <span className="text-primary">N. KANDAMPALAYAM, NAMAKKAL</span>
               </div>
             </div>
 
@@ -891,10 +892,10 @@ function Contact({ L }: { L: typeof t.en }) {
                   href={MAPS}
                   target="_blank"
                   rel="noopener"
-                  className="border-2 border-soil flex items-center justify-between p-5 font-mono font-black uppercase tracking-[0.2em] text-[10px] bg-white text-soil hover:bg-soil hover:text-white transition-all duration-500 group shadow-md w-full"
+                  className="border-2 border-primary flex items-center justify-between p-5 font-mono font-black uppercase tracking-[0.2em] text-[10px] bg-primary text-white hover:bg-soil hover:border-soil transition-all duration-500 group shadow-md w-full"
                 >
                   <span className="flex items-center gap-3">
-                    <MapPin className="h-5 w-5 text-primary animate-bounce" /> {L.googleMaps}
+                    <MapPin className="h-5 w-5 text-white animate-bounce" /> {L.googleMaps}
                   </span>
                   <ArrowUpRight className="h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </a>
@@ -936,8 +937,8 @@ function Footer({ L }: { L: typeof t.en }) {
     <footer className="py-20 bg-soil text-white relative z-10 overflow-hidden border-t-4 border-primary">
       
       {/* Huge Watermark Tamil Graphic Underlay */}
-      <div className="absolute -bottom-10 -right-10 font-serif italic text-[120px] sm:text-[180px] font-black text-white/[0.02] pointer-events-none select-none tracking-tighter whitespace-nowrap z-0">
-        ஸ்ரீ மாரியம்மன்
+      <div className="absolute -bottom-10 -right-10 font-serif italic text-[80px] sm:text-[130px] font-black text-white/[0.025] pointer-events-none select-none tracking-tighter whitespace-nowrap z-0">
+        ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-12 border-b-2 border-white/5 pb-12">
@@ -950,16 +951,26 @@ function Footer({ L }: { L: typeof t.en }) {
           </div>
         </div>
         
-        <div className="font-mono flex flex-wrap gap-6 md:gap-10 text-[9px] font-black uppercase tracking-[0.2em]">
-          {L.nav.map((label, i) => (
-            <a
-              key={i}
-              href={`#${["about", "services", "equipment", "why-us", "contact"][i]}`}
-              className="hover:text-primary border-b border-transparent hover:border-primary transition-all duration-300"
-            >
-              {label}
+        <div className="flex flex-col md:items-end gap-6">
+          <div className="font-mono flex flex-wrap gap-6 md:gap-10 text-[9px] font-black uppercase tracking-[0.2em]">
+            {L.nav.map((label, i) => (
+              <a
+                key={i}
+                href={`#${["about", "services", "equipment", "why-us", "contact"][i]}`}
+                className="hover:text-primary border-b border-transparent hover:border-primary transition-all duration-300"
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+          <div className="flex items-center gap-4">
+            <a href="https://www.facebook.com/shanmugam.smtc" target="_blank" rel="noopener" className="text-[#1877F2] hover:opacity-80 transition-opacity" aria-label="Facebook">
+              <Facebook className="w-5 h-5" />
             </a>
-          ))}
+            <a href="https://www.instagram.com/shanmugam_smtc_/" target="_blank" rel="noopener" className="text-[#E4405F] hover:opacity-80 transition-opacity" aria-label="Instagram">
+              <Instagram className="w-5 h-5" />
+            </a>
+          </div>
         </div>
       </div>
 
@@ -971,7 +982,7 @@ function Footer({ L }: { L: typeof t.en }) {
           <LiveClock />
         </div>
         <div>
-          © {new Date().getFullYear()} SRI MARIAMMAN. ALL BLUEPRINTS SECURED.
+          © {new Date().getFullYear()} Sri Mariamman Tractor Center. All Rights Reserved.
         </div>
       </div>
 
@@ -986,7 +997,7 @@ function FloatingWA() {
       target="_blank"
       rel="noopener"
       aria-label="WhatsApp Support"
-      className="fixed bottom-6 right-6 z-[100] h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-soil text-white grid place-items-center shadow-2xl hover:bg-primary transition-all duration-700 group animate-pulse-ring border-2 border-white/20"
+      className="fixed bottom-6 right-6 z-[100] h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-primary text-white grid place-items-center shadow-2xl hover:bg-soil transition-all duration-500 group animate-pulse-ring border-4 border-soil"
     >
       <WhatsAppIcon className="h-6 w-6 sm:h-7 sm:w-7 group-hover:scale-110 transition-transform duration-500" />
     </a>
