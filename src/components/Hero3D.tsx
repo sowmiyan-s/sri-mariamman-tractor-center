@@ -1,6 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Float, MeshDistortMaterial, Sphere, OrbitControls } from "@react-three/drei";
 import { Suspense } from "react";
+import { useHydrated } from "@tanstack/react-router";
 
 const AnimatedObject = () => {
   return (
@@ -19,8 +20,8 @@ const AnimatedObject = () => {
 };
 
 export const Hero3D = () => {
-  // Simple check to ensure window is defined (for SSR safety)
-  if (typeof window === "undefined") return null;
+  const hydrated = useHydrated();
+  if (!hydrated) return null;
 
   return (
     <div className="absolute inset-0 -z-10 opacity-40">
