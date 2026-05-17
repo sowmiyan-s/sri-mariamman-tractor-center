@@ -254,7 +254,10 @@ function Hero({ L }: { L: typeof t.en }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="font-display font-black text-soil leading-[1.05] text-balance text-3xl xs:text-4xl sm:text-6xl lg:text-7xl tracking-tight uppercase"
-          style={{ textShadow: "0 2px 6px rgba(255, 255, 255, 0.95)" }}
+          style={{
+            WebkitTextStroke: "2px white",
+            paintOrder: "stroke fill",
+          }}
         >
           {L.h1a} <br />
           <span className="text-primary">{L.h1b}</span>
@@ -278,7 +281,10 @@ function Hero({ L }: { L: typeof t.en }) {
           </p>
           <p
             className="text-base md:text-lg text-soil/80 font-bold leading-tight max-w-xl mx-auto tracking-wide"
-            style={{ textShadow: "0 1px 3px rgba(255, 255, 255, 0.9)" }}
+            style={{
+              WebkitTextStroke: "0.5px white",
+              paintOrder: "stroke fill",
+            }}
           >
             {L.sub}
           </p>
