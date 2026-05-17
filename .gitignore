@@ -1,53 +1,67 @@
-# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
-# compiled output
+# ─── Build Outputs ────────────────────────────────────────────────────────────
 dist
+.output
 tmp
 out-tsc
 *.tsbuildinfo
+build/
+
+# ─── Dependencies ─────────────────────────────────────────────────────────────
+node_modules/
+
+# ─── Environment & Secrets ────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+.dev.vars
+
+# ─── Platform-specific Cache & Config ─────────────────────────────────────────
+.cache/
+.local/
+.wrangler/
+.tanstack/
+.migration-backup/
 .expo
 .expo-shared
 
-# dependencies
-node_modules
+# ─── Replit ───────────────────────────────────────────────────────────────────
+.replit
+.replitignore
 
-# IDEs and editors
-/.idea
+# ─── IDEs ─────────────────────────────────────────────────────────────────────
+.idea/
 .project
 .classpath
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
-
-# IDE - VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# misc
+# ─── System Files ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+npm-debug.log*
+yarn-error.log
+*.log
+
+# ─── Package locks (keep only pnpm) ──────────────────────────────────────────
+package-lock.json
+yarn.lock
+
+# ─── Miscellaneous ────────────────────────────────────────────────────────────
 /.sass-cache
 /connect.lock
 /coverage
-/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
 /typings
-
-# System Files
-.DS_Store
-Thumbs.db
-
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
-
-# Replit
-.cache/
-.local/
-
-# Package locks from other package managers
-package-lock.json
-yarn.lock
