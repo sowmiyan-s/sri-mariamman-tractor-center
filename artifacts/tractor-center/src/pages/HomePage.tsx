@@ -476,7 +476,7 @@ function About({ L }: { L: typeof t.en }) {
         </div>
 
         {/* Wix Studio Grid Right - Narrative & Bold Outlines */}
-        <div className="lg:col-span-7 flex flex-col justify-center lg:pl-10">
+        <div className="lg:col-span-7 flex flex-col justify-center bg-white/90 backdrop-blur-md border-4 border-soil p-8 sm:p-12 shadow-2xl relative">
           <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
             // {L.aboutKicker}
           </p>
