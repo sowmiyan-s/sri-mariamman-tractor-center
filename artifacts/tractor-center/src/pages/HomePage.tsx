@@ -31,7 +31,7 @@ const t = {
     nav: ["About", "Services", "Equipment", "Why Us", "Contact"],
     badge: "ESTABLISHED 25+ YEARS · NAMAKKAL",
     h1a: "Sri Mariamman",
-    h1b: "Tractor",
+    h1b: "Tractor Center",
     h1c: "Center",
     sub: "Sales · Brokerage · Service · Equipment · Spare Parts. Built for farmers who demand reliability.",
     callNow: "Call Now",
@@ -94,7 +94,7 @@ const t = {
     nav: ["எங்களைப் பற்றி", "சேவைகள்", "உபகரணங்கள்", "ஏன் நாங்கள்", "தொடர்பு"],
     badge: "25+ ஆண்டுகள் அனுபவம் · நாமக்கல்",
     h1a: "ஸ்ரீ மாரியம்மன்",
-    h1b: "டிராக்டர்",
+    h1b: "டிராக்டர் சென்டர்",
     h1c: "சென்டர்",
     sub: "விற்பனை · தரகு · சேவை · விவசாய உபகரணங்கள் · உதிரி பாகங்கள். நம்பகத்தன்மையை விரும்பும் விவசாயிகளுக்காக.",
     callNow: "அழைக்கவும்",
@@ -253,11 +253,10 @@ function Hero({ L }: { L: typeof t.en }) {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-black text-soil leading-[0.95] text-balance text-3xl xs:text-4xl sm:text-6xl lg:text-7xl tracking-tight uppercase"
+          className="font-display font-black text-soil leading-[1.05] text-balance text-3xl xs:text-4xl sm:text-6xl lg:text-7xl tracking-tight uppercase"
         >
           {L.h1a} <br />
-          <span className="text-primary">{L.h1b}</span> <br />
-          {L.h1c}
+          <span className="text-primary">{L.h1b}</span>
         </motion.h1>
 
         <motion.div
@@ -267,8 +266,13 @@ function Hero({ L }: { L: typeof t.en }) {
           className="mt-10 max-w-4xl"
         >
           <p
-            className="font-serif italic text-2xl md:text-3xl text-rust/80 font-medium mb-8"
-            style={{ fontFamily: "var(--font-tamil)" }}
+            className="font-serif italic text-2xl md:text-3xl text-rust font-black mb-8 px-4"
+            style={{
+              fontFamily: "var(--font-tamil)",
+              WebkitTextStroke: "1.5px white",
+              paintOrder: "stroke fill",
+              textShadow: "0 2px 4px rgba(255,255,255,0.4)",
+            }}
           >
             ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
           </p>
@@ -315,7 +319,7 @@ function Hero({ L }: { L: typeof t.en }) {
         </div>
       </motion.div>
 
-      <div className="absolute bottom-0 w-full">
+      <div className="w-full mt-16 z-20">
         <MarqueeStrip />
       </div>
     </section>
@@ -442,12 +446,12 @@ function Equipment({ L }: { L: typeof t.en }) {
   const imgs = [eqTractor575, eqTractor475, eqRotavator, eqTanker];
   return (
     <section id="equipment" className="relative mx-auto max-w-7xl px-4 sm:px-5 lg:px-10 py-16 sm:py-24 md:py-32">
-      <div className="flex items-end justify-between flex-wrap gap-6 sm:gap-10 mb-10 sm:mb-16">
+      <div className="flex flex-col items-center text-center sm:text-left sm:flex-row sm:items-end sm:justify-between gap-6 sm:gap-10 mb-10 sm:mb-16">
         <div className="max-w-lg">
           <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-6">
             {L.equipKicker}
           </p>
-          <h2 className="font-display font-black text-4xl lg:text-6xl text-soil tracking-tight leading-[1] uppercase">
+          <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-6xl text-soil tracking-tight leading-[1] uppercase">
             {L.equipTitle}
           </h2>
         </div>
@@ -628,17 +632,17 @@ function Contact({ L }: { L: typeof t.en }) {
 
 function Footer({ L }: { L: typeof t.en }) {
   return (
-    <footer className="py-16 border-t border-black/5">
+    <footer className="py-16 bg-soil text-white border-t border-white/10 relative z-10">
       <div className="mx-auto max-w-7xl px-5 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-10">
         <div className="flex flex-col items-center md:items-start text-center md:text-left">
-          <div className="font-display font-black text-soil text-xl tracking-tighter uppercase leading-none mb-1">
+          <div className="font-display font-black text-white text-xl tracking-tighter uppercase leading-none mb-1">
             Sri Mariamman
           </div>
           <div className="text-[8px] tracking-[0.5em] uppercase text-primary font-black">
             Tractor Center
           </div>
         </div>
-        <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-[8px] font-black uppercase tracking-[0.3em] text-soil/30">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-[8px] font-black uppercase tracking-[0.3em] text-white/50">
           {L.nav.map((label, i) => (
             <a
               key={i}
@@ -649,7 +653,7 @@ function Footer({ L }: { L: typeof t.en }) {
             </a>
           ))}
         </div>
-        <div className="text-[8px] font-black uppercase tracking-[0.3em] text-soil/10">
+        <div className="text-[8px] font-black uppercase tracking-[0.3em] text-white/30">
           © {new Date().getFullYear()}
         </div>
       </div>
