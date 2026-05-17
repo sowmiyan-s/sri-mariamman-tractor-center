@@ -301,89 +301,100 @@ function Hero({ L }: { L: typeof t.en }) {
 
         {/* Wix Studio Column 2: Heavy Avant-Garde Overlapping Title Grid */}
         <div className="lg:col-span-11 flex flex-col items-start text-left pl-0 lg:pl-10">
-          {/* technical badge box */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="inline-flex items-center gap-3 border-2 border-soil px-3.5 py-1.5 rounded-sm font-mono text-[9px] sm:text-[10px] font-black tracking-[0.3em] uppercase text-soil mb-8 shadow-sm bg-white"
-          >
-            <span className="h-1.5 w-1.5 bg-primary animate-ping" />
-            {L.badge}
-          </motion.div>
+          
+          {/* Industrial Blueprint Glass Panel for 100% text legibility */}
+          <div className="w-full max-w-2xl border-4 border-soil bg-soil/90 backdrop-blur-2xl p-6 sm:p-10 shadow-2xl relative">
+            {/* Structural corner visual braces */}
+            <div className="absolute -top-2 -left-2 h-3.5 w-3.5 bg-primary" />
+            <div className="absolute -top-2 -right-2 h-3.5 w-3.5 bg-primary" />
+            <div className="absolute -bottom-2 -left-2 h-3.5 w-3.5 bg-primary" />
+            <div className="absolute -bottom-2 -right-2 h-3.5 w-3.5 bg-primary" />
 
-          {/* Double-Stroked Master Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="font-display font-black text-soil leading-[0.95] text-balance text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter uppercase"
-          >
-            <span className="text-stroke-bold-soil text-white drop-shadow-sm block mb-1">
-              {L.h1a}
-            </span>
-            <span className="text-primary block">{L.h1b}</span>
-          </motion.h1>
-
-          {/* Overlapping Floating Tamil Label */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 }}
-            className="mt-6 border-l-4 border-primary pl-4 py-1"
-          >
-            <p
-              className="font-serif italic text-lg sm:text-2xl md:text-3xl text-soil font-black tracking-tight"
-              style={{ fontFamily: "var(--font-tamil)" }}
+            {/* technical badge box */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="inline-flex items-center gap-3 border border-white/20 px-3.5 py-1.5 rounded-none font-mono text-[9px] sm:text-[10px] font-black tracking-[0.3em] uppercase text-white mb-6 bg-white/10"
             >
-              ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
-            </p>
-          </motion.div>
+              <span className="h-1.5 w-1.5 bg-primary animate-ping" />
+              {L.badge}
+            </motion.div>
 
-          {/* Clean Outline Stroke Narrative */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mt-6 text-xs sm:text-sm md:text-base text-soil/95 max-w-xl font-mono leading-relaxed"
-          >
-            {L.sub}
-          </motion.p>
+            {/* Double-Stroked Master Title */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="font-display font-black text-white leading-[0.95] text-balance text-3xl xs:text-4xl sm:text-6xl md:text-7xl tracking-tighter uppercase"
+            >
+              <span className="text-stroke-bold-white text-transparent block mb-1">
+                {L.h1a}
+              </span>
+              <span className="text-primary block">{L.h1b}</span>
+            </motion.h1>
 
-          {/* Wix Studio Action Console Buttons */}
-          <div className="mt-10 flex flex-wrap gap-4 items-center">
-            <MagneticButton>
-              <a
-                href={`tel:+91${PHONE_1}`}
-                className="group flex items-center gap-4 rounded-none border-2 border-soil bg-soil text-white px-6 py-4 text-xs font-mono font-black uppercase tracking-[0.2em] hover:bg-primary hover:border-primary transition-all duration-500 shadow-xl"
+            {/* Overlapping Floating Tamil Label */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+              className="mt-6 border-l-4 border-primary pl-4 py-1"
+            >
+              <p
+                className="font-serif italic text-lg sm:text-2xl md:text-3xl text-white font-black tracking-tight"
+                style={{ fontFamily: "var(--font-tamil)" }}
               >
-                <Phone className="h-4 w-4" /> {L.callNow}
-                <ArrowUpRight className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </a>
-            </MagneticButton>
-            <MagneticButton>
-              <a
-                href={WA}
-                target="_blank"
-                rel="noopener"
-                className="group flex items-center gap-4 rounded-none border-2 border-soil bg-white text-soil px-6 py-4 text-xs font-mono font-black uppercase tracking-[0.2em] hover:bg-soil hover:text-white transition-all duration-500 shadow-md"
-              >
-                <WhatsAppIcon className="h-4 w-4 text-primary" /> {L.whatsapp}
-              </a>
-            </MagneticButton>
-          </div>
+                ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
+              </p>
+            </motion.div>
 
-          {/* Wix Studio Stats Banner - Horizontal Spec Lines */}
-          <div className="mt-16 w-full grid grid-cols-3 gap-4 border-t-2 border-soil/10 pt-10">
-            {L.stats.map(([k, v]) => (
-              <div key={v} className="border-l-2 border-primary/45 pl-4 sm:pl-6">
-                <div className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-soil tracking-tighter leading-none">
-                  {k}
+            {/* Clean Outline Stroke Narrative */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mt-6 text-xs sm:text-sm md:text-base text-white/90 max-w-xl font-mono leading-relaxed"
+            >
+              {L.sub}
+            </motion.p>
+
+            {/* Wix Studio Action Console Buttons */}
+            <div className="mt-8 flex flex-wrap gap-4 items-center">
+              <MagneticButton>
+                <a
+                  href={`tel:+91${PHONE_1}`}
+                  className="group flex items-center gap-4 rounded-none border-2 border-white bg-white text-soil px-5 py-3.5 text-xs font-mono font-black uppercase tracking-[0.2em] hover:bg-primary hover:text-white hover:border-primary transition-all duration-500 shadow-xl"
+                >
+                  <Phone className="h-4 w-4" /> {L.callNow}
+                  <ArrowUpRight className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </a>
+              </MagneticButton>
+              <MagneticButton>
+                <a
+                  href={WA}
+                  target="_blank"
+                  rel="noopener"
+                  className="group flex items-center gap-4 rounded-none border-2 border-white/20 bg-white/10 text-white px-5 py-3.5 text-xs font-mono font-black uppercase tracking-[0.2em] hover:bg-white hover:text-soil transition-all duration-500 shadow-md"
+                >
+                  <WhatsAppIcon className="h-4 w-4 text-primary" /> {L.whatsapp}
+                </a>
+              </MagneticButton>
+            </div>
+
+            {/* Wix Studio Stats Banner - Horizontal Spec Lines inside the readable container */}
+            <div className="mt-10 w-full grid grid-cols-3 gap-4 border-t border-white/15 pt-8">
+              {L.stats.map(([k, v]) => (
+                <div key={v} className="border-l-2 border-primary pl-4">
+                  <div className="font-display text-2xl sm:text-4xl font-black text-white tracking-tighter leading-none">
+                    {k}
+                  </div>
+                  <div className="text-[8px] sm:text-[9px] text-white/60 font-mono font-black uppercase tracking-[0.2em] mt-1.5">
+                    {v}
+                  </div>
                 </div>
-                <div className="text-[8px] sm:text-[9px] md:text-[10px] text-soil/60 font-mono font-black uppercase tracking-[0.2em] mt-1.5">
-                  {v}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
           </div>
         </div>
       </motion.div>
