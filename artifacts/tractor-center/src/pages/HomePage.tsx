@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, Suspense } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   Phone,
   MapPin,
@@ -12,6 +12,7 @@ import {
   Tractor,
   Quote,
   Star,
+  Clock,
 } from "lucide-react";
 import eqRotavator from "@/assets/eq-rotavator.jpg";
 import eqTanker from "@/assets/eq-tanker.jpg";
@@ -167,7 +168,7 @@ export default function HomePage() {
   const L = t[lang];
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden">
+    <main className="relative min-h-screen overflow-x-hidden bg-background selection:bg-primary selection:text-white">
       <Scrollytelling />
       <Nav L={L} lang={lang} setLang={setLang} />
       <Hero L={L} />
@@ -186,39 +187,39 @@ export default function HomePage() {
 
 function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: Lang) => void }) {
   return (
-    <header className="fixed top-4 md:top-8 inset-x-0 z-[100] flex justify-center px-2 sm:px-4 md:px-5 pointer-events-none">
-      <div className="pointer-events-auto flex items-center gap-2.5 sm:gap-4 md:gap-8 rounded-full border border-black/5 bg-white/70 backdrop-blur-3xl px-4 sm:px-6 md:px-10 py-2 sm:py-3 md:py-4 shadow-xl transition-all duration-500 hover:border-primary/20">
-        <nav className="flex items-center gap-2.5 sm:gap-4 md:gap-8 text-[8px] sm:text-[10px] md:text-[11px] font-black uppercase tracking-[0.05em] sm:tracking-[0.2em] text-soil/80">
+    <header className="fixed top-4 md:top-8 inset-x-0 z-[100] flex justify-center px-4 pointer-events-none">
+      <div className="pointer-events-auto flex items-center gap-3 sm:gap-6 md:gap-10 rounded-full border-2 border-soil bg-white/80 backdrop-blur-3xl px-4 sm:px-8 py-2.5 sm:py-3.5 shadow-2xl transition-all duration-500 hover:shadow-primary/5">
+        <nav className="flex items-center gap-3 sm:gap-6 md:gap-8 text-[9px] sm:text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] text-soil">
           {L.nav.map((label, i) => {
             const slugs = ["about", "services", "equipment", "why-us", "contact"];
             return (
               <a
                 key={i}
                 href={`#${slugs[i]}`}
-                className="hover:text-primary hover:scale-105 transition-all duration-300 relative px-1 py-0.5"
+                className="hover:text-primary hover:scale-105 transition-all duration-300 relative px-1 py-0.5 border-b-2 border-transparent hover:border-primary"
               >
                 {label}
               </a>
             );
           })}
         </nav>
-        <div className="h-4 w-px bg-soil/20 hidden xs:block" />
-        <div className="flex items-center gap-2.5 sm:gap-4 md:gap-6">
+        <div className="h-5 w-0.5 bg-soil/20" />
+        <div className="flex items-center gap-3 sm:gap-5">
           <button
             onClick={() => setLang(lang === "en" ? "ta" : "en")}
-            className="flex items-center gap-1 sm:gap-2 text-[9px] sm:text-[11px] font-black uppercase tracking-widest text-soil/80 hover:text-primary transition-all duration-300"
+            className="flex items-center gap-1 sm:gap-1.5 text-[10px] font-mono font-black uppercase tracking-widest text-soil hover:text-primary transition-all duration-300"
             aria-label="Toggle language"
           >
             <span className={lang === "ta" ? "text-primary" : "text-soil/30"}>தமிழ்</span>
-            <span className="text-soil/10">/</span>
+            <span className="text-soil/15">|</span>
             <span className={lang === "en" ? "text-primary" : "text-soil/30"}>ENG</span>
           </button>
           <MagneticButton>
             <a
               href={`tel:+91${PHONE_1}`}
-              className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full bg-primary text-white grid place-items-center hover:scale-110 transition shadow-lg shadow-primary/20"
+              className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-primary text-white grid place-items-center hover:scale-110 transition shadow-lg shadow-primary/20"
             >
-              <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5" />
+              <Phone className="h-3.5 w-3.5" />
             </a>
           </MagneticButton>
         </div>
@@ -230,109 +231,117 @@ function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: La
 function Hero({ L }: { L: typeof t.en }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <section
       id="top"
       ref={ref}
-      className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-16 overflow-hidden px-5"
+      className="relative min-h-screen flex flex-col justify-center pt-32 pb-16 overflow-hidden px-4 md:px-10"
     >
-
       <motion.div
         style={{ opacity }}
-        className="relative z-10 max-w-6xl w-full text-center flex flex-col items-center"
+        className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-8 items-center"
       >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-4 text-[10px] md:text-[11px] font-black tracking-[0.5em] uppercase text-soil/70 mb-10"
-        >
-          <span className="h-px w-6 md:w-10 bg-soil/30" />
-          {L.badge}
-          <span className="h-px w-6 md:w-10 bg-soil/30" />
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-black text-soil leading-[1.05] text-balance text-3xl xs:text-4xl sm:text-6xl lg:text-7xl tracking-tight uppercase"
-          style={{
-            WebkitTextStroke: "2px white",
-            paintOrder: "stroke fill",
-          }}
-        >
-          {L.h1a} <br />
-          <span className="text-primary">{L.h1b}</span>
-        </motion.h1>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="mt-10 max-w-4xl"
-        >
-          <p
-            className="font-serif italic text-2xl md:text-3xl text-rust font-black mb-8 px-4"
-            style={{
-              fontFamily: "var(--font-tamil)",
-              WebkitTextStroke: "1.5px white",
-              paintOrder: "stroke fill",
-            }}
-          >
-            ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
-          </p>
-          <p
-            className="text-base md:text-lg text-soil/80 font-bold leading-tight max-w-xl mx-auto tracking-wide"
-            style={{
-              WebkitTextStroke: "0.5px white",
-              paintOrder: "stroke fill",
-            }}
-          >
-            {L.sub}
-          </p>
-        </motion.div>
-
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <MagneticButton>
-            <a
-              href={`tel:+91${PHONE_1}`}
-              className="group inline-flex items-center gap-3 rounded-full bg-soil text-white pl-6 pr-2 py-2 text-base font-bold hover:bg-primary transition-all duration-500 shadow-lg"
-            >
-              <Phone className="h-4 w-4" /> {L.callNow}
-              <span className="ml-2 grid h-8 w-8 place-items-center rounded-full bg-primary text-white group-hover:rotate-45 transition">
-                <ArrowUpRight className="h-4 w-4" />
-              </span>
-            </a>
-          </MagneticButton>
-          <MagneticButton>
-            <a
-              href={WA}
-              target="_blank"
-              rel="noopener"
-              className="inline-flex items-center gap-3 rounded-full border border-black/5 bg-white/30 backdrop-blur-2xl px-6 py-3 text-base font-bold text-soil hover:border-primary transition shadow-md"
-            >
-              <WhatsAppIcon className="h-4 w-4 text-primary" /> {L.whatsapp}
-            </a>
-          </MagneticButton>
+        {/* Wix Studio Column 1: Vertical Graphic Running Down Left Side */}
+        <div className="hidden lg:block lg:col-span-1 border-r-2 border-soil/10 h-[500px] relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-270 origin-center whitespace-nowrap">
+            <span className="font-mono text-[9px] font-black uppercase tracking-[0.6em] text-soil/30">
+              NAMAKKAL · TAMIL NADU · MACHINERY HUB
+            </span>
+          </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-3 gap-8 md:gap-16">
-          {L.stats.map(([k, v]) => (
-            <div key={v} className="text-center">
-              <div className="font-display text-3xl md:text-4xl font-extrabold text-soil tracking-tighter">
-                {k}
+        {/* Wix Studio Column 2: Heavy Avant-Garde Overlapping Title Grid */}
+        <div className="lg:col-span-11 flex flex-col items-start text-left pl-0 lg:pl-10">
+          {/* technical badge box */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="inline-flex items-center gap-3 border-2 border-soil px-3.5 py-1.5 rounded-sm font-mono text-[9px] sm:text-[10px] font-black tracking-[0.3em] uppercase text-soil mb-8 shadow-sm bg-white"
+          >
+            <span className="h-1.5 w-1.5 bg-primary animate-ping" />
+            {L.badge}
+          </motion.div>
+
+          {/* Double-Stroked Master Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="font-display font-black text-soil leading-[0.95] text-balance text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter uppercase"
+          >
+            <span className="text-stroke-bold-soil text-white drop-shadow-sm block mb-1">
+              {L.h1a}
+            </span>
+            <span className="text-primary block">{L.h1b}</span>
+          </motion.h1>
+
+          {/* Overlapping Floating Tamil Label */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+            className="mt-6 border-l-4 border-primary pl-4 py-1"
+          >
+            <p
+              className="font-serif italic text-2xl sm:text-3xl text-soil font-black tracking-tight"
+              style={{ fontFamily: "var(--font-tamil)" }}
+            >
+              ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
+            </p>
+          </motion.div>
+
+          {/* Clean Outline Stroke Narrative */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="mt-8 text-sm sm:text-base md:text-lg text-soil/95 max-w-xl font-mono leading-relaxed"
+          >
+            {L.sub}
+          </motion.p>
+
+          {/* Wix Studio Action Console Buttons */}
+          <div className="mt-10 flex flex-wrap gap-4 items-center">
+            <MagneticButton>
+              <a
+                href={`tel:+91${PHONE_1}`}
+                className="group flex items-center gap-4 rounded-none border-2 border-soil bg-soil text-white px-6 py-4 text-xs font-mono font-black uppercase tracking-[0.2em] hover:bg-primary hover:border-primary transition-all duration-500 shadow-xl"
+              >
+                <Phone className="h-4 w-4" /> {L.callNow}
+                <ArrowUpRight className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </a>
+            </MagneticButton>
+            <MagneticButton>
+              <a
+                href={WA}
+                target="_blank"
+                rel="noopener"
+                className="group flex items-center gap-4 rounded-none border-2 border-soil bg-white text-soil px-6 py-4 text-xs font-mono font-black uppercase tracking-[0.2em] hover:bg-soil hover:text-white transition-all duration-500 shadow-md"
+              >
+                <WhatsAppIcon className="h-4 w-4 text-primary" /> {L.whatsapp}
+              </a>
+            </MagneticButton>
+          </div>
+
+          {/* Wix Studio Stats Banner - Horizontal Spec Lines */}
+          <div className="mt-16 w-full grid grid-cols-3 gap-4 border-t-2 border-soil/10 pt-10">
+            {L.stats.map(([k, v]) => (
+              <div key={v} className="border-l-2 border-primary/45 pl-4 sm:pl-6">
+                <div className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-soil tracking-tighter leading-none">
+                  {k}
+                </div>
+                <div className="text-[8px] sm:text-[9px] md:text-[10px] text-soil/60 font-mono font-black uppercase tracking-[0.2em] mt-1.5">
+                  {v}
+                </div>
               </div>
-              <div className="text-[9px] md:text-[10px] text-soil/75 font-black uppercase tracking-[0.2em] mt-2 leading-none">
-                {v}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </motion.div>
 
+      {/* Infinite Horizontal Spec Belt */}
       <div className="w-full mt-16 z-20">
         <MarqueeStrip />
       </div>
@@ -346,11 +355,13 @@ function LocationStrip({ L }: { L: typeof t.en }) {
       href={MAPS}
       target="_blank"
       rel="noopener"
-      className="block bg-primary text-white hover:bg-soil transition duration-500 relative z-20"
+      className="block bg-primary text-white hover:bg-soil transition duration-500 relative z-20 border-y-2 border-soil"
     >
-      <div className="mx-auto max-w-7xl px-5 lg:px-10 py-5 flex items-center justify-center gap-5 text-center">
-        <MapPin className="h-4 w-4 flex-shrink-0" />
-        <p className="text-[10px] font-black uppercase tracking-[0.35em]">{L.locStrip}</p>
+      <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-center gap-4 text-center">
+        <MapPin className="h-4 w-4 flex-shrink-0 animate-bounce" />
+        <p className="text-[9px] sm:text-[10px] font-mono font-black uppercase tracking-[0.25em]">
+          {L.locStrip}
+        </p>
         <ArrowUpRight className="h-4 w-4 flex-shrink-0" />
       </div>
     </a>
@@ -368,17 +379,20 @@ function MarqueeStrip() {
     "Water Tankers",
     "Engine Repair",
   ];
-  const row = [...items, ...items];
   return (
-    <div className="border-y border-black/5 bg-white/5 backdrop-blur-md text-soil py-6 overflow-hidden">
-      <div className="flex gap-16 animate-marquee whitespace-nowrap">
-        {row.map((label, i) => (
-          <span
-            key={i}
-            className="inline-flex items-center gap-5 font-display font-bold text-2xl tracking-tighter uppercase opacity-30 hover:opacity-100 transition-opacity"
-          >
-            <Sprout className="h-5 w-5 text-primary" /> {label}
-          </span>
+    <div className="relative w-full overflow-hidden bg-white border-y-2 border-soil py-4 select-none">
+      <div className="flex w-[200%] animate-marquee">
+        {[...Array(4)].map((_, groupIdx) => (
+          <div key={groupIdx} className="flex justify-around w-1/4">
+            {items.map((item) => (
+              <span
+                key={item}
+                className="font-mono text-[9px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-soil/80 flex items-center gap-4"
+              >
+                <span className="h-2 w-2 rounded-full bg-primary" /> {item}
+              </span>
+            ))}
+          </div>
         ))}
       </div>
     </div>
@@ -387,51 +401,73 @@ function MarqueeStrip() {
 
 function About({ L }: { L: typeof t.en }) {
   return (
-    <section id="about" className="relative mx-auto max-w-7xl px-4 sm:px-5 lg:px-10 py-16 sm:py-24 md:py-32">
-      <div className="glass rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 md:p-16">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-          
-          {/* Left Column: Bold Asymmetric Typography Frame */}
-          <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left w-full">
-            <div className="relative p-6 sm:p-8 rounded-[1.5rem] bg-soil/5 border border-soil/10 w-full overflow-hidden group hover:border-primary/20 transition-all duration-700">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-colors duration-700" />
-              <span className="font-mono text-[10px] font-black uppercase text-primary tracking-[0.3em] block mb-4">
-                ESTABLISHED 2001
+    <section id="about" className="relative mx-auto max-w-7xl px-4 md:px-10 py-20 sm:py-32">
+      <div className="grid lg:grid-cols-12 gap-12 items-start">
+        {/* Wix Studio Grid Left - Massive Physical Trust Box */}
+        <div className="lg:col-span-5 relative">
+          <div className="border-4 border-soil rounded-none p-6 sm:p-10 bg-white shadow-2xl relative overflow-hidden group">
+            {/* Background pattern grid */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:24px_24px] opacity-[0.03]" />
+            
+            <div className="relative z-10">
+              <span className="font-mono text-[9px] font-black tracking-[0.4em] uppercase text-primary mb-6 block">
+                [ CREDENTIAL ]
               </span>
-              <h3 className="font-display font-black text-6xl xs:text-7xl lg:text-8xl leading-none text-soil tracking-tighter uppercase mb-6">
-                25+ <br />
-                <span className="text-primary text-stroke-bold-primary text-4xl xs:text-5xl lg:text-6xl">YEARS</span>
-              </h3>
-              <p className="font-mono text-[9px] xs:text-[10px] text-soil/60 uppercase tracking-[0.2em] leading-relaxed">
-                Delivering high-performance agricultural excellence to farmers across Tamil Nadu.
+              <div className="font-display font-black text-soil text-7xl sm:text-8xl md:text-9xl leading-none tracking-tighter mb-4">
+                25+
+              </div>
+              <div className="font-mono text-[10px] sm:text-11px font-black tracking-[0.45em] uppercase text-soil mb-6 border-b-2 border-soil/15 pb-6">
+                YEARS OF EXCELLENCE
+              </div>
+              <p className="text-xs sm:text-sm font-mono text-soil/80 leading-relaxed mb-8">
+                Providing local tractor dealerships, trustworthy pre-owned machinery brokerage, and professional engine mechanics inside Tamil Nadu.
+              </p>
+              
+              {/* Wix Studio Physical Stamp Tags */}
+              <div className="flex flex-wrap gap-2 pt-4">
+                {L.aboutPills.map((pill) => (
+                  <span
+                    key={pill}
+                    className="font-mono text-[8px] sm:text-[9px] font-black uppercase tracking-wider bg-soil text-white px-2.5 py-1"
+                  >
+                    #{pill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Wix Studio Grid Right - Narrative & Bold Outlines */}
+        <div className="lg:col-span-7 flex flex-col justify-center lg:pl-10">
+          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
+            // {L.aboutKicker}
+          </p>
+          <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-7xl text-soil tracking-tighter leading-[1] uppercase mb-8">
+            {L.aboutTitle}
+          </h2>
+          <p className="font-serif italic text-xl sm:text-2xl text-soil/85 leading-snug mb-8 pl-4 border-l-4 border-primary">
+            "{L.aboutBody}"
+          </p>
+          
+          <div className="grid sm:grid-cols-2 gap-6 mt-6">
+            <div className="border-t-2 border-soil pt-4">
+              <div className="font-mono text-[10px] font-black uppercase tracking-widest text-primary mb-2">
+                01 / LOCAL ORIGIN
+              </div>
+              <p className="text-xs text-soil/75 font-mono">
+                Serving the agriculture lands of Namakkal and surrounding districts since 1999.
+              </p>
+            </div>
+            <div className="border-t-2 border-soil pt-4">
+              <div className="font-mono text-[10px] font-black uppercase tracking-widest text-primary mb-2">
+                02 / PRE-OWNED BROKERAGE
+              </div>
+              <p className="text-xs text-soil/75 font-mono">
+                Fair valuation, transparency, and verified sellers across state lines.
               </p>
             </div>
           </div>
-          
-          {/* Right Column: Narrative and Pills */}
-          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-6">
-              {L.aboutKicker}
-            </p>
-            <h2 className="font-serif font-black text-3xl sm:text-5xl lg:text-6xl text-soil tracking-tight leading-[1.1] mb-8 italic">
-              {L.aboutTitle}
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-soil/85 font-medium leading-relaxed mb-10 tracking-wide">
-              {L.aboutBody}
-            </p>
-            <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4">
-              {L.aboutPills.map((p) => (
-                <div
-                  key={p}
-                  className="font-mono text-[9px] xs:text-[10px] font-bold uppercase tracking-[0.15em] text-soil bg-soil/5 border border-soil/10 hover:border-primary/30 px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-2 group cursor-default"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary/40 group-hover:bg-primary group-hover:scale-110 transition-all duration-300" />
-                  {p}
-                </div>
-              ))}
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
@@ -439,41 +475,63 @@ function About({ L }: { L: typeof t.en }) {
 }
 
 function Services({ L }: { L: typeof t.en }) {
-  const icons = [Tractor, Handshake, Wrench, Cog, Sprout, Truck];
   return (
-    <section id="services" className="relative py-16 sm:py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-10">
-        <div className="text-center mb-12 sm:mb-20">
-          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-6">
-            {L.servicesKicker}
-          </p>
-          <h2 className="font-sans font-black text-3xl sm:text-4xl lg:text-6xl leading-[1] tracking-tight text-soil uppercase">
-            {L.servicesTitle}
-          </h2>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {L.services.map(([title, desc], i) => {
-            const Icon = icons[i];
-            return (
-              <motion.div
+    <section id="services" className="relative bg-white border-y-2 border-soil py-20 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 md:px-10">
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          
+          {/* Wix Studio Sticky Blueprint Title Panel */}
+          <div className="lg:col-span-5 lg:sticky lg:top-32">
+            <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
+              // {L.servicesKicker}
+            </p>
+            <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-soil tracking-tighter leading-[1] uppercase mb-6">
+              {L.servicesTitle}
+            </h2>
+            <div className="w-full aspect-[4/3] border-2 border-soil/15 p-4 rounded-none bg-background relative overflow-hidden hidden sm:block">
+              {/* Technical schematic box design */}
+              <div className="absolute inset-0 bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:16px_16px] opacity-[0.04]" />
+              <div className="absolute inset-6 border border-dashed border-soil/20 grid place-items-center">
+                <Tractor className="h-16 w-16 text-primary opacity-20 animate-pulse" />
+                <div className="absolute bottom-2 left-2 font-mono text-[8px] text-soil/40">[ SCHEMATIC_BOARD_V1 ]</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Wix Studio Interactive Specs List (Accordions/Blueprints Grid) */}
+          <div className="lg:col-span-7 flex flex-col border-t-2 border-soil">
+            {L.services.map(([title, desc], i) => (
+              <div
                 key={title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.04 }}
-                whileHover={{ y: -6, scale: 1.02 }}
-                className="glass group p-6 sm:p-8 rounded-[1.5rem] flex flex-col items-start text-left hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
+                className="group py-6 border-b-2 border-soil/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 hover:bg-background px-4 transition-all duration-300 relative overflow-hidden"
               >
-                <div className="h-12 w-12 rounded-xl bg-soil/5 text-soil group-hover:bg-primary group-hover:text-white transition-all duration-500 grid place-items-center mb-6">
-                  <Icon className="h-6 w-6" />
+                <div className="flex items-start gap-4">
+                  <span className="font-mono text-xs text-primary font-black pt-1">
+                    [{String(i + 1).padStart(2, "0")}]
+                  </span>
+                  <div>
+                    <h3 className="font-display text-lg sm:text-xl font-black text-soil uppercase group-hover:text-primary transition-colors">
+                      {title}
+                    </h3>
+                    <p className="text-xs text-soil/75 font-mono max-w-lg mt-1">
+                      {desc}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="font-sans text-xl font-black mb-3 tracking-tight uppercase text-soil">
-                  {title}
-                </h3>
-                <p className="text-sm text-soil/75 font-medium leading-relaxed">{desc}</p>
-              </motion.div>
-            );
-          })}
+                <div className="flex-shrink-0 self-end sm:self-center">
+                  <a
+                    href={WA}
+                    target="_blank"
+                    rel="noopener"
+                    className="h-9 w-9 rounded-full border-2 border-soil group-hover:border-primary group-hover:bg-primary group-hover:text-white flex items-center justify-center transition-all duration-500"
+                  >
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>
@@ -482,14 +540,25 @@ function Services({ L }: { L: typeof t.en }) {
 
 function Equipment({ L }: { L: typeof t.en }) {
   const imgs = [eqTractor575, eqTractor475, eqRotavator, eqTanker];
+  
+  // Custom Detailed Specifications for Wix Studio premium feel
+  const specs = [
+    { hp: "47 HP", cyl: "4 Cylinders", lift: "1600 KG", type: "Wetland / Haulage" },
+    { hp: "42 HP", cyl: "4 Cylinders", lift: "1500 KG", type: "Dryland / Plowing" },
+    { width: "5 / 6 Feet", blades: "36 / 42 Blades", drive: "Multi-Speed", type: "Rotary Tilling" },
+    { cap: "4000-5000 L", sheet: "Heavy MS Sheet", tires: "Heavy Duty Dual", type: "Irrigation Support" },
+  ];
+
   return (
-    <section id="equipment" className="relative mx-auto max-w-7xl px-4 sm:px-5 lg:px-10 py-16 sm:py-24 md:py-32">
-      <div className="flex flex-col items-center text-center sm:text-left sm:flex-row sm:items-end sm:justify-between gap-6 sm:gap-10 mb-10 sm:mb-16">
-        <div className="max-w-lg">
-          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-6">
-            {L.equipKicker}
+    <section id="equipment" className="relative mx-auto max-w-7xl px-4 md:px-10 py-20 sm:py-32">
+      
+      {/* Editorial Header */}
+      <div className="flex flex-col items-start lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-20">
+        <div>
+          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
+            // {L.equipKicker}
           </p>
-          <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-6xl text-soil tracking-tight leading-[1] uppercase">
+          <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-7xl text-soil tracking-tighter leading-[1] uppercase">
             {L.equipTitle}
           </h2>
         </div>
@@ -498,87 +567,153 @@ function Equipment({ L }: { L: typeof t.en }) {
             href={WA}
             target="_blank"
             rel="noopener"
-            className="h-16 w-16 rounded-full border border-black/5 grid place-items-center hover:bg-primary hover:text-white transition-all duration-500 font-bold uppercase text-[8px] tracking-widest text-soil"
+            className="flex items-center gap-4 rounded-none border-2 border-soil px-6 py-4 text-xs font-mono font-black uppercase tracking-[0.2em] bg-soil text-white hover:bg-primary hover:border-primary transition-all duration-500"
           >
             {L.enquire}
           </a>
         </MagneticButton>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      {/* Wix Studio Dealership Grid layout */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
         {L.equipment.map(([title, tag, desc], i) => (
-          <motion.article
+          <article
             key={title}
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className="glass rounded-[1.5rem] p-3 group"
+            className="border-2 border-soil bg-white p-3 rounded-none flex flex-col group relative hover:shadow-2xl transition-all duration-500"
           >
-            <div className="relative aspect-[4/5] overflow-hidden mb-5 rounded-[1.2rem] shadow-md">
+            {/* Visual crop box */}
+            <div className="relative aspect-[4/5] overflow-hidden mb-4 border-2 border-soil">
               <img
                 src={imgs[i]}
                 alt={title}
                 loading="lazy"
-                className="w-full h-full object-cover group-hover:scale-110 transition duration-1000 grayscale group-hover:grayscale-0"
+                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 grayscale group-hover:grayscale-0 filter saturate-125"
               />
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/90 text-[8px] font-black tracking-[0.2em] font-mono text-soil text-stroke-bold-soil shadow-sm">
+              <div className="absolute top-2 left-2 px-2 py-0.5 bg-soil text-white font-mono text-[8px] font-black uppercase tracking-widest">
                 {tag}
               </div>
               
-              {/* Luxury Hover Overlay Button */}
-              <div className="absolute inset-0 bg-soil/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center pointer-events-none group-hover:pointer-events-auto">
+              {/* Wix Studio Premium Hover Overlay Button */}
+              <div className="absolute inset-0 bg-soil/25 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center pointer-events-none group-hover:pointer-events-auto">
                 <a
-                  href={`https://wa.me/91${PHONE_1}?text=${encodeURIComponent(`Hello Sri Mariamman Tractor Center, I'd like to enquire about the ${title} (${tag}) shown on your website.`)}`}
+                  href={`https://wa.me/91${PHONE_1}?text=${encodeURIComponent(`Hello Sri Mariamman Tractor Center, I am interested in inquiring about the ${title} (${tag}) shown on your website.`)}`}
                   target="_blank"
                   rel="noopener"
-                  className="font-mono text-[9px] sm:text-[10px] font-black tracking-[0.2em] uppercase bg-white text-soil hover:bg-primary hover:text-white px-4 py-2.5 rounded-full shadow-2xl scale-90 group-hover:scale-100 transition-all duration-500 flex items-center gap-1.5"
+                  className="font-mono text-[10px] font-black tracking-[0.25em] uppercase bg-white text-soil hover:bg-primary hover:text-white px-5 py-3 shadow-2xl scale-95 group-hover:scale-100 transition-all duration-500 flex items-center gap-2 border-2 border-soil"
                 >
-                  ENQUIRE <ArrowUpRight className="h-3.5 w-3.5" />
+                  ENQUIRE <ArrowUpRight className="h-4 w-4" />
                 </a>
               </div>
             </div>
-            <div className="px-3 pb-3">
-              <h3 className="font-display text-lg font-black text-soil leading-tight tracking-tight mb-2 uppercase">
-                {title}
-              </h3>
-              <p className="text-xs text-soil/75 font-medium leading-relaxed">{desc}</p>
+
+            {/* Spec Content & Tech Details Tables */}
+            <div className="px-1 flex-grow flex flex-col justify-between">
+              <div>
+                <h3 className="font-display text-lg font-black text-soil leading-tight mb-2 uppercase group-hover:text-primary transition-colors">
+                  {title}
+                </h3>
+                <p className="text-xs text-soil/75 font-mono mb-4 leading-relaxed">
+                  {desc}
+                </p>
+              </div>
+
+              {/* Physical Spec Grid Integration for that premium Wix feel */}
+              <div className="border-t-2 border-dashed border-soil/15 pt-3 mt-3">
+                <table className="w-full text-[9px] font-mono text-soil/60">
+                  <tbody>
+                    {specs[i].hp && (
+                      <tr className="border-b border-soil/5">
+                        <td className="py-1 uppercase font-bold text-soil/45">POWER:</td>
+                        <td className="py-1 text-right text-soil font-black">{specs[i].hp}</td>
+                      </tr>
+                    )}
+                    {specs[i].cyl && (
+                      <tr className="border-b border-soil/5">
+                        <td className="py-1 uppercase font-bold text-soil/45">ENGINE:</td>
+                        <td className="py-1 text-right text-soil font-black">{specs[i].cyl}</td>
+                      </tr>
+                    )}
+                    {specs[i].lift && (
+                      <tr className="border-b border-soil/5">
+                        <td className="py-1 uppercase font-bold text-soil/45">LIFT CAP:</td>
+                        <td className="py-1 text-right text-soil font-black">{specs[i].lift}</td>
+                      </tr>
+                    )}
+                    {specs[i].width && (
+                      <tr className="border-b border-soil/5">
+                        <td className="py-1 uppercase font-bold text-soil/45">WIDTH:</td>
+                        <td className="py-1 text-right text-soil font-black">{specs[i].width}</td>
+                      </tr>
+                    )}
+                    {specs[i].blades && (
+                      <tr className="border-b border-soil/5">
+                        <td className="py-1 uppercase font-bold text-soil/45">BLADES:</td>
+                        <td className="py-1 text-right text-soil font-black">{specs[i].blades}</td>
+                      </tr>
+                    )}
+                    {specs[i].cap && (
+                      <tr className="border-b border-soil/5">
+                        <td className="py-1 uppercase font-bold text-soil/45">CAPACITY:</td>
+                        <td className="py-1 text-right text-soil font-black">{specs[i].cap}</td>
+                      </tr>
+                    )}
+                    <tr className="border-b border-soil/5">
+                      <td className="py-1 uppercase font-bold text-soil/45">APPLICATION:</td>
+                      <td className="py-1 text-right text-soil font-black">{specs[i].type}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </motion.article>
+
+          </article>
         ))}
       </div>
+
     </section>
   );
 }
 
 function WhyUs({ L }: { L: typeof t.en }) {
   return (
-    <section id="why-us" className="py-16 sm:py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-10">
-        <div className="glass rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 md:p-16">
-          <div className="text-center mb-10 sm:mb-16">
-            <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-6">
-              {L.whyKicker}
-            </p>
-            <h2 className="font-mono font-bold text-3xl lg:text-5xl text-soil tracking-tighter leading-[1] uppercase">
-              {L.whyTitle}
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
-            {L.reasons.map(([title, desc]) => (
-              <div
-                key={title}
-                className="group text-left border-l border-black/5 pl-6 py-1 hover:border-primary transition-all duration-500"
-              >
-                <h3 className="font-mono text-lg font-bold mb-3 tracking-tight uppercase text-soil">
+    <section id="why-us" className="relative bg-white border-y-2 border-soil py-20 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 md:px-10">
+        
+        {/* Header block */}
+        <div className="text-left mb-16 max-w-lg">
+          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
+            // {L.whyKicker}
+          </p>
+          <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-soil tracking-tighter leading-[1] uppercase">
+            {L.whyTitle}
+          </h2>
+        </div>
+
+        {/* Wix Studio Industrial Number Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {L.reasons.map(([title, desc], i) => (
+            <div
+              key={title}
+              className="group border-2 border-soil bg-background p-6 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col justify-between min-h-[160px]"
+            >
+              <div className="flex justify-between items-start mb-4">
+                <span className="font-display text-4xl font-black text-soil/15 group-hover:text-primary/20 transition-colors">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="h-1.5 w-1.5 bg-primary rounded-full opacity-30 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <div>
+                <h3 className="font-display text-lg font-black text-soil uppercase mb-2 group-hover:text-primary transition-colors">
                   {title}
                 </h3>
-                <p className="text-sm text-soil/75 font-semibold leading-relaxed group-hover:text-soil transition-colors">
+                <p className="text-xs font-mono text-soil/75 leading-relaxed">
                   {desc}
                 </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
+
       </div>
     </section>
   );
@@ -586,45 +721,55 @@ function WhyUs({ L }: { L: typeof t.en }) {
 
 function Testimonials({ L }: { L: typeof t.en }) {
   return (
-    <section className="py-16 sm:py-24 md:py-32 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-10">
-        <div className="mb-12 sm:mb-20 text-center md:text-left">
-          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-6">
-            {L.voiceKicker}
+    <section className="py-20 sm:py-32 relative">
+      <div className="mx-auto max-w-7xl px-4 md:px-10">
+        
+        {/* Editorial Heading */}
+        <div className="mb-16 text-left">
+          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
+            // {L.voiceKicker}
           </p>
-          <h2 className="font-serif font-black text-3xl sm:text-4xl lg:text-6xl tracking-tight leading-[1] italic text-soil">
+          <h2 className="font-serif italic text-3xl sm:text-5xl lg:text-7xl font-black text-soil tracking-tight leading-[1]">
             {L.voiceTitle}
           </h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
+
+        {/* Technical Rated Cards Grid */}
+        <div className="grid md:grid-cols-3 gap-8">
           {L.testimonials.map(([q, n, r], i) => (
             <div
               key={i}
-              className="glass p-6 sm:p-10 rounded-[1.5rem] sm:rounded-[2rem] group hover:border-primary/20 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1"
+              className="border-2 border-soil bg-white p-6 sm:p-10 flex flex-col justify-between min-h-[300px] hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 relative"
             >
-              <div className="flex justify-between items-start mb-8">
-                <Quote className="h-8 w-8 text-primary opacity-20 group-hover:scale-110 transition-transform duration-500" />
+              {/* Gold Stars Board */}
+              <div className="flex justify-between items-start mb-6">
+                <Quote className="h-8 w-8 text-primary opacity-20" />
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, idx) => (
                     <Star key={idx} className="h-3.5 w-3.5 fill-primary text-primary" />
                   ))}
                 </div>
               </div>
-              <p className="font-serif italic text-lg md:text-xl font-medium leading-snug mb-10 text-soil/85">
+
+              {/* Quote narrative */}
+              <p className="font-serif italic text-lg sm:text-xl font-black text-soil/90 leading-snug flex-grow">
                 "{q}"
               </p>
-              <div className="pt-6 border-t border-black/5 flex items-center gap-4">
-                <div className="h-10 w-10 rounded-full bg-soil text-white font-display font-black text-sm grid place-items-center border border-white/20 select-none shadow-md group-hover:bg-primary transition-colors duration-500">
+
+              {/* Monogram client avatar panel */}
+              <div className="pt-6 border-t-2 border-soil/10 mt-8 flex items-center gap-4">
+                <div className="h-10 w-10 rounded-none bg-soil text-white font-display font-black text-sm grid place-items-center select-none shadow-md group-hover:bg-primary transition-colors duration-500">
                   {n.slice(0, 2).toUpperCase()}
                 </div>
                 <div>
-                  <div className="font-bold uppercase tracking-widest text-xs mb-0.5 text-soil">{n}</div>
-                  <div className="text-[9px] font-black text-primary uppercase tracking-[0.25em] font-mono">{r}</div>
+                  <div className="font-mono font-bold uppercase tracking-widest text-xs text-soil">{n}</div>
+                  <div className="text-[9px] font-mono font-black text-primary uppercase tracking-[0.2em]">{r}</div>
                 </div>
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
@@ -632,93 +777,146 @@ function Testimonials({ L }: { L: typeof t.en }) {
 
 function Contact({ L }: { L: typeof t.en }) {
   return (
-    <section id="contact" className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-10 py-16 sm:py-24 md:py-32">
-      <div className="grid lg:grid-cols-12 gap-10 sm:gap-12 md:gap-16 items-start">
-        <div className="lg:col-span-6">
-          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-6">
-            {L.contactKicker}
-          </p>
-          <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-6xl text-soil leading-[1] tracking-tight uppercase mb-8 sm:mb-12">
-            {L.contactTitle}
-          </h2>
-          <div className="space-y-10">
-            <div className="flex flex-col gap-3">
-              <div className="font-mono text-[9px] font-black uppercase tracking-[0.3em] text-soil text-stroke-bold-soil">{L.phone}</div>
-              <a href={`tel:+91${PHONE_1}`} className="block text-3xl md:text-4xl font-black text-soil hover:text-primary transition-colors tracking-tighter">
-                94433 61295
-              </a>
-              <a href={`tel:+91${PHONE_2}`} className="block text-3xl md:text-4xl font-black text-soil hover:text-primary transition-colors tracking-tighter">
-                93823 34477
-              </a>
-            </div>
-            <div className="flex flex-col gap-3">
-              <div className="font-mono text-[9px] font-black uppercase tracking-[0.3em] text-soil text-stroke-bold-soil">{L.address}</div>
-              <p className="text-xl md:text-2xl font-black text-soil tracking-tighter leading-tight">
-                {L.footerNote}, India
-              </p>
+    <section id="contact" className="relative bg-white border-y-2 border-soil py-20 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 md:px-10">
+        
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          
+          {/* Grid Left: Big support details */}
+          <div className="lg:col-span-6">
+            <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary mb-4">
+              // {L.contactKicker}
+            </p>
+            <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-7xl text-soil leading-[0.95] tracking-tighter uppercase mb-10">
+              {L.contactTitle}
+            </h2>
+            
+            <div className="space-y-8">
+              <div className="border-l-4 border-primary pl-6 py-1">
+                <div className="font-mono text-[10px] font-black uppercase tracking-[0.25em] text-soil/55 mb-2">
+                  {L.phone}
+                </div>
+                <a href={`tel:+91${PHONE_1}`} className="block text-2xl sm:text-4xl font-black text-soil hover:text-primary transition-colors tracking-tighter font-display">
+                  94433 61295
+                </a>
+                <a href={`tel:+91${PHONE_2}`} className="block text-2xl sm:text-4xl font-black text-soil hover:text-primary transition-colors tracking-tighter font-display mt-2">
+                  93823 34477
+                </a>
+              </div>
+              <div className="border-l-4 border-primary pl-6 py-1">
+                <div className="font-mono text-[10px] font-black uppercase tracking-[0.25em] text-soil/55 mb-2">
+                  {L.address}
+                </div>
+                <p className="text-xl sm:text-2xl font-black text-soil tracking-tighter font-display leading-tight">
+                  {L.footerNote}, India
+                </p>
+              </div>
             </div>
           </div>
+
+          {/* Grid Right: Massive mechanical blueprint links */}
+          <div className="lg:col-span-6 flex flex-col gap-6 pt-6 lg:pt-14">
+            <MagneticButton>
+              <a
+                href={WA}
+                target="_blank"
+                rel="noopener"
+                className="border-2 border-soil flex items-center justify-between p-6 sm:p-8 font-mono font-black uppercase tracking-[0.2em] text-[11px] bg-soil text-white hover:bg-primary hover:border-primary transition-all duration-700 group shadow-xl"
+              >
+                <span className="flex items-center gap-5">
+                  <WhatsAppIcon className="h-6 w-6 text-white" /> {L.whatsapp}
+                </span>
+                <ArrowUpRight className="h-6 w-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </a>
+            </MagneticButton>
+            
+            <MagneticButton>
+              <a
+                href={MAPS}
+                target="_blank"
+                rel="noopener"
+                className="border-2 border-soil flex items-center justify-between p-6 sm:p-8 font-mono font-black uppercase tracking-[0.2em] text-[11px] bg-white text-soil hover:bg-soil hover:text-white transition-all duration-700 group shadow-md"
+              >
+                <span className="flex items-center gap-5">
+                  <MapPin className="h-6 w-6 text-primary animate-pulse" /> {L.googleMaps}
+                </span>
+                <ArrowUpRight className="h-6 w-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </a>
+            </MagneticButton>
+          </div>
+
         </div>
-        <div className="lg:col-span-6 flex flex-col gap-4">
-          <MagneticButton>
-            <a
-              href={WA}
-              target="_blank"
-              rel="noopener"
-              className="glass flex items-center justify-between rounded-[1.5rem] p-6 md:p-8 font-bold uppercase tracking-[0.2em] text-[10px] hover:border-primary transition-all duration-700 group"
-            >
-              <span className="flex items-center gap-5">
-                <WhatsAppIcon className="h-6 w-6 md:h-8 md:w-8 text-primary" /> {L.whatsapp}
-              </span>
-              <ArrowUpRight className="h-6 w-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-700" />
-            </a>
-          </MagneticButton>
-          <MagneticButton>
-            <a
-              href={MAPS}
-              target="_blank"
-              rel="noopener"
-              className="glass flex items-center justify-between rounded-[1.5rem] p-6 md:p-8 font-bold uppercase tracking-[0.2em] text-[10px] hover:border-primary transition-all duration-700 group"
-            >
-              <span className="flex items-center gap-5">
-                <MapPin className="h-6 w-6 md:h-8 md:w-8 text-primary" /> {L.googleMaps}
-              </span>
-              <ArrowUpRight className="h-6 w-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-700" />
-            </a>
-          </MagneticButton>
-        </div>
+
       </div>
     </section>
   );
 }
 
+function LiveClock() {
+  const [time, setTime] = useState("");
+  useEffect(() => {
+    const updateTime = () => {
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone: "Asia/Kolkata",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      };
+      setTime(new Intl.DateTimeFormat("en-US", options).format(new Date()));
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+  
+  return <span className="text-[10px] text-primary">{time || "08:30:00 PM"}</span>;
+}
+
 function Footer({ L }: { L: typeof t.en }) {
   return (
-    <footer className="py-16 bg-soil text-white border-t border-white/10 relative z-10">
-      <div className="mx-auto max-w-7xl px-5 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-10">
-        <div className="flex flex-col items-center md:items-start text-center md:text-left">
-          <div className="font-display font-black text-white text-xl tracking-tighter uppercase leading-none mb-1">
+    <footer className="py-20 bg-soil text-white relative z-10 overflow-hidden border-t-4 border-primary">
+      
+      {/* Huge Watermark Tamil Graphic Underlay */}
+      <div className="absolute -bottom-10 -right-10 font-serif italic text-[120px] sm:text-[180px] font-black text-white/[0.02] pointer-events-none select-none tracking-tighter whitespace-nowrap z-0">
+        ஸ்ரீ மாரியம்மன்
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-12 border-b-2 border-white/5 pb-12">
+        <div className="flex flex-col">
+          <div className="font-display font-black text-white text-2xl tracking-tighter uppercase leading-none mb-2">
             Sri Mariamman
           </div>
-          <div className="font-mono text-[9px] tracking-[0.35em] uppercase text-primary font-black text-stroke-bold-primary">
+          <div className="font-mono text-[9px] tracking-[0.4em] uppercase text-primary font-black">
             Tractor Center
           </div>
         </div>
-        <div className="font-mono flex flex-wrap justify-center gap-6 md:gap-12 text-[8px] font-black uppercase tracking-[0.25em] text-white text-stroke-bold-white">
+        
+        <div className="font-mono flex flex-wrap gap-6 md:gap-10 text-[9px] font-black uppercase tracking-[0.2em]">
           {L.nav.map((label, i) => (
             <a
               key={i}
               href={`#${["about", "services", "equipment", "why-us", "contact"][i]}`}
-              className="hover:text-primary transition-colors"
+              className="hover:text-primary border-b border-transparent hover:border-primary transition-all duration-300"
             >
               {label}
             </a>
           ))}
         </div>
-        <div className="font-mono text-[8px] font-black uppercase tracking-[0.25em] text-white text-stroke-bold-white">
-          © {new Date().getFullYear()}
+      </div>
+
+      {/* Dynamic Clock Support Info Belt */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-10 pt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-[9px] tracking-[0.25em] uppercase text-white/50">
+        <div className="flex items-center gap-3">
+          <Clock className="h-4 w-4 text-primary animate-spin" style={{ animationDuration: "12s" }} />
+          <span>NAMAKKAL, IN — </span>
+          <LiveClock />
+        </div>
+        <div>
+          © {new Date().getFullYear()} SRI MARIAMMAN. ALL BLUEPRINTS SECURED.
         </div>
       </div>
+
     </footer>
   );
 }
@@ -729,10 +927,10 @@ function FloatingWA() {
       href={WA}
       target="_blank"
       rel="noopener"
-      aria-label="WhatsApp"
-      className="fixed bottom-6 right-6 z-[100] h-14 w-14 md:h-16 md:w-16 rounded-full bg-soil text-white grid place-items-center shadow-xl hover:bg-primary transition-all duration-700 group animate-pulse-ring"
+      aria-label="WhatsApp Support"
+      className="fixed bottom-6 right-6 z-[100] h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-soil text-white grid place-items-center shadow-2xl hover:bg-primary transition-all duration-700 group animate-pulse-ring border-2 border-white/20"
     >
-      <WhatsAppIcon className="h-6 w-6 md:h-8 md:w-8 group-hover:scale-110 transition-transform duration-500" />
+      <WhatsAppIcon className="h-6 w-6 sm:h-7 sm:w-7 group-hover:scale-110 transition-transform duration-500" />
     </a>
   );
 }
