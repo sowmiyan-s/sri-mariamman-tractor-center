@@ -52,7 +52,7 @@ const localBusinessSchema = {
   telephone: ["+91-9443361295", "+91-9382334477"],
   priceRange: "₹₹",
   hasMap: MAPS,
-  url: "https://srimariammantractor.in/",
+  url: "https://sri-mariamman-tractor-center.lovable.app/",
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -79,7 +79,7 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Sri Mariamman Tractor Center — Sales, Broker & Service, Namakkal" },
+      { title: "Sri Mariamman Tractor Center | Tractors Namakkal" },
       {
         name: "description",
         content:
@@ -101,7 +101,7 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://srimariammantractor.in/" }],
+    links: [{ rel: "canonical", href: "https://sri-mariamman-tractor-center.lovable.app/" }],
     scripts: [{ type: "application/ld+json", children: JSON.stringify(localBusinessSchema) }],
   }),
 });
