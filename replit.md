@@ -1,6 +1,6 @@
 # Sri Mariamman Tractor Center
 
-A bilingual (English/Tamil) landing page for Sri Mariamman Tractor Center — a Mahindra tractor sales, brokerage, service, and spare parts business in Paramathi Velur, Namakkal, Tamil Nadu.
+A bilingual (English/Tamil) landing page for Sri Mariamman Tractor Center — a Mahindra tractor sales, brokerage, service, and spare parts business in Paramathi Velur, Namakkal,  Tamil Nadu.
 
 ## Run & Operate
 
@@ -12,7 +12,7 @@ A bilingual (English/Tamil) landing page for Sri Mariamman Tractor Center — a 
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
 - Frontend: React + Vite (TailwindCSS v4, Framer Motion, Three.js via @react-three/fiber)
-- No backend — purely static frontend
+- No backend — purely static frontend.
 
 ## Where things live
 
