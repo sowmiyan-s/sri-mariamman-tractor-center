@@ -272,7 +272,6 @@ function Hero({ L }: { L: typeof t.en }) {
               fontFamily: "var(--font-tamil)",
               WebkitTextStroke: "1.5px white",
               paintOrder: "stroke fill",
-              textShadow: "0 2px 4px rgba(255,255,255,0.4)",
             }}
           >
             ஸ்ரீ மாரியம்மன் டிராக்டர் சென்டர்
@@ -379,7 +378,7 @@ function About({ L }: { L: typeof t.en }) {
   return (
     <section id="about" className="relative mx-auto max-w-7xl px-4 sm:px-5 lg:px-10 py-16 sm:py-24 md:py-32">
       <div className="glass rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 md:p-16 flex flex-col items-center text-center">
-        <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-8">
+        <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-8">
           {L.aboutKicker}
         </p>
         <h2 className="font-serif font-black text-4xl lg:text-6xl text-soil tracking-tight leading-[1.1] mb-10 italic">
@@ -411,7 +410,7 @@ function Services({ L }: { L: typeof t.en }) {
     <section id="services" className="relative py-16 sm:py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-10">
         <div className="text-center mb-12 sm:mb-20">
-          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-6">
+          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-6">
             {L.servicesKicker}
           </p>
           <h2 className="font-sans font-black text-3xl sm:text-4xl lg:text-6xl leading-[1] tracking-tight text-soil uppercase">
@@ -452,7 +451,7 @@ function Equipment({ L }: { L: typeof t.en }) {
     <section id="equipment" className="relative mx-auto max-w-7xl px-4 sm:px-5 lg:px-10 py-16 sm:py-24 md:py-32">
       <div className="flex flex-col items-center text-center sm:text-left sm:flex-row sm:items-end sm:justify-between gap-6 sm:gap-10 mb-10 sm:mb-16">
         <div className="max-w-lg">
-          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-6">
+          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-6">
             {L.equipKicker}
           </p>
           <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-6xl text-soil tracking-tight leading-[1] uppercase">
@@ -487,7 +486,7 @@ function Equipment({ L }: { L: typeof t.en }) {
                 loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-110 transition duration-1000 grayscale group-hover:grayscale-0"
               />
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/90 text-[7px] font-black uppercase tracking-[0.15em] text-soil shadow-sm">
+              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/90 text-[8px] font-black tracking-[0.2em] font-mono text-soil text-stroke-bold-soil shadow-sm">
                 {tag}
               </div>
             </div>
@@ -510,7 +509,7 @@ function WhyUs({ L }: { L: typeof t.en }) {
       <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-10">
         <div className="glass rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 md:p-16">
           <div className="text-center mb-10 sm:mb-16">
-            <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-6">
+            <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-6">
               {L.whyKicker}
             </p>
             <h2 className="font-mono font-bold text-3xl lg:text-5xl text-soil tracking-tighter leading-[1] uppercase">
@@ -543,7 +542,7 @@ function Testimonials({ L }: { L: typeof t.en }) {
     <section className="py-16 sm:py-24 md:py-32 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-10">
         <div className="mb-12 sm:mb-20 text-center md:text-left">
-          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-6">
+          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-6">
             {L.voiceKicker}
           </p>
           <h2 className="font-serif font-black text-3xl sm:text-4xl lg:text-6xl tracking-tight leading-[1] italic text-soil">
@@ -577,7 +576,7 @@ function Contact({ L }: { L: typeof t.en }) {
     <section id="contact" className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-10 py-16 sm:py-24 md:py-32">
       <div className="grid lg:grid-cols-12 gap-10 sm:gap-12 md:gap-16 items-start">
         <div className="lg:col-span-6">
-          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-6">
+          <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-6">
             {L.contactKicker}
           </p>
           <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-6xl text-soil leading-[1] tracking-tight uppercase mb-8 sm:mb-12">
@@ -585,7 +584,7 @@ function Contact({ L }: { L: typeof t.en }) {
           </h2>
           <div className="space-y-10">
             <div className="flex flex-col gap-3">
-              <div className="text-[9px] font-black uppercase tracking-[0.4em] text-soil/60">{L.phone}</div>
+              <div className="font-mono text-[9px] font-black uppercase tracking-[0.3em] text-soil text-stroke-bold-soil">{L.phone}</div>
               <a href={`tel:+91${PHONE_1}`} className="block text-3xl md:text-4xl font-black text-soil hover:text-primary transition-colors tracking-tighter">
                 94433 61295
               </a>
@@ -594,7 +593,7 @@ function Contact({ L }: { L: typeof t.en }) {
               </a>
             </div>
             <div className="flex flex-col gap-3">
-              <div className="text-[9px] font-black uppercase tracking-[0.4em] text-soil/60">{L.address}</div>
+              <div className="font-mono text-[9px] font-black uppercase tracking-[0.3em] text-soil text-stroke-bold-soil">{L.address}</div>
               <p className="text-xl md:text-2xl font-black text-soil tracking-tighter leading-tight">
                 {L.footerNote}, India
               </p>
@@ -642,11 +641,11 @@ function Footer({ L }: { L: typeof t.en }) {
           <div className="font-display font-black text-white text-xl tracking-tighter uppercase leading-none mb-1">
             Sri Mariamman
           </div>
-          <div className="text-[8px] tracking-[0.5em] uppercase text-primary font-black">
+          <div className="font-mono text-[9px] tracking-[0.35em] uppercase text-primary font-black text-stroke-bold-primary">
             Tractor Center
           </div>
         </div>
-        <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-[8px] font-black uppercase tracking-[0.3em] text-white/50">
+        <div className="font-mono flex flex-wrap justify-center gap-6 md:gap-12 text-[8px] font-black uppercase tracking-[0.25em] text-white text-stroke-bold-white">
           {L.nav.map((label, i) => (
             <a
               key={i}
@@ -657,7 +656,7 @@ function Footer({ L }: { L: typeof t.en }) {
             </a>
           ))}
         </div>
-        <div className="text-[8px] font-black uppercase tracking-[0.3em] text-white/30">
+        <div className="font-mono text-[8px] font-black uppercase tracking-[0.25em] text-white text-stroke-bold-white">
           © {new Date().getFullYear()}
         </div>
       </div>

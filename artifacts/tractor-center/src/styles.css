@@ -176,6 +176,21 @@
     -webkit-text-stroke: 0.5px oklch(0 0 0 / 30%);
     paint-order: stroke fill;
   }
+  .text-stroke-bold-white {
+    -webkit-text-stroke: 1.2px #ffffff;
+    paint-order: stroke fill;
+    text-shadow: none !important;
+  }
+  .text-stroke-bold-soil {
+    -webkit-text-stroke: 1.2px var(--color-soil);
+    paint-order: stroke fill;
+    text-shadow: none !important;
+  }
+  .text-stroke-bold-primary {
+    -webkit-text-stroke: 1.2px var(--color-primary);
+    paint-order: stroke fill;
+    text-shadow: none !important;
+  }
 
   /* Subtle backdrop wash for section text legibility without hiding bg */
   .section-veil {
