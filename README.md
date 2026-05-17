@@ -26,7 +26,6 @@
 
 ## 📸 Preview
 
-![Sri Mariamman Tractor Center Website Preview](./preview.png)
 
 > 🔗 **Live:** [sri-mariamman-tractor-center.vercel.app](https://sri-mariamman-tractor-center.vercel.app/)
 
