@@ -14,10 +14,11 @@ import {
   Star,
   Clock,
 } from "lucide-react";
-import eqRotavator from "@/assets/eq-rotavator.jpg";
-import eqTanker from "@/assets/eq-tanker.jpg";
-import eqTractor575 from "@/assets/eq-tractor-575.jpg";
-import eqTractor475 from "@/assets/eq-tractor-475.jpg";
+import eqRotavator from "@/assets/eq-rotavator.png";
+import eqTrailer from "@/assets/eq-trailer.png";
+import eqTractor575 from "@/assets/eq-tractor-575.png";
+import eqTractor475 from "@/assets/eq-tractor-475.png";
+import eqMechanic from "@/assets/eq-servicing.png";
 import { Scrollytelling } from "@/components/Scrollytelling";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 
@@ -31,7 +32,7 @@ type Lang = "en" | "ta";
 const t = {
   en: {
     nav: ["About", "Services", "Equipment", "Why Us", "Contact"],
-    badge: "ESTABLISHED 25+ YEARS · NAMAKKAL",
+    badge: "ஸ்ரீ ஆச்சியம்மன் துணை",
     h1a: "Sri Mariamman",
     h1b: "Tractor Center",
     h1c: "Center",
@@ -63,13 +64,13 @@ const t = {
     equipTitle: "Workhorses for every field.",
     enquire: "Enquire Now",
     equipment: [
-      ["Mahindra 575 DI", "Bestseller", "India's most loved 47 HP workhorse — fuel-efficient."],
-      ["Mahindra 475 DI", "Classic", "Reliable 42 HP all-rounder, perfect for medium farms."],
-      ["Rotavator", "Implement", "Heavy-duty soil prep with even tilling depth."],
-      ["Water Tanker", "Irrigation", "High-capacity tanker for irrigation & transport."],
+      ["Mahindra Tractor Expert", "Bestseller", "Complete engine overhaul, servicing & transmission repair."],
+      ["Other Tractors Repair", "All Brands", "We repair John Deere, Swaraj, Massey Ferguson & more."],
+      ["Rotavators Repair", "Implement", "Blade replacement, gearbox servicing and balancing."],
+      ["Trailer Repair", "Heavy Duty", "Axle welding, hydraulic cylinder fixes & chassis repair."],
     ] as [string, string, string][],
     whyKicker: "Reliability",
-    whyTitle: "Built on trust since 1999.",
+    whyTitle: "Built on trust.",
     reasons: [
       ["Expert technicians", "25+ years on the field."],
       ["Genuine parts", "Sourced from authorized OEMs."],
@@ -90,11 +91,11 @@ const t = {
     address: "Location",
     phone: "Direct Call",
     googleMaps: "Google Maps",
-    footerNote: "Namakkal, Tamil Nadu",
+    footerNote: "N. Kandampalayam, Namakkal (Dt) - 637203",
   },
   ta: {
     nav: ["எங்களைப் பற்றி", "சேவைகள்", "உபகரணங்கள்", "ஏன் நாங்கள்", "தொடர்பு"],
-    badge: "25+ ஆண்டுகள் அனுபவம் · நாமக்கல்",
+    badge: "ஸ்ரீ ஆச்சியம்மன் துணை",
     h1a: "ஸ்ரீ மாரியம்மன்",
     h1b: "டிராக்டர் சென்டர்",
     h1c: "சென்டர்",
@@ -126,13 +127,13 @@ const t = {
     equipTitle: "ஒவ்வொரு வயலுக்கும் வேலைக்காரர்கள்.",
     enquire: "கேளுங்கள்",
     equipment: [
-      ["மஹிந்திரா 575 DI", "அதிகம் விற்பனை", "இந்தியாவின் 47 HP — எரிபொருள் சிக்கனம்."],
-      ["மஹிந்திரா 475 DI", "கிளாசிக்", "நம்பகமான 42 HP, நடுத்தர பண்ணைகளுக்கு."],
-      ["ரோட்டாவேட்டர்", "உபகரணம்", "சீரான ஆழத்தில் மண் தயாரிப்பு."],
-      ["தண்ணீர் டாங்கர்", "பாசனம்", "பாசனம் மற்றும் தண்ணீர் டாங்கர்."],
+      ["மஹிந்திரா டிராக்டர் நிபுணர்", "அதிகம் விற்பனை", "முழுமையான என்ஜின், சர்வீஸ் & கியர்பாக்ஸ் ரிப்பேர்."],
+      ["மற்ற டிராக்டர்கள் ரிப்பேர்", "அனைத்து பிராண்டுகள்", "ஜான் டீர், ஸ்வராஜ், மாஸ்ஸி பெர்குசன் ரிப்பேர்."],
+      ["ரோட்டாவேட்டர் ரிப்பேர்", "உபகரணம்", "பிளேடு மாற்றுதல், கியர்பாக்ஸ் சர்வீஸ்."],
+      ["டிரெய்லர் ரிப்பேர்", "ஹெவி டியூட்டி", "ஹைட்ராலிக் மற்றும் சேஸ் ரிப்பேர்."],
     ] as [string, string, string][],
     whyKicker: "நம்பகத்தன்மை",
-    whyTitle: "1999 முதல் நம்பிக்கையில் கட்டப்பட்டது.",
+    whyTitle: "நம்பிக்கையில் கட்டப்பட்டது.",
     reasons: [
       ["நிபுணர்கள்", "களத்தில் 25+ ஆண்டுகள்."],
       ["ஒரிஜினல் பாகங்கள்", "OEM-களிடமிருந்து."],
@@ -153,7 +154,7 @@ const t = {
     address: "இடம்",
     phone: "அழைக்கவும்",
     googleMaps: "கூகிள் மேப்ஸ்",
-    footerNote: "நாமக்கல், தமிழ்நாடு",
+    footerNote: "N. கந்தம்பாளையம், நாமக்கல் - 637203",
   },
 };
 
@@ -193,14 +194,9 @@ function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: La
     <header className="fixed top-4 md:top-8 inset-x-0 z-[100] flex flex-col items-center px-4 pointer-events-none">
       {/* Desktop & Mobile Capsule Dock */}
       <div className="pointer-events-auto w-full max-w-sm md:max-w-4xl flex flex-col items-stretch rounded-2xl md:rounded-full border-2 border-soil bg-white/90 backdrop-blur-3xl p-2 md:p-3 shadow-2xl transition-all duration-500 hover:shadow-primary/5">
-        <div className="flex items-center justify-between gap-4 px-2 sm:px-4">
+        <div className="flex items-center justify-end md:justify-between gap-4 px-2 sm:px-4">
           
-          {/* Logo / Title Kicker */}
-          <a href="#top" className="flex items-center gap-2">
-            <span className="font-display font-black text-[10px] sm:text-xs tracking-tighter text-soil">
-              SRI MARIAMMAN
-            </span>
-          </a>
+
 
           {/* Inline Navigation (Desktop Only) */}
           <nav className="hidden md:flex items-center gap-6 text-[10px] font-mono font-black uppercase tracking-[0.15em] text-soil">
@@ -281,11 +277,12 @@ function Hero({ L }: { L: typeof t.en }) {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <section
-      id="top"
-      ref={ref}
-      className="relative min-h-screen flex flex-col justify-center pt-32 pb-16 overflow-hidden px-4 md:px-10"
-    >
+    <>
+      <section
+        id="top"
+        ref={ref}
+        className="relative min-h-screen flex flex-col justify-center pt-32 pb-16 overflow-hidden px-4 md:px-10"
+      >
       <motion.div
         style={{ opacity }}
         className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-8 items-center"
@@ -322,7 +319,7 @@ function Hero({ L }: { L: typeof t.en }) {
             <span className="text-stroke-bold-soil text-white drop-shadow-sm block mb-1">
               {L.h1a}
             </span>
-            <span className="text-primary block">{L.h1b}</span>
+            <span className="text-primary text-stroke-bold-white drop-shadow-sm block">{L.h1b}</span>
           </motion.h1>
 
           {/* Overlapping Floating Tamil Label styled as an Industrial Decal */}
@@ -337,17 +334,7 @@ function Hero({ L }: { L: typeof t.en }) {
             </span>
           </motion.div>
 
-          {/* Clean Outline Stroke Narrative styled as an Industrial Spec Decal */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mt-6 inline-block bg-white/90 backdrop-blur-md border border-soil/15 p-4 max-w-xl shadow-sm"
-          >
-            <p className="text-xs sm:text-sm text-soil font-mono leading-relaxed font-bold">
-              {L.sub}
-            </p>
-          </motion.div>
+
 
           {/* Wix Studio Action Console Buttons */}
           <div className="mt-8 flex flex-wrap gap-4 items-center">
@@ -373,13 +360,13 @@ function Hero({ L }: { L: typeof t.en }) {
           </div>
 
           {/* Wix Studio Stats Banner - Horizontal Spec Lines */}
-          <div className="mt-12 w-full grid grid-cols-3 gap-4 border-t-2 border-soil/15 pt-8">
+          <div className="mt-12 w-full grid grid-cols-3 gap-4 border-t-2 border-soil/15 pt-8 relative z-20">
             {L.stats.map(([k, v]) => (
               <div key={v} className="border-l-2 border-primary pl-4 sm:pl-6">
-                <div className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-soil tracking-tighter leading-none">
+                <div className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-soil tracking-tighter leading-none text-stroke-bold-white drop-shadow-md">
                   {k}
                 </div>
-                <div className="text-[8px] sm:text-[9px] md:text-[10px] text-soil/60 font-mono font-black uppercase tracking-[0.2em] mt-1.5">
+                <div className="text-[8px] sm:text-[9px] md:text-[10px] text-soil font-mono font-black uppercase tracking-[0.2em] mt-1.5 text-stroke-bold-white drop-shadow-md">
                   {v}
                 </div>
               </div>
@@ -387,12 +374,13 @@ function Hero({ L }: { L: typeof t.en }) {
           </div>
         </div>
       </motion.div>
-
-      {/* Infinite Horizontal Spec Belt */}
-      <div className="w-full mt-16 z-20">
-        <MarqueeStrip />
-      </div>
     </section>
+
+    {/* Infinite Horizontal Spec Belt - FULL SCREEN EDGE TO EDGE */}
+    <div className="w-full relative z-20 bg-white">
+      <MarqueeStrip />
+    </div>
+    </>
   );
 }
 
@@ -538,11 +526,13 @@ function Services({ L }: { L: typeof t.en }) {
               {L.servicesTitle}
             </h2>
             <div className="w-full aspect-[4/3] border-2 border-soil/15 p-4 rounded-none bg-white/40 backdrop-blur-sm relative overflow-hidden hidden sm:block">
-              {/* Technical schematic box design */}
+              {/* Technical schematic box design with actual image */}
               <div className="absolute inset-0 bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:16px_16px] opacity-[0.04]" />
-              <div className="absolute inset-6 border border-dashed border-soil/20 grid place-items-center">
-                <Tractor className="h-16 w-16 text-primary opacity-20 animate-pulse" />
-                <div className="absolute bottom-2 left-2 font-mono text-[8px] text-soil/40">[ SCHEMATIC_BOARD_V1 ]</div>
+              <div className="absolute inset-4 border border-dashed border-soil/20 overflow-hidden group bg-white/50">
+                <img src={eqMechanic} alt="Mechanic Schematic" className="w-full h-full object-cover filter grayscale contrast-110 group-hover:grayscale-0 transition-all duration-700 opacity-90" />
+                <div className="absolute bottom-2 left-2 bg-white/90 px-2 py-1 font-mono text-[8px] text-soil font-black tracking-[0.2em] shadow-sm border border-soil/10">
+                  [ SCHEMATIC_BOARD_V1 ]
+                </div>
               </div>
             </div>
           </div>
@@ -588,15 +578,9 @@ function Services({ L }: { L: typeof t.en }) {
 }
 
 function Equipment({ L }: { L: typeof t.en }) {
-  const imgs = [eqTractor575, eqTractor475, eqRotavator, eqTanker];
+  const imgs = [eqTractor575, eqTractor475, eqRotavator, eqTrailer];
   
-  // Custom Detailed Specifications for Wix Studio premium feel
-  const specs = [
-    { hp: "47 HP", cyl: "4 Cylinders", lift: "1600 KG", type: "Wetland / Haulage" },
-    { hp: "42 HP", cyl: "4 Cylinders", lift: "1500 KG", type: "Dryland / Plowing" },
-    { width: "5 / 6 Feet", blades: "36 / 42 Blades", drive: "Multi-Speed", type: "Rotary Tilling" },
-    { cap: "4000-5000 L", sheet: "Heavy MS Sheet", tires: "Heavy Duty Dual", type: "Irrigation Support" },
-  ];
+
 
   return (
     <section id="equipment" className="relative mx-auto max-w-7xl px-4 md:px-10 py-20 sm:py-32">
@@ -666,53 +650,6 @@ function Equipment({ L }: { L: typeof t.en }) {
                 </p>
               </div>
 
-              {/* Physical Spec Grid Integration for that premium Wix feel */}
-              <div className="border-t-2 border-dashed border-soil/15 pt-3 mt-3">
-                <table className="w-full text-[9px] font-mono text-soil/60">
-                  <tbody>
-                    {specs[i].hp && (
-                      <tr className="border-b border-soil/5">
-                        <td className="py-1 uppercase font-bold text-soil/45">POWER:</td>
-                        <td className="py-1 text-right text-soil font-black">{specs[i].hp}</td>
-                      </tr>
-                    )}
-                    {specs[i].cyl && (
-                      <tr className="border-b border-soil/5">
-                        <td className="py-1 uppercase font-bold text-soil/45">ENGINE:</td>
-                        <td className="py-1 text-right text-soil font-black">{specs[i].cyl}</td>
-                      </tr>
-                    )}
-                    {specs[i].lift && (
-                      <tr className="border-b border-soil/5">
-                        <td className="py-1 uppercase font-bold text-soil/45">LIFT CAP:</td>
-                        <td className="py-1 text-right text-soil font-black">{specs[i].lift}</td>
-                      </tr>
-                    )}
-                    {specs[i].width && (
-                      <tr className="border-b border-soil/5">
-                        <td className="py-1 uppercase font-bold text-soil/45">WIDTH:</td>
-                        <td className="py-1 text-right text-soil font-black">{specs[i].width}</td>
-                      </tr>
-                    )}
-                    {specs[i].blades && (
-                      <tr className="border-b border-soil/5">
-                        <td className="py-1 uppercase font-bold text-soil/45">BLADES:</td>
-                        <td className="py-1 text-right text-soil font-black">{specs[i].blades}</td>
-                      </tr>
-                    )}
-                    {specs[i].cap && (
-                      <tr className="border-b border-soil/5">
-                        <td className="py-1 uppercase font-bold text-soil/45">CAPACITY:</td>
-                        <td className="py-1 text-right text-soil font-black">{specs[i].cap}</td>
-                      </tr>
-                    )}
-                    <tr className="border-b border-soil/5">
-                      <td className="py-1 uppercase font-bold text-soil/45">APPLICATION:</td>
-                      <td className="py-1 text-right text-soil font-black">{specs[i].type}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
             </div>
 
           </article>
@@ -847,7 +784,7 @@ function Contact({ L }: { L: typeof t.en }) {
                 </span>
               </div>
               
-              <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-soil leading-[0.95] tracking-tighter uppercase mb-10">
+              <h2 className="font-display font-black text-2xl sm:text-4xl lg:text-4xl xl:text-5xl text-soil leading-[0.95] tracking-tighter uppercase mb-10 text-balance">
                 {L.contactTitle}
               </h2>
               
@@ -880,7 +817,7 @@ function Contact({ L }: { L: typeof t.en }) {
                   <div className="font-mono text-[10px] font-black uppercase tracking-[0.25em] text-soil/55 mb-2">
                     {L.address}
                   </div>
-                  <p className="text-xl sm:text-2xl font-black text-soil tracking-tighter font-display leading-tight">
+                  <p className="text-xl sm:text-2xl font-black text-soil tracking-tighter font-display leading-tight text-balance">
                     {L.footerNote}, India
                   </p>
                 </div>
@@ -888,13 +825,23 @@ function Contact({ L }: { L: typeof t.en }) {
             </div>
 
             {/* Technical Subtext/Badge */}
-            <div className="mt-12 pt-6 border-t border-soil/10 flex items-center justify-between">
+            <div className="mt-12 pt-6 border-t border-soil/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 mb-8">
               <span className="font-mono text-[8px] font-black text-soil/40 tracking-wider">
                 SRI MARIAMMAN TRACTOR CENTER · ESTD 1999
               </span>
               <span className="font-mono text-[8px] font-black text-primary tracking-wider">
                 LIVE STATUS: ACTIVE
               </span>
+            </div>
+            
+            {/* New Schematic Servicing Image Section placed here as requested */}
+            <div className="w-full aspect-[2/1] border-2 border-soil/15 p-2 rounded-none bg-white/40 backdrop-blur-sm relative overflow-hidden group">
+              <div className="absolute inset-2 border border-dashed border-soil/20 overflow-hidden">
+                <img src={eqMechanic} alt="Tractor Servicing" className="w-full h-full object-cover filter contrast-110 opacity-95 group-hover:scale-105 transition-transform duration-700" />
+                <div className="absolute bottom-2 left-2 bg-white/90 px-2 py-1 font-mono text-[8px] text-soil font-black tracking-[0.2em] shadow-sm border border-soil/10 z-10">
+                  [ SCHEMATIC_BOARD_V1 ]
+                </div>
+              </div>
             </div>
           </div>
 

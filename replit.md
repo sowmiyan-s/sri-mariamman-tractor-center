@@ -6,7 +6,7 @@ A bilingual (English/Tamil) landing page for Sri Mariamman Tractor Center — a 
 
 - `pnpm --filter @workspace/tractor-center run dev` — run the frontend (workflow: `artifacts/tractor-center: web`)
 - `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
+- `pnpm run build` — typecheck + build all package![alt text](image.png)s
 
 ## Stack
 
