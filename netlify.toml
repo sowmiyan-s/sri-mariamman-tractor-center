@@ -1,0 +1,8 @@
+[build]
+  command   = "pnpm --filter @workspace/tractor-center run build"
+  publish   = "artifacts/tractor-center/dist"
+
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

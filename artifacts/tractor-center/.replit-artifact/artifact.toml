@@ -19,7 +19,7 @@ run = "pnpm --filter @workspace/tractor-center run dev"
 
 [services.production]
 build = [ "pnpm", "--filter", "@workspace/tractor-center", "run", "build" ]
-publicDir = "artifacts/tractor-center/dist/public"
+publicDir = "artifacts/tractor-center/dist"
 serve = "static"
 
 [[services.production.rewrites]]
