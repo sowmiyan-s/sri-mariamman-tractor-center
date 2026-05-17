@@ -31,9 +31,9 @@ const t = {
   en: {
     nav: ["About", "Services", "Equipment", "Why Us", "Contact"],
     badge: "ESTABLISHED 25+ YEARS · NAMAKKAL",
-    h1a: "Powering modern",
-    h1b: "agriculture",
-    h1c: "with trusted solutions.",
+    h1a: "Sri Mariamman",
+    h1b: "Tractor",
+    h1c: "Center",
     sub: "Sales · Brokerage · Service · Equipment · Spare Parts. Built for farmers who demand reliability.",
     callNow: "Call Now",
     whatsapp: "WhatsApp",
@@ -94,9 +94,9 @@ const t = {
   ta: {
     nav: ["எங்களைப் பற்றி", "சேவைகள்", "உபகரணங்கள்", "ஏன் நாங்கள்", "தொடர்பு"],
     badge: "25+ ஆண்டுகள் அனுபவம் · நாமக்கல்",
-    h1a: "நம்பகமான தீர்வுகளுடன்",
-    h1b: "நவீன விவசாயத்திற்கு",
-    h1c: "சக்தி அளிக்கிறோம்.",
+    h1a: "ஸ்ரீ மாரியம்மன்",
+    h1b: "டிராக்டர்",
+    h1c: "சென்டர்",
     sub: "விற்பனை · தரகு · சேவை · விவசாய உபகரணங்கள் · உதிரி பாகங்கள். நம்பகத்தன்மையை விரும்பும் விவசாயிகளுக்காக.",
     callNow: "அழைக்கவும்",
     whatsapp: "வாட்ஸ்அப்",
@@ -186,9 +186,9 @@ export default function HomePage() {
 
 function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: Lang) => void }) {
   return (
-    <header className="fixed top-4 md:top-8 inset-x-0 z-[100] flex justify-center px-4 md:px-5 pointer-events-none">
-      <div className="pointer-events-auto flex items-center gap-4 md:gap-8 rounded-full border border-black/5 bg-white/40 backdrop-blur-3xl px-6 md:px-10 py-3 md:py-4 shadow-xl transition-all duration-500">
-        <nav className="flex items-center gap-6 md:gap-10 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-soil/80">
+    <header className="fixed top-4 md:top-8 inset-x-0 z-[100] flex justify-center px-2 sm:px-4 md:px-5 pointer-events-none">
+      <div className="pointer-events-auto flex items-center gap-2.5 sm:gap-4 md:gap-8 rounded-full border border-black/5 bg-white/40 backdrop-blur-3xl px-4 sm:px-6 md:px-10 py-2 sm:py-3 md:py-4 shadow-xl transition-all duration-500">
+        <nav className="flex items-center gap-3 sm:gap-6 md:gap-10 text-[8px] sm:text-[10px] md:text-[11px] font-black uppercase tracking-[0.1em] sm:tracking-[0.3em] text-soil/80">
           {L.nav.slice(0, 3).map((label, i) => {
             const slugs = ["about", "services", "equipment"];
             return (
@@ -198,11 +198,11 @@ function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: La
             );
           })}
         </nav>
-        <div className="h-4 w-px bg-soil/20 hidden sm:block" />
-        <div className="flex items-center gap-4 md:gap-6">
+        <div className="h-4 w-px bg-soil/20 hidden xs:block" />
+        <div className="flex items-center gap-2.5 sm:gap-4 md:gap-6">
           <button
             onClick={() => setLang(lang === "en" ? "ta" : "en")}
-            className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-soil/80 hover:text-primary transition-all duration-300"
+            className="flex items-center gap-1 sm:gap-2 text-[9px] sm:text-[11px] font-black uppercase tracking-widest text-soil/80 hover:text-primary transition-all duration-300"
             aria-label="Toggle language"
           >
             <span className={lang === "ta" ? "text-primary" : "text-soil/30"}>தமிழ்</span>
@@ -212,9 +212,9 @@ function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: La
           <MagneticButton>
             <a
               href={`tel:+91${PHONE_1}`}
-              className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-primary text-white grid place-items-center hover:scale-110 transition shadow-lg shadow-primary/20"
+              className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full bg-primary text-white grid place-items-center hover:scale-110 transition shadow-lg shadow-primary/20"
             >
-              <Phone className="h-4 w-4 md:h-5 md:w-5" />
+              <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5" />
             </a>
           </MagneticButton>
         </div>
@@ -257,7 +257,7 @@ function Hero({ L }: { L: typeof t.en }) {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-black text-soil leading-[0.9] text-balance text-4xl sm:text-6xl lg:text-7xl tracking-tight uppercase"
+          className="font-display font-black text-soil leading-[0.95] text-balance text-3xl xs:text-4xl sm:text-6xl lg:text-7xl tracking-tight uppercase"
         >
           {L.h1a} <br />
           <span className="text-stroke text-transparent">{L.h1b}</span> <br />
@@ -373,8 +373,8 @@ function MarqueeStrip() {
 
 function About({ L }: { L: typeof t.en }) {
   return (
-    <section id="about" className="relative mx-auto max-w-7xl px-5 lg:px-10 py-24 md:py-32">
-      <div className="glass rounded-[2rem] p-10 md:p-16 flex flex-col items-center text-center">
+    <section id="about" className="relative mx-auto max-w-7xl px-4 sm:px-5 lg:px-10 py-16 sm:py-24 md:py-32">
+      <div className="glass rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 md:p-16 flex flex-col items-center text-center">
         <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-8">
           {L.aboutKicker}
         </p>
@@ -404,17 +404,17 @@ function About({ L }: { L: typeof t.en }) {
 function Services({ L }: { L: typeof t.en }) {
   const icons = [Tractor, Handshake, Wrench, Cog, Sprout, Truck];
   return (
-    <section id="services" className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-5 lg:px-10">
-        <div className="text-center mb-20">
+    <section id="services" className="relative py-16 sm:py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-10">
+        <div className="text-center mb-12 sm:mb-20">
           <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-6">
             {L.servicesKicker}
           </p>
-          <h2 className="font-sans font-black text-4xl lg:text-6xl leading-[1] tracking-tight text-soil uppercase">
+          <h2 className="font-sans font-black text-3xl sm:text-4xl lg:text-6xl leading-[1] tracking-tight text-soil uppercase">
             {L.servicesTitle}
           </h2>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {L.services.map(([title, desc], i) => {
             const Icon = icons[i];
             return (
@@ -424,7 +424,7 @@ function Services({ L }: { L: typeof t.en }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.04 }}
-                className="glass group p-8 rounded-[1.5rem] flex flex-col items-start text-left hover:border-primary/20 transition-all duration-500"
+                className="glass group p-6 sm:p-8 rounded-[1.5rem] flex flex-col items-start text-left hover:border-primary/20 transition-all duration-500"
               >
                 <div className="h-12 w-12 rounded-xl bg-soil/5 text-soil group-hover:bg-primary group-hover:text-white transition-all duration-500 grid place-items-center mb-6">
                   <Icon className="h-6 w-6" />
@@ -445,8 +445,8 @@ function Services({ L }: { L: typeof t.en }) {
 function Equipment({ L }: { L: typeof t.en }) {
   const imgs = [eqTractor575, eqTractor475, eqRotavator, eqTanker];
   return (
-    <section id="equipment" className="relative mx-auto max-w-7xl px-5 lg:px-10 py-24 md:py-32">
-      <div className="flex items-end justify-between flex-wrap gap-10 mb-16">
+    <section id="equipment" className="relative mx-auto max-w-7xl px-4 sm:px-5 lg:px-10 py-16 sm:py-24 md:py-32">
+      <div className="flex items-end justify-between flex-wrap gap-6 sm:gap-10 mb-10 sm:mb-16">
         <div className="max-w-lg">
           <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-6">
             {L.equipKicker}
@@ -502,10 +502,10 @@ function Equipment({ L }: { L: typeof t.en }) {
 
 function WhyUs({ L }: { L: typeof t.en }) {
   return (
-    <section id="why-us" className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-5 lg:px-10">
-        <div className="glass rounded-[2rem] p-10 md:p-16">
-          <div className="text-center mb-16">
+    <section id="why-us" className="py-16 sm:py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-10">
+        <div className="glass rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 md:p-16">
+          <div className="text-center mb-10 sm:mb-16">
             <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-6">
               {L.whyKicker}
             </p>
@@ -536,21 +536,21 @@ function WhyUs({ L }: { L: typeof t.en }) {
 
 function Testimonials({ L }: { L: typeof t.en }) {
   return (
-    <section className="py-24 md:py-32 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-5 lg:px-10">
-        <div className="mb-20 text-center md:text-left">
+    <section className="py-16 sm:py-24 md:py-32 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-10">
+        <div className="mb-12 sm:mb-20 text-center md:text-left">
           <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-6">
             {L.voiceKicker}
           </p>
-          <h2 className="font-serif font-black text-4xl lg:text-6xl tracking-tight leading-[1] italic text-soil">
+          <h2 className="font-serif font-black text-3xl sm:text-4xl lg:text-6xl tracking-tight leading-[1] italic text-soil">
             {L.voiceTitle}
           </h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
           {L.testimonials.map(([q, n, r], i) => (
             <div
               key={i}
-              className="glass p-10 rounded-[2rem] group hover:border-primary/20 transition-all duration-500"
+              className="glass p-6 sm:p-10 rounded-[1.5rem] sm:rounded-[2rem] group hover:border-primary/20 transition-all duration-500"
             >
               <Quote className="h-8 w-8 text-primary opacity-20 mb-8 group-hover:scale-110 transition-transform duration-500" />
               <p className="font-serif italic text-xl md:text-2xl font-light leading-snug mb-10 text-soil/80">
@@ -570,13 +570,13 @@ function Testimonials({ L }: { L: typeof t.en }) {
 
 function Contact({ L }: { L: typeof t.en }) {
   return (
-    <section id="contact" className="mx-auto max-w-7xl px-5 lg:px-10 py-24 md:py-32">
-      <div className="grid lg:grid-cols-12 gap-12 md:gap-16 items-start">
+    <section id="contact" className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-10 py-16 sm:py-24 md:py-32">
+      <div className="grid lg:grid-cols-12 gap-10 sm:gap-12 md:gap-16 items-start">
         <div className="lg:col-span-6">
           <p className="text-[9px] font-black tracking-[0.5em] uppercase text-primary mb-6">
             {L.contactKicker}
           </p>
-          <h2 className="font-display font-black text-4xl lg:text-6xl text-soil leading-[1] tracking-tight uppercase mb-12">
+          <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-6xl text-soil leading-[1] tracking-tight uppercase mb-8 sm:mb-12">
             {L.contactTitle}
           </h2>
           <div className="space-y-10">

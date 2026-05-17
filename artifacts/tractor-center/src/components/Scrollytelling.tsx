@@ -34,7 +34,20 @@ export const Scrollytelling = () => {
     preloadImages();
   }, []);
 
-  const frameIndex = useTransform(smoothProgress, [0, 1], [0, frameCount - 1]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Complete the full sequence faster on mobile (by 60% scroll progress) to fit the mobile scroll ratio
+  const scrollRange = isMobile ? [0, 0.6] : [0, 1];
+  const frameIndex = useTransform(smoothProgress, scrollRange, [0, frameCount - 1], { clamp: true });
 
   useEffect(() => {
     const handleResize = () => {
