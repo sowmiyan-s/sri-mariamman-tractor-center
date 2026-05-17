@@ -3,6 +3,7 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "packageManager": "bun@1.2.23",
   "engines": {
     "node": ">=22.12.0"
   },
