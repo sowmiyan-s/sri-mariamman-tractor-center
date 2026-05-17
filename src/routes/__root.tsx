@@ -94,16 +94,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Trusted tractor sales, service and spare parts in Paramathi Velur, Namakkal — 25+ years of experience.",
       },
-      {
-        property: "og:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5480d355-6576-4bb7-bf3c-1b0568957340/id-preview-b6d37210--584d6547-7a61-4538-8c9b-d1b2aae799ea.lovable.app-1778596440055.png",
-      },
-      {
-        name: "twitter:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5480d355-6576-4bb7-bf3c-1b0568957340/id-preview-b6d37210--584d6547-7a61-4538-8c9b-d1b2aae799ea.lovable.app-1778596440055.png",
-      },
     ],
     links: [
       {
