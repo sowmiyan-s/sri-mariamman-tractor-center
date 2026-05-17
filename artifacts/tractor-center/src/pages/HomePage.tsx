@@ -11,6 +11,7 @@ import {
   ArrowUpRight,
   Tractor,
   Quote,
+  Star,
 } from "lucide-react";
 import eqRotavator from "@/assets/eq-rotavator.jpg";
 import eqTanker from "@/assets/eq-tanker.jpg";
@@ -186,12 +187,16 @@ export default function HomePage() {
 function Nav({ L, lang, setLang }: { L: typeof t.en; lang: Lang; setLang: (l: Lang) => void }) {
   return (
     <header className="fixed top-4 md:top-8 inset-x-0 z-[100] flex justify-center px-2 sm:px-4 md:px-5 pointer-events-none">
-      <div className="pointer-events-auto flex items-center gap-2.5 sm:gap-4 md:gap-8 rounded-full border border-black/5 bg-white/40 backdrop-blur-3xl px-4 sm:px-6 md:px-10 py-2 sm:py-3 md:py-4 shadow-xl transition-all duration-500">
-        <nav className="flex items-center gap-3 sm:gap-6 md:gap-10 text-[8px] sm:text-[10px] md:text-[11px] font-black uppercase tracking-[0.1em] sm:tracking-[0.3em] text-soil/80">
-          {L.nav.slice(0, 3).map((label, i) => {
-            const slugs = ["about", "services", "equipment"];
+      <div className="pointer-events-auto flex items-center gap-2.5 sm:gap-4 md:gap-8 rounded-full border border-black/5 bg-white/70 backdrop-blur-3xl px-4 sm:px-6 md:px-10 py-2 sm:py-3 md:py-4 shadow-xl transition-all duration-500 hover:border-primary/20">
+        <nav className="flex items-center gap-2.5 sm:gap-4 md:gap-8 text-[8px] sm:text-[10px] md:text-[11px] font-black uppercase tracking-[0.05em] sm:tracking-[0.2em] text-soil/80">
+          {L.nav.map((label, i) => {
+            const slugs = ["about", "services", "equipment", "why-us", "contact"];
             return (
-              <a key={i} href={`#${slugs[i]}`} className="hover:text-primary transition-colors">
+              <a
+                key={i}
+                href={`#${slugs[i]}`}
+                className="hover:text-primary hover:scale-105 transition-all duration-300 relative px-1 py-0.5"
+              >
                 {label}
               </a>
             );
@@ -383,27 +388,50 @@ function MarqueeStrip() {
 function About({ L }: { L: typeof t.en }) {
   return (
     <section id="about" className="relative mx-auto max-w-7xl px-4 sm:px-5 lg:px-10 py-16 sm:py-24 md:py-32">
-      <div className="glass rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 md:p-16 flex flex-col items-center text-center">
-        <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-8">
-          {L.aboutKicker}
-        </p>
-        <h2 className="font-serif font-black text-4xl lg:text-6xl text-soil tracking-tight leading-[1.1] mb-10 italic">
-          {L.aboutTitle}
-        </h2>
-        <div className="max-w-2xl">
-          <p className="text-lg md:text-xl text-soil/85 font-medium leading-relaxed mb-12 tracking-wide">
-            {L.aboutBody}
-          </p>
-          <div className="flex flex-wrap justify-center gap-5 md:gap-8">
-            {L.aboutPills.map((p) => (
-              <div key={p} className="flex items-center gap-2 group">
-                <div className="h-1 w-1 rounded-full bg-primary/30 group-hover:bg-primary transition-colors duration-500" />
-                <span className="font-bold text-soil/30 group-hover:text-soil text-[11px] uppercase tracking-[0.15em] transition-colors">
-                  {p}
-                </span>
-              </div>
-            ))}
+      <div className="glass rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 md:p-16">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          
+          {/* Left Column: Bold Asymmetric Typography Frame */}
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left w-full">
+            <div className="relative p-6 sm:p-8 rounded-[1.5rem] bg-soil/5 border border-soil/10 w-full overflow-hidden group hover:border-primary/20 transition-all duration-700">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-colors duration-700" />
+              <span className="font-mono text-[10px] font-black uppercase text-primary tracking-[0.3em] block mb-4">
+                ESTABLISHED 2001
+              </span>
+              <h3 className="font-display font-black text-6xl xs:text-7xl lg:text-8xl leading-none text-soil tracking-tighter uppercase mb-6">
+                25+ <br />
+                <span className="text-primary text-stroke-bold-primary text-4xl xs:text-5xl lg:text-6xl">YEARS</span>
+              </h3>
+              <p className="font-mono text-[9px] xs:text-[10px] text-soil/60 uppercase tracking-[0.2em] leading-relaxed">
+                Delivering high-performance agricultural excellence to farmers across Tamil Nadu.
+              </p>
+            </div>
           </div>
+          
+          {/* Right Column: Narrative and Pills */}
+          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase text-primary text-stroke-bold-primary mb-6">
+              {L.aboutKicker}
+            </p>
+            <h2 className="font-serif font-black text-3xl sm:text-5xl lg:text-6xl text-soil tracking-tight leading-[1.1] mb-8 italic">
+              {L.aboutTitle}
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl text-soil/85 font-medium leading-relaxed mb-10 tracking-wide">
+              {L.aboutBody}
+            </p>
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4">
+              {L.aboutPills.map((p) => (
+                <div
+                  key={p}
+                  className="font-mono text-[9px] xs:text-[10px] font-bold uppercase tracking-[0.15em] text-soil bg-soil/5 border border-soil/10 hover:border-primary/30 px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-2 group cursor-default"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary/40 group-hover:bg-primary group-hover:scale-110 transition-all duration-300" />
+                  {p}
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -433,7 +461,8 @@ function Services({ L }: { L: typeof t.en }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.04 }}
-                className="glass group p-6 sm:p-8 rounded-[1.5rem] flex flex-col items-start text-left hover:border-primary/20 transition-all duration-500"
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="glass group p-6 sm:p-8 rounded-[1.5rem] flex flex-col items-start text-left hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
               >
                 <div className="h-12 w-12 rounded-xl bg-soil/5 text-soil group-hover:bg-primary group-hover:text-white transition-all duration-500 grid place-items-center mb-6">
                   <Icon className="h-6 w-6" />
@@ -494,6 +523,18 @@ function Equipment({ L }: { L: typeof t.en }) {
               />
               <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/90 text-[8px] font-black tracking-[0.2em] font-mono text-soil text-stroke-bold-soil shadow-sm">
                 {tag}
+              </div>
+              
+              {/* Luxury Hover Overlay Button */}
+              <div className="absolute inset-0 bg-soil/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center pointer-events-none group-hover:pointer-events-auto">
+                <a
+                  href={`https://wa.me/91${PHONE_1}?text=${encodeURIComponent(`Hello Sri Mariamman Tractor Center, I'd like to enquire about the ${title} (${tag}) shown on your website.`)}`}
+                  target="_blank"
+                  rel="noopener"
+                  className="font-mono text-[9px] sm:text-[10px] font-black tracking-[0.2em] uppercase bg-white text-soil hover:bg-primary hover:text-white px-4 py-2.5 rounded-full shadow-2xl scale-90 group-hover:scale-100 transition-all duration-500 flex items-center gap-1.5"
+                >
+                  ENQUIRE <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
               </div>
             </div>
             <div className="px-3 pb-3">
@@ -559,15 +600,27 @@ function Testimonials({ L }: { L: typeof t.en }) {
           {L.testimonials.map(([q, n, r], i) => (
             <div
               key={i}
-              className="glass p-6 sm:p-10 rounded-[1.5rem] sm:rounded-[2rem] group hover:border-primary/20 transition-all duration-500"
+              className="glass p-6 sm:p-10 rounded-[1.5rem] sm:rounded-[2rem] group hover:border-primary/20 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1"
             >
-              <Quote className="h-8 w-8 text-primary opacity-20 mb-8 group-hover:scale-110 transition-transform duration-500" />
-              <p className="font-serif italic text-xl md:text-2xl font-light leading-snug mb-10 text-soil/80">
+              <div className="flex justify-between items-start mb-8">
+                <Quote className="h-8 w-8 text-primary opacity-20 group-hover:scale-110 transition-transform duration-500" />
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, idx) => (
+                    <Star key={idx} className="h-3.5 w-3.5 fill-primary text-primary" />
+                  ))}
+                </div>
+              </div>
+              <p className="font-serif italic text-lg md:text-xl font-medium leading-snug mb-10 text-soil/85">
                 "{q}"
               </p>
-              <div className="pt-6 border-t border-black/5">
-                <div className="font-bold uppercase tracking-widest text-xs mb-1 text-soil">{n}</div>
-                <div className="text-[9px] font-black text-primary uppercase tracking-[0.25em]">{r}</div>
+              <div className="pt-6 border-t border-black/5 flex items-center gap-4">
+                <div className="h-10 w-10 rounded-full bg-soil text-white font-display font-black text-sm grid place-items-center border border-white/20 select-none shadow-md group-hover:bg-primary transition-colors duration-500">
+                  {n.slice(0, 2).toUpperCase()}
+                </div>
+                <div>
+                  <div className="font-bold uppercase tracking-widest text-xs mb-0.5 text-soil">{n}</div>
+                  <div className="text-[9px] font-black text-primary uppercase tracking-[0.25em] font-mono">{r}</div>
+                </div>
               </div>
             </div>
           ))}
