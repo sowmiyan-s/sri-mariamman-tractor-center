@@ -5,7 +5,7 @@
   "scripts": {
     "setup": "npx pnpm install",
     "dev": "npx pnpm --filter @workspace/tractor-center dev",
-    "build:dev": "npx pnpm --filter @workspace/tractor-center run build",
+    "build:dev": "npx pnpm run build",
     "build": "npx pnpm run typecheck && npx pnpm -r --if-present run build",
     "typecheck:libs": "tsc --build",
     "typecheck": "npx pnpm run typecheck:libs && npx pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
